@@ -1,0 +1,177 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id                                         Int             @id @default(autoincrement()) @db.UnsignedInt
+  name                                       String          @db.VarChar(60)
+  fsurname                                   String          @db.VarChar(50)
+  msurname                                   String          @db.VarChar(50)
+  nickname                                   String?         @unique(map: "users_nickname_unique") @db.VarChar(50)
+  email                                      String          @unique(map: "users_email_unique") @db.VarChar(255)
+  gender                                     String          @default("N/E") @db.VarChar(255)
+  password                                   String          @db.VarChar(255)
+  birthdate                                  DateTime        @default(dbgenerated("('2023-12-01')")) @db.Date
+  image                                      String          @default("userprofile.webp") @db.VarChar(255)
+  remember_token                             String?         @db.VarChar(100)
+  created_at                                 DateTime?       @default(now())
+  updated_at                                 DateTime?       @updatedAt
+  equipos                                    equipos[]
+  notifications_notifications_user_idTousers notifications[] @relation("notifications_user_idTousers") @ignore
+  torneos                                    torneos[]
+}
+
+model equipos {
+  id                                            Int               @id @default(autoincrement()) @db.UnsignedInt
+  name                                          String            @db.VarChar(255)
+  user_id                                       Int               @db.UnsignedInt
+  created_at                                    DateTime?         @default(now())
+  updated_at                                    DateTime?         @updatedAt
+  users                                         users             @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "equipos_user_id_foreign")
+  estadisticas                                  estadisticas[]    @ignore
+  miembro_equipos                               miembro_equipos[] @ignore
+  notifications                                 notifications[]   @ignore
+  partidos_partidos_equipoLocal_idToequipos     partidos[]        @relation("partidos_equipoLocal_idToequipos")
+  partidos_partidos_equipoVisitante_idToequipos partidos[]        @relation("partidos_equipoVisitante_idToequipos")
+
+  @@index([user_id], map: "equipos_user_id_foreign")
+}
+
+model partidos {
+  id                                           Int       @id @default(autoincrement()) @db.UnsignedInt
+  horaPartido                                  DateTime  @db.Time(0)
+  fechaPartido                                 DateTime  @db.Date
+  jornada                                      DateTime  @db.Date
+  resLocal                                     Int?      @db.UnsignedInt
+  resVisitante                                 Int?      @db.UnsignedInt
+  equipoLocal_id                               Int       @db.UnsignedInt
+  equipoVisitante_id                           Int       @db.UnsignedInt
+  torneo_id                                    Int       @db.UnsignedInt
+  created_at                                   DateTime? @default(now())
+  updated_at                                   DateTime? @updatedAt
+  // partido_torneos                              partido_torneos[] @ignore
+  equipos_partidos_equipoLocal_idToequipos     equipos   @relation("partidos_equipoLocal_idToequipos", fields: [equipoLocal_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partidos_equipolocal_id_foreign")
+  equipos_partidos_equipoVisitante_idToequipos equipos   @relation("partidos_equipoVisitante_idToequipos", fields: [equipoVisitante_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partidos_equipovisitante_id_foreign")
+  torneos                                      torneos   @relation(fields: [torneo_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partidos_torneo_id_foreign")
+
+  @@index([equipoLocal_id], map: "partidos_equipolocal_id_foreign")
+  @@index([equipoVisitante_id], map: "partidos_equipovisitante_id_foreign")
+}
+
+model torneos {
+  id            Int             @id @default(autoincrement()) @db.UnsignedInt
+  name          String          @db.VarChar(255)
+  ubicacion     String          @db.VarChar(255)
+  descripcion   String          @db.VarChar(255)
+  fechaInicio   DateTime        @db.Date
+  fechaFin      DateTime        @db.Date
+  cantEquipo    Int             @default(0) @db.UnsignedInt
+  user_id       Int             @db.UnsignedInt
+  created_at    DateTime?       @default(now())
+  updated_at    DateTime?       @updatedAt
+  estadisticas  estadisticas[]  @ignore
+  notifications notifications[] @ignore
+  // partido_torneos      partido_torneos[]      @ignore
+  partidos      partidos[]      @ignore
+  users         users           @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "torneos_user_id_foreign")
+
+  @@index([user_id], map: "torneos_user_id_foreign")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model estadisticas {
+  torneo_id  Int       @db.UnsignedInt
+  equipo_id  Int       @db.UnsignedInt
+  PT         Int       @default(0) @db.UnsignedInt
+  CA         Int       @default(0) @db.UnsignedInt
+  DC         Int       @default(0)
+  CC         Int       @default(0) @db.UnsignedInt
+  created_at DateTime? @default(now())
+  updated_at DateTime? @updatedAt
+  equipos    equipos   @relation(fields: [equipo_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "estadisticas_equipo_id_foreign")
+  torneos    torneos   @relation(fields: [torneo_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "estadisticas_torneo_id_foreign")
+
+  @@id([torneo_id, equipo_id])
+  @@index([equipo_id], map: "estadisticas_equipo_id_foreign")
+  @@index([torneo_id], map: "estadisticas_torneo_id_foreign")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model miembro_equipos {
+  user_miembro String    @db.VarChar(255)
+  equipo_id    Int       @db.UnsignedInt
+  created_at   DateTime? @default(now())
+  updated_at   DateTime? @updatedAt
+  equipos      equipos   @relation(fields: [equipo_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "miembro_equipos_equipo_id_foreign")
+
+  @@id([user_miembro, equipo_id])
+  @@index([equipo_id], map: "miembro_equipos_equipo_id_foreign")
+}
+
+// model partido_torneos {
+//   torneo_id Int    @db.UnsignedInt
+//   partido_idInt    @db.UnsignedInt
+//   created_at DateTime? @default(now())
+//   updated_at DateTime? @updatedAt
+//   partidos   partidos  @relation(fields: [partido_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partido_torneos_partido_id_foreign")
+//   torneos    torneos   @relation(fields: [torneo_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partido_torneos_torneo_id_foreign")
+
+//   @@index([partido_id], map: "partido_torneos_partido_id_foreign")
+//   @@index([torneo_id], map: "partido_torneos_torneo_id_foreign")
+//   @@id([torneo_id, partido_id])
+// }
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model notifications {
+  equipo_id                          Int?                 @db.UnsignedInt
+  torneo_id                          Int?                 @db.UnsignedInt
+  user_id                            Int                  @db.UnsignedInt
+  user_id2                           Int?                 @db.UnsignedInt
+  status                             notifications_status @default(pending)
+  created_at                         DateTime?            @default(now())
+  updated_at                         DateTime?            @updatedAt
+  equipos                            equipos?             @relation(fields: [equipo_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "notifications_equipo_id_foreign")
+  torneos                            torneos?             @relation(fields: [torneo_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "notifications_torneo_id_foreign")
+  users_notifications_user_idTousers users                @relation("notifications_user_idTousers", fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "notifications_user_id_foreign")
+
+  @@index([equipo_id], map: "notifications_equipo_id_foreign")
+  @@index([torneo_id], map: "notifications_torneo_id_foreign")
+  @@index([user_id2], map: "notifications_user_id2_foreign")
+  @@index([user_id], map: "notifications_user_id_foreign")
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model password_reset_tokens {
+  email      String    @db.VarChar(255)
+  token      String    @db.VarChar(255)
+  created_at DateTime? @default(now())
+
+  @@index([email], map: "password_reset_tokens_email_index")
+  @@ignore
+}
+
+model personal_access_tokens {
+  id             Int       @id @default(autoincrement()) @db.UnsignedInt
+  tokenable_type String    @db.VarChar(255)
+  tokenable_id   Int       @db.UnsignedInt
+  name           String    @db.VarChar(255)
+  token          String    @unique(map: "personal_access_tokens_token_unique") @db.VarChar(64)
+  abilities      String?   @db.Text
+  last_used_at   DateTime? @db.Timestamp(0)
+  expires_at     DateTime? @db.Timestamp(0)
+  created_at     DateTime? @default(now())
+  updated_at     DateTime? @updatedAt
+
+  @@index([tokenable_type, tokenable_id], map: "personal_access_tokens_tokenable_type_tokenable_id_index")
+}
+
+enum notifications_status {
+  pending
+  accepted
+  rejected
+}
