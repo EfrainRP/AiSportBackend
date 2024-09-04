@@ -2,6 +2,7 @@
 
 npm install
 npm run db-seed
+npm rebuild     ->      en caso de que no se instalen bien
 
 .ENV
 
