@@ -1,4 +1,4 @@
-import prisma from "./db.js"
+import { prisma } from "../prisma/db.js"
 import bcrypt from "bcrypt";
 
 // Mostrar todos
