@@ -1,11 +1,12 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import { prisma } from "../prisma/db.js";
 import bcrypt from "bcrypt";
 
-// Mostrar todos
-export const getAllUsers = async (req,res) =>{
+export const dashIndex = async (req,res) =>{
   try{
-      const users = await prisma.users.findMany();
+    //MIS TORNEOS
+      const users = await prisma.torneos.findMany({
+        where: {user_id: parseInt(req.params.id,10) }
+      });
       res.json(users);
   }catch(error){
     res.json({message: error.message})
@@ -15,8 +16,8 @@ export const getAllUsers = async (req,res) =>{
 // Mostrar uno
 export const getUser = async (req,res) =>{
   try{
-      const user = await await prisma.users.findFirst({
-        where: {id: req.body.id }
+      const user = await prisma.users.findFirst({
+        where: {id: parseInt(req.params.id,10) }
       });
       res.json(user);
   }catch(error){

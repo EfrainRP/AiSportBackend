@@ -1,21 +1,26 @@
 import express from 'express';
 import userRoutes from './routes/routes.js';
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import connect from './prisma/db.js';
+
+// Libreria para el uso de archivos estaticos de nodejs
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const port = process.env.PORT;
 
 const app = express();
 
 app.use(express.json());
-app.use('/api/sporthub', userRoutes);
 
-// Verificar la conexión
-try{
-  await prisma.$connect()
-    console.log('Conectado a la base de datos MySQL');
-}catch(error){
-    console.log(`No se pudo conectar a la base de datos: ${error}`);
-}
+// Hacer que node sirva los archivos de nuestro app React
+app.use(express.static(path.resolve(__dirname, '../client/build')));
+
+app.use('/sporthub/api', userRoutes);
+
+connect(); //Conecta a la base de datos
+
 // app.get('/',(req,res)=>{
 //   res.send('hola mundo')
 // });

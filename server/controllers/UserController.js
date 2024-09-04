@@ -1,4 +1,4 @@
-import { prisma } from "../prisma/db.js"
+import { prisma } from "../prisma/db.js";
 import bcrypt from "bcrypt";
 
 // Mostrar todos
@@ -14,7 +14,7 @@ export const getAllUsers = async (req,res) =>{
 // Mostrar uno
 export const getUser = async (req,res) =>{
   try{
-      const user = await await prisma.users.findFirst({
+      const user = await prisma.users.findFirst({
         where: {id: parseInt(req.params.id,10) }
       });
       res.json(user);
