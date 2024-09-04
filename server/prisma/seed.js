@@ -1,6 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "./db.js"
 import bcrypt from "bcrypt";
-const prisma = new PrismaClient();
 import JSONequipos from "./data/equipos.json" with { type: "json" };
 import JSONestadisticas from "./data/estadisticas.json" with { type: "json" };
 import JSONmiembros from "./data/miembros.json" with { type: "json" };
