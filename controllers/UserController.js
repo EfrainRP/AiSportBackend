@@ -1,12 +1,10 @@
-import { prisma } from "../prisma/db.js";
+import * as query from "../utils/queries.js";
 import bcrypt from "bcrypt";
 
-export const dashIndex = async (req,res) =>{
+// Mostrar todos
+export const getAllUsers = async (req,res) =>{
   try{
-    //MIS TORNEOS
-      const users = await prisma.torneos.findMany({
-        where: {user_id: parseInt(req.params.id,10) }
-      });
+      const users = await query.getAllUsers();
       res.json(users);
   }catch(error){
     res.json({message: error.message})
@@ -16,10 +14,8 @@ export const dashIndex = async (req,res) =>{
 // Mostrar uno
 export const getUser = async (req,res) =>{
   try{
-      const user = await prisma.users.findFirst({
-        where: {id: parseInt(req.params.id,10) }
-      });
-      res.json(user);
+    const user = await query.getUser(req.params.id,10);
+    res.json(user);
   }catch(error){
     res.json({message: error.message})
   }

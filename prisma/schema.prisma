@@ -83,7 +83,6 @@ model torneos {
   @@index([user_id], map: "torneos_user_id_foreign")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model estadisticas {
   torneo_id  Int       @db.UnsignedInt
   equipo_id  Int       @db.UnsignedInt
@@ -101,7 +100,6 @@ model estadisticas {
   @@index([torneo_id], map: "estadisticas_torneo_id_foreign")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model miembro_equipos {
   user_miembro String    @db.VarChar(255)
   equipo_id    Int       @db.UnsignedInt
@@ -113,19 +111,6 @@ model miembro_equipos {
   @@index([equipo_id], map: "miembro_equipos_equipo_id_foreign")
 }
 
-// model partido_torneos {
-//   torneo_id Int    @db.UnsignedInt
-//   partido_idInt    @db.UnsignedInt
-//   created_at DateTime? @default(now())
-//   updated_at DateTime? @updatedAt
-//   partidos   partidos  @relation(fields: [partido_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partido_torneos_partido_id_foreign")
-//   torneos    torneos   @relation(fields: [torneo_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partido_torneos_torneo_id_foreign")
-
-//   @@index([partido_id], map: "partido_torneos_partido_id_foreign")
-//   @@index([torneo_id], map: "partido_torneos_torneo_id_foreign")
-//   @@id([torneo_id, partido_id])
-// }
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model notifications {
   equipo_id                          Int?                 @db.UnsignedInt
   torneo_id                          Int?                 @db.UnsignedInt
@@ -175,3 +160,18 @@ enum notifications_status {
   accepted
   rejected
 }
+
+// model partido_torneos {
+//   torneo_id Int    @db.UnsignedInt
+//   partido_idInt    @db.UnsignedInt
+//   created_at DateTime? @default(now())
+//   updated_at DateTime? @updatedAt
+//   partidos   partidos  @relation(fields: [partido_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partido_torneos_partido_id_foreign")
+//   torneos    torneos   @relation(fields: [torneo_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partido_torneos_torneo_id_foreign")
+
+//   @@index([partido_id], map: "partido_torneos_partido_id_foreign")
+//   @@index([torneo_id], map: "partido_torneos_torneo_id_foreign")
+//   @@id([torneo_id, partido_id])
+// }
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+
