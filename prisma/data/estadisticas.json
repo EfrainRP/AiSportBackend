@@ -1,30 +1,122 @@
-[{"torneo_id":1,"equipo_id":44},
-{"torneo_id":2,"equipo_id":26},
-{"torneo_id":3,"equipo_id":15},
-{"torneo_id":4,"equipo_id":31},
-{"torneo_id":5,"equipo_id":43},
-{"torneo_id":6,"equipo_id":48},
-{"torneo_id":7,"equipo_id":22},
-{"torneo_id":8,"equipo_id":20},
-{"torneo_id":9,"equipo_id":45},
-{"torneo_id":10,"equipo_id":18},
-{"torneo_id":11,"equipo_id":1},
-{"torneo_id":12,"equipo_id":7},
-{"torneo_id":13,"equipo_id":28},
-{"torneo_id":14,"equipo_id":29},
-{"torneo_id":15,"equipo_id":31},
-{"torneo_id":16,"equipo_id":9},
-{"torneo_id":17,"equipo_id":4},
-{"torneo_id":18,"equipo_id":20},
-{"torneo_id":19,"equipo_id":42},
-{"torneo_id":20,"equipo_id":28},
-{"torneo_id":21,"equipo_id":48},
-{"torneo_id":22,"equipo_id":38},
-{"torneo_id":23,"equipo_id":50},
-{"torneo_id":24,"equipo_id":37},
-{"torneo_id":25,"equipo_id":46},
-{"torneo_id":26,"equipo_id":44},
-{"torneo_id":27,"equipo_id":5},
-{"torneo_id":28,"equipo_id":18},
-{"torneo_id":29,"equipo_id":32},
-{"torneo_id":30,"equipo_id":12}]
+[
+    {
+        "torneo_id": 1,
+        "equipo_id": 44
+    },
+    {
+        "torneo_id": 2,
+        "equipo_id": 26
+    },
+    {
+        "torneo_id": 3,
+        "equipo_id": 15
+    },
+    {
+        "torneo_id": 4,
+        "equipo_id": 31
+    },
+    {
+        "torneo_id": 5,
+        "equipo_id": 43
+    },
+    {
+        "torneo_id": 6,
+        "equipo_id": 48
+    },
+    {
+        "torneo_id": 7,
+        "equipo_id": 22
+    },
+    {
+        "torneo_id": 8,
+        "equipo_id": 20
+    },
+    {
+        "torneo_id": 9,
+        "equipo_id": 45
+    },
+    {
+        "torneo_id": 10,
+        "equipo_id": 18
+    },
+    {
+        "torneo_id": 11,
+        "equipo_id": 1
+    },
+    {
+        "torneo_id": 12,
+        "equipo_id": 7
+    },
+    {
+        "torneo_id": 13,
+        "equipo_id": 28
+    },
+    {
+        "torneo_id": 14,
+        "equipo_id": 29
+    },
+    {
+        "torneo_id": 15,
+        "equipo_id": 31
+    },
+    {
+        "torneo_id": 16,
+        "equipo_id": 9
+    },
+    {
+        "torneo_id": 17,
+        "equipo_id": 4
+    },
+    {
+        "torneo_id": 18,
+        "equipo_id": 20
+    },
+    {
+        "torneo_id": 19,
+        "equipo_id": 42
+    },
+    {
+        "torneo_id": 20,
+        "equipo_id": 28
+    },
+    {
+        "torneo_id": 21,
+        "equipo_id": 48
+    },
+    {
+        "torneo_id": 22,
+        "equipo_id": 38
+    },
+    {
+        "torneo_id": 23,
+        "equipo_id": 50
+    },
+    {
+        "torneo_id": 24,
+        "equipo_id": 37
+    },
+    {
+        "torneo_id": 25,
+        "equipo_id": 46
+    },
+    {
+        "torneo_id": 26,
+        "equipo_id": 44
+    },
+    {
+        "torneo_id": 27,
+        "equipo_id": 5
+    },
+    {
+        "torneo_id": 28,
+        "equipo_id": 18
+    },
+    {
+        "torneo_id": 29,
+        "equipo_id": 32
+    },
+    {
+        "torneo_id": 30,
+        "equipo_id": 12
+    }
+]
