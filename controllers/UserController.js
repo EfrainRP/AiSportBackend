@@ -1,4 +1,6 @@
 import bcrypt from "bcrypt";
+import jwt from 'jsonwebtoken'; // Libreria para generar Token <-
+import crypto from 'crypto';
 import { prisma } from '../prisma/db.js';
 
 // Mostrar todos los usuarios
@@ -82,20 +84,31 @@ export const deleteUser = async (req, res) => {
 };
 
 // Iniciar sesión
+const JWT_SECRET = crypto.randomBytes(32).toString('base64');  // Clave secreta generada aleatoriamente
+
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
+  
   try {
     const user = await prisma.users.findUnique({ // Uso del modelo "users" en schema.prisma  
       where: {
         email
       }
     });
-    
+
     if (user && await bcrypt.compare(password, user.password)) {
-      // Devuelve el nombre de usuario además del mensaje
-      res.json({ 
-        message: 'Login successful', 
-        username: user.name 
+      // Generar el token JWT si las credenciales son correctas
+      const token = jwt.sign(
+        { id: user.id, username: user.name }, // Payload del token
+        JWT_SECRET, // Clave tipo secreta para firmar el token por el usuario
+        { expiresIn: '1h' } // Da tiempo de expiracion de 1 hora al token
+      );
+
+      // Devolver el token junto con el mensaje y el nombre de usuario
+      res.json({
+        message: 'Login successful',
+        username: user.name,
+        token: token, // Enviar el token al frontend
       });
     } else {
       res.status(401).json({ message: 'Invalid credentials' });
