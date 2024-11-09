@@ -1,4 +1,4 @@
-import * as query from "../utils/queries.js";
+import * as query from "../utils/dashUtils.js";
 
 export const dashIndex = async (req,res) =>{
   try{

@@ -50,24 +50,23 @@ export const createUser = async (data) => {
             throw new Error('Faltan campos por llenar.');
         }
         validateUserInput(data);
-        // TODO : Control de user existed
+        // TODO : Control de user existed email
         
+        const user = await prisma.users.create({
+            data: {
+                name: data.name,
+                fsurname: data.fsurname,
+                msurname: data.msurname,
+                nickname: data.nickname,
+                email: data.email,
+                gender: gender || 'N/E', // Asignar 'N/E' si el género no se especifica
+                password: hashedPassword,
+                birthdate: birthDateObj, // Fecha como un objeto Date
+            }
+        })
+        return user;
     }catch(error){
         console.log(error);
-    }finally{
-    const user = await prisma.users.create({
-        data: {
-            name: data.name,
-            fsurname: data.fsurname,
-            msurname: data.msurname,
-            nickname: data.nickname,
-            email: data.email,
-            gender: gender || 'N/E', // Asignar 'N/E' si el género no se especifica
-            password: hashedPassword,
-            birthdate: birthDateObj, // Fecha como un objeto Date
-        }
-    })
-    return await user;
     }
 }
 

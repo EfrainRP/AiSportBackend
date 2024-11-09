@@ -134,7 +134,7 @@ export const loginUser = async (req, res) => {
       res.json({
         status: "success",
         message: 'Login successful',
-        username: user.name,
+        params: {userId: user.id, userName: user.name},
         token: token, // Enviar el token al frontend
       });
     } else {
