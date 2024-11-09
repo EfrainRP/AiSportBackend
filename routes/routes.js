@@ -1,6 +1,6 @@
 import express from 'express';
-import UserController from '../controllers/UserController.js';
-import DashboardController from '../controllers/DashboardController.js';
+import * as UserController from '../controllers/UserController.js';
+import * as DashboardController from '../controllers/DashboardController.js';
 
 const router = express.Router();
 
