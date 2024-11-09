@@ -7,7 +7,9 @@ export const getAllUsers = async (req, res) => {
     const users = await prisma.user.findMany();  // `findMany()` en lugar de `query.getAllUsers()`
     res.json(users);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ 
+      status: "error",
+      message: error.message });
   }
 };
 
@@ -20,12 +22,16 @@ export const getUser = async (req, res) => {
       }
     });
     if (user) {
-      res.json(user);
+      res.status(200).json(user);
     } else {
-      res.status(404).json({ message: 'User not found' });
+      res.status(404).json({ 
+        status: "error",
+        message: 'User not found' });
     }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ 
+      status: "error",
+      message: error.message });
   }
 };
 
@@ -40,9 +46,13 @@ export const createUser = async (req, res) => {
         password: hashedPassword,
       },
     });
-    res.status(201).json({ message: 'User registered successfully', user });
+    res.status(201).json({ 
+      status: "success",
+      message: 'User registered successfully', user });
   } catch (error) {
-    res.status(500).json({ message: 'Error registering user', error });
+    res.status(500).json({ 
+      status: "error",
+      message: 'Error registering user', error });
   }
 };
 
@@ -60,9 +70,13 @@ export const updateUser = async (req, res) => {
         password: hashedPassword,  // Actualiza solo si se proporciona
       },
     });
-    res.json({ message: 'User updated successfully', user });
+    res.json({ 
+      status: "success",
+      message: 'User updated successfully', user });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ 
+      status: "error",
+      message: error.message });
   }
 };
 
@@ -75,9 +89,13 @@ export const deleteUser = async (req, res) => {
         id: parseInt(id, 10)  // Convierte el `id` a número entero
       },
     });
-    res.json({ message: 'User deleted successfully' });
+    res.json({ 
+      status: "success",
+      message: 'User deleted successfully' });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ 
+      status: "error",
+      message: error.message });
   }
 };
 
@@ -93,15 +111,19 @@ export const loginUser = async (req, res) => {
     
     if (user && await bcrypt.compare(password, user.password)) {
       // Devuelve el nombre de usuario además del mensaje
-      res.json({ 
-        message: 'Login successful', 
+      res.status(200).json({ 
+        status: "success",
         username: user.name 
       });
     } else {
-      res.status(401).json({ message: 'Invalid credentials' });
+      res.status(401).json({ 
+        status: "error",
+        message: 'Invalid credentials' });
     }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ 
+      status: "error",
+      message: error.message });
   }
 };
 
@@ -112,7 +134,9 @@ export const registerUser = async (req, res) => {
 
   // Validar si faltan campos
   if (!name || !fsurname || !msurname || !nickname || !email || !password || !birthdate) {
-    return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+    return res.status(400).json({ 
+      status: "error",
+      message: 'Todos los campos son obligatorios' });
   }
 
   // Validar tipos y formatos
@@ -153,7 +177,9 @@ export const registerUser = async (req, res) => {
   }
 
   if (errors.length > 0) {
-    return res.status(400).json({ message: 'Errores de validación', errors });
+    return res.status(400).json({ 
+      status: "error",
+      message: 'Errores de validación', errors });
   }
 
   try {
@@ -173,9 +199,13 @@ export const registerUser = async (req, res) => {
       },
     });
     // Responder con el usuario creado
-    res.status(201).json({ message: 'Usuario registrado exitosamente', user });
+    res.status(201).json({ 
+      status: "success",
+      message: 'Usuario registrado exitosamente', user });
   } catch (error) {
     console.error('Error registrando usuario:', error);  // Para depuración
-    res.status(500).json({ message: 'Error registrando usuario', error });
+    res.status(500).json({ 
+      status: "error",
+      message: 'Error registrando usuario', error });
   }
 };
