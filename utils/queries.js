@@ -1,43 +1,60 @@
 import { prisma } from "../prisma/db.js";
 
 function validateUserInput(data) {
+    // Validar tipos y formatos
+    const errors = [];
     if (typeof data.name !== 'string' || data.name.length > 60) {
-        throw new Error('El nombre debe ser una cadena de hasta 60 caracteres.');
+        errors.push('El nombre debe ser una cadena de hasta 60 caracteres.');
     }
 
     if (typeof data.fsurname !== 'string' || data.fsurname.length > 50) {
-        throw new Error('El primer apellido debe ser una cadena de hasta 50 caracteres.');
+        errors.push('El primer apellido debe ser una cadena de hasta 50 caracteres.');
     }
 
     if (typeof data.msurname !== 'string' || data.msurname.length > 50) {
-        throw new Error('El segundo apellido debe ser una cadena de hasta 50 caracteres.');
+        errors.push('El segundo apellido debe ser una cadena de hasta 50 caracteres.');
     }
 
     if (typeof data.nickname !== 'string' || data.nickname.length > 50) {
-        throw new Error('El apodo debe ser una cadena de hasta 50 caracteres.');
+        errors.push('El apodo debe ser una cadena de hasta 50 caracteres.');
     }
 
     if (!/^\S+@\S+\.\S+$/.test(data.email)) {
-        throw new Error('El correo electrónico no es válido.');
+        errors.push('El correo electrónico no es válido.');
     }
 
     if (typeof data.gender !== 'string') {
-        throw new Error('El género debe ser una cadena.');
+        errors.push('El género debe ser una cadena.');
     }
 
     if (typeof data.password !== 'string' || data.password.length < 6) {
-        throw new Error('La contraseña debe tener al menos 6 caracteres.');
+        errors.push('La contraseña debe tener al menos 6 caracteres.');
     }
 
     // Validar fecha de nacimiento
     const birthDateObj = new Date(data.birthdate);
     if (isNaN(birthDateObj.getTime())) {
-        throw new Error('La fecha de nacimiento no es válida.');
+        errors.push('La fecha de nacimiento no es válida.');
     }
+
+    if (errors.length > 0) {
+        throw new Error('Errores de validación: \n', errors);
+    }
+    return;
 }
 
 export const createUser = async (data) => {
-    validateUserInput(data);
+    try{
+        // Validar si faltan campos
+        if (!data.name || !data.fsurname || !data.msurname || !data.nickname || !data.email || !data.password || !data.birthdate) {
+            throw new Error('Faltan campos por llenar.');
+        }
+        validateUserInput(data);
+        // TODO : Control de user existed
+        
+    }catch(error){
+        console.log(error);
+    }finally{
     const user = await prisma.users.create({
         data: {
             name: data.name,
@@ -45,12 +62,13 @@ export const createUser = async (data) => {
             msurname: data.msurname,
             nickname: data.nickname,
             email: data.email,
-            gender: data.gender,
-            password: data.password,
-            birthdate: data.birthday
+            gender: gender || 'N/E', // Asignar 'N/E' si el género no se especifica
+            password: hashedPassword,
+            birthdate: birthDateObj, // Fecha como un objeto Date
         }
     })
     return await user;
+    }
 }
 
 //Mostrar todos los usuarios
