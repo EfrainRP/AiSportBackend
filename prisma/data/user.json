@@ -548,5 +548,16 @@
         "gender": "Male",
         "password": "admin123",
         "birthday": "2024-03-27"
+    },
+    {
+        "id": 51,
+        "name": "Maik",
+        "fsurname": "Horten",
+        "msurname": "Hargey",
+        "nickname": "maiks",
+        "email": "mike@gmail.com",
+        "gender": "Male",
+        "password": "admin123",
+        "birthday": "2024-03-27"
     }
 ]

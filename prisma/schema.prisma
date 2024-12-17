@@ -33,8 +33,8 @@ model equipos {
   created_at                                    DateTime?         @default(now())
   updated_at                                    DateTime?         @updatedAt
   users                                         users             @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "equipos_user_id_foreign")
-  estadisticas                                  estadisticas[]    @ignore
-  miembro_equipos                               miembro_equipos[] @ignore
+  estadisticas                                  estadisticas[]    // Relacion habilitada
+  miembro_equipos                               miembro_equipos[] // Relación habilitada
   notifications                                 notifications[]   @ignore
   partidos_partidos_equipoLocal_idToequipos     partidos[]        @relation("partidos_equipoLocal_idToequipos")
   partidos_partidos_equipoVisitante_idToequipos partidos[]        @relation("partidos_equipoVisitante_idToequipos")
@@ -54,7 +54,7 @@ model partidos {
   torneo_id                                    Int       @db.UnsignedInt
   created_at                                   DateTime? @default(now())
   updated_at                                   DateTime? @updatedAt
-  // partido_torneos                              partido_torneos[] @ignore
+  //partido_torneos                           partido_torneos[] 
   equipos_partidos_equipoLocal_idToequipos     equipos   @relation("partidos_equipoLocal_idToequipos", fields: [equipoLocal_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partidos_equipolocal_id_foreign")
   equipos_partidos_equipoVisitante_idToequipos equipos   @relation("partidos_equipoVisitante_idToequipos", fields: [equipoVisitante_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partidos_equipovisitante_id_foreign")
   torneos                                      torneos   @relation(fields: [torneo_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partidos_torneo_id_foreign")
@@ -74,16 +74,17 @@ model torneos {
   user_id       Int             @db.UnsignedInt
   created_at    DateTime?       @default(now())
   updated_at    DateTime?       @updatedAt
-  estadisticas  estadisticas[]  @ignore
+  estadisticas  estadisticas[]  // Habilitada
   notifications notifications[] @ignore
-  // partido_torneos      partido_torneos[]      @ignore
-  partidos      partidos[]      @ignore
+  //partido_torneos      partido_torneos[]     @ignore
+  partidos      partidos[]      // Habilitada
   users         users           @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "torneos_user_id_foreign")
 
   @@index([user_id], map: "torneos_user_id_foreign")
 }
 
 model estadisticas {
+  id         Int       @id @default(autoincrement()) @db.UnsignedInt
   torneo_id  Int       @db.UnsignedInt
   equipo_id  Int       @db.UnsignedInt
   PT         Int       @default(0) @db.UnsignedInt
@@ -95,7 +96,7 @@ model estadisticas {
   equipos    equipos   @relation(fields: [equipo_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "estadisticas_equipo_id_foreign")
   torneos    torneos   @relation(fields: [torneo_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "estadisticas_torneo_id_foreign")
 
-  @@id([torneo_id, equipo_id])
+  //@@id([torneo_id, equipo_id])
   @@index([equipo_id], map: "estadisticas_equipo_id_foreign")
   @@index([torneo_id], map: "estadisticas_torneo_id_foreign")
 }
@@ -112,6 +113,7 @@ model miembro_equipos {
 }
 
 model notifications {
+  id                                 Int                  @id @default(autoincrement()) @db.UnsignedInt
   equipo_id                          Int?                 @db.UnsignedInt
   torneo_id                          Int?                 @db.UnsignedInt
   user_id                            Int                  @db.UnsignedInt

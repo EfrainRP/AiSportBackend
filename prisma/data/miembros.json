@@ -144,19 +144,19 @@
         "equipo_id": 40
     },
     {
-        "user_miembro": 30,
-        "equipo_id": 18
-    },
-    {
-        "user_miembro": 37,
+        "user_miembro": 51,
         "equipo_id": 46
     },
     {
-        "user_miembro": 25,
-        "equipo_id": 11
+        "user_miembro": 50,
+        "equipo_id": 46
     },
     {
         "user_miembro": 49,
-        "equipo_id": 25
+        "equipo_id": 46
+    },
+    {
+        "user_miembro": 48,
+        "equipo_id": 46
     }
 ]
