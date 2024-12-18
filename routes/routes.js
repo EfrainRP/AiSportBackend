@@ -5,6 +5,7 @@ import * as EquiposController from '../controllers/EquiposController.js';
 import * as PartidosController from '../controllers/PartidosController.js';
 import * as TorneoEquiposController from '../controllers/TorneoEquiposController.js';
 import * as DashboardController from '../controllers/DashboardController.js';
+import * as ProfileController from '../controllers/ProfileController.js';
 
 const router = express.Router();
 
@@ -20,8 +21,9 @@ router.post('/register', UserController.registerUser);
 // router.put('/:id', UserController.updateUser);
 // router.delete('/:id', UserController.deleteUser);
 
-//Ruta Dashboard
+//Rutas del DASHBOARD
 router.get('/dash/:id', DashboardController.dashIndex);
+router.get('/dashboard/:userId', DashboardController.index);
 // Rutas de TORNEOS (CRUD)
 router.get('/torneos/:id', TorneosController.index);
 router.get('/torneo/:torneoName/:torneoId', TorneosController.show); 
@@ -42,9 +44,13 @@ router.post('/equipo/create', EquiposController.store);
 // Rutas de PARTIDOS (CRUD)
 router.get('/partidos/:torneoId', PartidosController.index);
 router.get('/partido/:torneoId/:partidoId', PartidosController.show);
-//router.put('/partido/:torneoId/:partidoId', PartidosController.update); 
+router.put('/partido/:torneoId/:partidoId', PartidosController.update); 
 router.delete('/partido/:torneoId/:partidoId', PartidosController.eliminate); 
 router.post('/partido/create/:torneoId', PartidosController.store); 
-
+// Rutas de NOTIFICACIONES 
+router.get('/notificacion/:capitanEquipoId/:organizadorTorneoId', PartidosController.index);
+// Rutas de PERFIL 
+router.get('/perfil/:userId', ProfileController.show);
+router.put('/perfil/:userId', ProfileController.update);
 
 export default router;

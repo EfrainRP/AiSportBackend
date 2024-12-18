@@ -67,6 +67,11 @@ import { prisma } from '../prisma/db.js';
       if (!equipo) {
         return res.status(404).json({ message: 'Equipo no encontrado.' });
       }
+
+      // Validación 1: Nombre obligatorio.
+      if (!name) {
+        return res.status(400).json({ message: "El nombre del equipo es obligatorio." });
+       }
   
       // Verificar si el nombre ha cambiado
       if (name !== equipo.name) {
@@ -153,15 +158,39 @@ export const eliminate = async (req, res) => {
   const { equipoId } = req.params;
 
   try {
-    // Elimina el equipo de la base de datos
-    const equipoEliminado = await prisma.equipos.delete({
-      where: { id: parseInt(equipoId) }, // Convierte equipoId a int 
+    // Convertir equipoId a entero
+    const equipoIdInt = parseInt(equipoId, 10);
+
+    if (isNaN(equipoIdInt)) {
+      return res.status(400).json({ message: 'El ID del equipo no es válido' });
+    }
+
+    // Paso 1: Validar si el equipo está participando en algún partido como local o visitante
+    const equipoEnPartido = await prisma.partidos.findFirst({
+      where: {
+        OR: [
+          { equipoLocal_id: equipoIdInt },
+          { equipoVisitante_id: equipoIdInt },
+        ],
+      },
     });
 
-    res.status(200).json({ message: 'Equipo eliminado con éxito' });
+    if (equipoEnPartido) {
+      return res.status(400).json({
+        message: 'No se puede eliminar al equipo porque está participando en un partido.',
+      });
+    }
+
+    // Paso 2: Eliminar el equipo si no está participando en ningún partido
+    const equipoEliminado = await prisma.equipos.delete({
+      where: { id: equipoIdInt },
+    });
+
+    res.status(200).json({ message: 'Equipo eliminado con éxito', equipo: equipoEliminado });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Error al eliminar el equipo' });
   }
 };
+
 

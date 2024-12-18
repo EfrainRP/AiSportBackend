@@ -32,6 +32,9 @@ import { prisma } from '../prisma/db.js';
           id: torneoId, // Filtra por el ID del torneo
           name: torneoName, // Filtra también por el nombre del torneo
         },
+        include: {
+          users: true, // Incluye el usuario relacionado
+        },
       });
   
       // Verifica si se encontró el torneo
