@@ -6,6 +6,7 @@ import * as PartidosController from '../controllers/PartidosController.js';
 import * as TorneoEquiposController from '../controllers/TorneoEquiposController.js';
 import * as DashboardController from '../controllers/DashboardController.js';
 import * as ProfileController from '../controllers/ProfileController.js';
+import * as NotificationController from '../controllers/NotificationController.js';
 
 const router = express.Router();
 
@@ -22,8 +23,9 @@ router.post('/register', UserController.registerUser);
 // router.delete('/:id', UserController.deleteUser);
 
 //Rutas del DASHBOARD
-router.get('/dash/:id', DashboardController.dashIndex);
 router.get('/dashboard/:userId', DashboardController.index);
+//router.get('/dash/:id', DashboardController.dashIndex);
+
 // Rutas de TORNEOS (CRUD)
 router.get('/torneos/:id', TorneosController.index);
 router.get('/torneo/:torneoName/:torneoId', TorneosController.show); 
@@ -47,8 +49,11 @@ router.get('/partido/:torneoId/:partidoId', PartidosController.show);
 router.put('/partido/:torneoId/:partidoId', PartidosController.update); 
 router.delete('/partido/:torneoId/:partidoId', PartidosController.eliminate); 
 router.post('/partido/create/:torneoId', PartidosController.store); 
-// Rutas de NOTIFICACIONES 
-router.get('/notificacion/:capitanEquipoId/:organizadorTorneoId', PartidosController.index);
+// Rutas de NOTIFICACIONES (CRUD)
+router.get('/notificaciones/:userId', NotificationController.index)
+router.put('/notificaciones/:notificationId', NotificationController.update)
+router.delete('/notificacion/:capitanEquipoId/:torneoId', NotificationController.eliminate)
+router.post('/notificacion/:capitanEquipoId/:organizadorTorneoId', NotificationController.store);
 // Rutas de PERFIL 
 router.get('/perfil/:userId', ProfileController.show);
 router.put('/perfil/:userId', ProfileController.update);

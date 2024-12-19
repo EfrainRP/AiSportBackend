@@ -115,7 +115,6 @@ export const show = async (req, res) => {
         console.log("IGUALES")
       }
       
-
       // Validar campos nulos o vacíos
       if (!equipoLocalId) return res.status(400).json({ field: 'equipo', message: 'Los equipos son obligatorios.' });
       if (!equipoVisitanteId) return res.status(400).json({ field: 'equipo', message: 'Los equipos son obligatorios.' });

@@ -26,7 +26,7 @@ import { prisma } from '../prisma/db.js';
     const torneoName = req.params.torneoName; // Obtiene el nombre del torneo desde los parámetros de la URL
   
     try {
-      // Consulta para obtener un solo torneo basado en el ID y el nombre
+      // Consulta para obtener un solo torneo basado en el ID y el nombre, e incluir las notificaciones,
       const torneo = await prisma.torneos.findFirst({
         where: {
           id: torneoId, // Filtra por el ID del torneo
@@ -34,6 +34,24 @@ import { prisma } from '../prisma/db.js';
         },
         include: {
           users: true, // Incluye el usuario relacionado
+          notifications: {
+            where: {
+              status: 'pending', // Filtra solo las notificaciones con status 'pending'
+            },
+            include: {
+              equipos: {
+                select: {
+                  name: true, // Solo incluye el campo 'name' del equipo
+                },
+              },
+              users_notifications_user_idTousers: {
+                select: {
+                  name: true, //  incluye el campo 'name' del usuario
+                  email: true, //  incluye el campo 'email' del usuario
+                },
+              },
+            },
+          },
         },
       });
   
@@ -42,12 +60,13 @@ import { prisma } from '../prisma/db.js';
         return res.status(404).json({ message: "Torneo no encontrado o datos no coinciden" });
       }
   
-      res.status(200).json(torneo);
+      res.status(200).json(torneo); // Retorna el torneo con las notificaciones y la información adicional
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Error al obtener el torneo", error });
     }
   };
+  
   
   // ---------------------------------------------------------------------------------
   // FORM UPDATE
@@ -59,10 +78,18 @@ import { prisma } from '../prisma/db.js';
       // Obtener el torneo actual desde la base de datos
       const currentTorneo = await prisma.torneos.findUnique({
         where: { id: torneoId },
+        include: { partidos: true }, // Incluir la relación de partidos
       });
   
       if (!currentTorneo) {
         return res.status(404).json({ message: 'Torneo no encontrado.' });
+      }
+      // Verificar si ya hay partidos en el torneo antes de permitir la actualización de cantEquipo
+      if (currentTorneo.partidos.length > 0 && cantEquipo !== currentTorneo.cantEquipo) {
+        return res.status(400).json({
+          field: 'cantEquipo',
+          message: 'No es posible actualizar la cantidad de equipos del torneo si ya comenzaron sus partidos.',
+        });
       }
   
       // Validar campos nulos o vacíos
@@ -143,7 +170,7 @@ import { prisma } from '../prisma/db.js';
       if (!descripcion) return res.status(400).json({ field: 'descripcion', message: 'La descripción es obligatoria.' });
       if (!fechaInicio) return res.status(400).json({ field: 'fechaInicio', message: 'La fecha de inicio es obligatoria.' });
       if (!fechaFin) return res.status(400).json({ field: 'fechaFin', message: 'La fecha de fin es obligatoria.' });
-      if (!cantEquipo) return res.status(400).json({ field: 'cantEquipo', message: 'La cantidad de equipos es obligatoria.' });
+      if (!cantEquipo) return res.status(400).json({ field: 'cantEquipo', message: 'La cantidad de equipos no puede ser 0 o vacía.' });
       if (!userId) return res.status(400).json({ field: 'userId', message: 'El ID de usuario es obligatorio.' });
   
       // Validar que no exista un torneo con el mismo nombre
