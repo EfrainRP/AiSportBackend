@@ -15,7 +15,7 @@ export const dashIndex = async (req,res) =>{
 // Index <- Regresa todos los torneos y equipos a exepcion de los que pertenecen al usuario Auth 
 export const index = async (req, res) => {
   const { userId } = req.params; // Extraer userId de los parámetros de la solicitud.
-  console.log("Regresando index");
+  console.log("Volviendo al Dash <-");
   try {
     // Consultar todos los torneos excepto los del usuario.
     const torneos = await prisma.torneos.findMany({

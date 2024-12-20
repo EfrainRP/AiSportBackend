@@ -87,15 +87,16 @@ export const show = async (req, res) => {
       const equiposExistentes = await prisma.partidos.findFirst({
         where: { id: Number(partidoId) },
       });
+
+      // Validacion si el partido a editar es el ultimo (mas reciente) o no
+      // En caso de no serlo, no se le permite cambiar de equipos al modificar la estructura del torneo de partidos ya posteriores <-
+      const ultimoPartido = await prisma.partidos.findFirst({
+        where: { torneo_id: Number(torneoId) },    // Filtramos por torneo_id
+        orderBy: { id: 'desc' }, // Ordenamos por fecha de manera descendente (más reciente primero)
+      });
       // Valida si los equipos ya han tenido un partido, o si son del partido más reciente del torneo <-
       if(equiposExistentes.equipoLocal_id != equipoLocalId || equiposExistentes.equipoVisitante_id != equipoVisitanteId){
         //console.log("Distintos")
-        // Validacion si el partido a editar es el ultimo (mas reciente) o no
-        // En caso de no serlo, no se le permite cambiar de equipos al modificar la estructura del torneo de partidos ya posteriores <-
-        const ultimoPartido = await prisma.partidos.findFirst({
-          where: { torneo_id: Number(torneoId) },    // Filtramos por torneo_id
-          orderBy: { id: 'desc' }, // Ordenamos por fecha de manera descendente (más reciente primero)
-        });
     
         // Paso 2: Verificar si el partidoId corresponde al último partido
         if (ultimoPartido.id !== Number(partidoId)) {
@@ -113,6 +114,16 @@ export const show = async (req, res) => {
         }
       }else{
         console.log("IGUALES")
+      }
+      // Valida si se actualizan los resultados del partido mas reciente o no <-
+      if(equiposExistentes.resLocal != resLocal || equiposExistentes.resVisitante != resVisitante){
+        if (ultimoPartido.id !== Number(partidoId)) {
+          console.log("PARTIDO NO ES EL MAS RECIENTE ")
+          return res.status(400).json({ 
+            field: 'partido', 
+            message: 'No es posible cambiar los resultados de un partido que no es el más reciente del torneo.' 
+          });
+        }
       }
       
       // Validar campos nulos o vacíos
@@ -188,21 +199,78 @@ export const show = async (req, res) => {
       if (isNaN(formattedHoraPartido.getTime())) {
         return res.status(400).json({ field: 'horaPartido', message: 'La hora del partido no es válida.' });
       }
-      // Creación del partido
-      const partido = await prisma.partidos.update({
-        where: { id: Number(partidoId) },
-        data: {
-          torneo_id: Number(torneoId),
-          equipoLocal_id: Number(equipoLocalId),
-          equipoVisitante_id: Number(equipoVisitanteId),
-          horaPartido: formattedHoraPartido,
-          fechaPartido: parsedFechaPartido,
-          jornada: parsedJornada,
-          resLocal: Number(resLocal),
-          resVisitante: Number(resVisitante),
-        },
+      // Actualizacion del partido y sus estadisticas mas recientes <-
+      await prisma.$transaction(async (prisma) => {
+        // Actualización del partido
+        const partido = await prisma.partidos.update({
+          where: { id: Number(partidoId) },
+          data: {
+            torneo_id: Number(torneoId),
+            equipoLocal_id: Number(equipoLocalId),
+            equipoVisitante_id: Number(equipoVisitanteId),
+            horaPartido: formattedHoraPartido,
+            fechaPartido: parsedFechaPartido,
+            jornada: parsedJornada,
+            resLocal: Number(resLocal),
+            resVisitante: Number(resVisitante),
+          },
+        });
+  
+        // Encuentra y actualiza la estadística más reciente del Equipo Local
+        const latestLocalStat = await prisma.estadisticas.findFirst({
+          where: {
+            torneo_id: Number(torneoId),
+            equipo_id: Number(equipoLocalId),
+          },
+          orderBy: {
+            id: 'desc', // Ordenar por ID de mayor a menor
+          },
+        });
+  
+        if (latestLocalStat) {
+          await prisma.estadisticas.update({
+            where: {
+              id: latestLocalStat.id, // Actualiza la estadística más reciente
+            },
+            data: {
+              PT: Number(resLocal), // Puntos del equipo local
+              CA: 0,
+              DC: 0,
+              CC: 0,
+            },
+          });
+        }
+  
+        // Encuentra y actualiza la estadística más reciente del Equipo Visitante
+        const latestVisitorStat = await prisma.estadisticas.findFirst({
+          where: {
+            torneo_id: Number(torneoId),
+            equipo_id: Number(equipoVisitanteId),
+          },
+          orderBy: {
+            id: 'desc', // Ordenar por ID de mayor a menor
+          },
+        });
+  
+        if (latestVisitorStat) {
+          await prisma.estadisticas.update({
+            where: {
+              id: latestVisitorStat.id, // Actualiza la estadística más reciente
+            },
+            data: {
+              PT: Number(resVisitante), // Puntos del equipo visitante
+              CA: 0,
+              DC: 0,
+              CC: 0,
+            },
+          });
+        }
+
+        res.status(200).json({
+          message: 'Partido y estadísticas más recientes actualizados correctamente',
+          partido,
+        });
       });
-      res.status(201).json({ message: 'Partido actualizado exitosamente con sus estadisticas', partido});
     } catch (error) {
       console.error('Error al actualizar el partido:', error);
       res.status(500).json({ error: 'Hubo un error al actualizar el partido.' });
@@ -368,20 +436,79 @@ export const store = async (req, res) => {
 // Delete <- 
 export const eliminate = async (req, res) => {
   const { torneoId, partidoId } = req.params; // Obtener torneoId y partidoId de la URL
- // console.log("Eliminando",torneoId,partidoId)
-  try {
-    // Eliminar el partido basado en el ID
-    const deletedPartido = await prisma.partidos.delete({
-      where: {
-        id: parseInt(partidoId),
-        torneo_id: parseInt(torneoId), // Partido del torneo actual <-
-      },
-    });
 
-    res.status(200).json({ message: 'Partido eliminado correctamente', partido: deletedPartido });
+  try {
+    // Inicia una transacción para realizar múltiples consultas como atómicas
+    await prisma.$transaction(async (prisma) => {
+      // Obtiene el partido a eliminar para extraer equipoLocal_id y equipoVisitante_id
+      const partido = await prisma.partidos.findUnique({
+        where: {
+          id: parseInt(partidoId),
+        },
+        select: {
+          equipoLocal_id: true,
+          equipoVisitante_id: true,
+        },
+      });
+
+      if (!partido) {
+        throw new Error('Partido no encontrado');
+      }
+
+      const { equipoLocal_id, equipoVisitante_id } = partido;
+
+      // Encuentra y elimina la estadística más reciente del equipo local en el torneo
+      const latestLocalStat = await prisma.estadisticas.findFirst({
+        where: {
+          torneo_id: parseInt(torneoId),
+          equipo_id: equipoLocal_id,
+        },
+        orderBy: {
+          id: 'desc', // Ordenar por id de mayor a menor
+        },
+      });
+
+      if (latestLocalStat) {
+        await prisma.estadisticas.delete({
+          where: {
+            id: latestLocalStat.id,
+          },
+        });
+      }
+
+      // Encuentra y elimina la estadística más reciente del equipo visitante en el torneo
+      const latestVisitorStat = await prisma.estadisticas.findFirst({
+        where: {
+          torneo_id: parseInt(torneoId),
+          equipo_id: equipoVisitante_id,
+        },
+        orderBy: {
+          id: 'desc', // Ordenar por id de mayor a menor
+        },
+      });
+
+      if (latestVisitorStat) {
+        await prisma.estadisticas.delete({
+          where: {
+            id: latestVisitorStat.id,
+          },
+        });
+      }
+
+      // Elimina el partido
+      const deletedPartido = await prisma.partidos.delete({
+        where: {
+          id: parseInt(partidoId),
+        },
+      });
+
+      res
+        .status(200)
+        .json({ message: 'Partido y estadísticas más recientes eliminados correctamente', partido: deletedPartido });
+    });
   } catch (error) {
-    console.error('Error al eliminar el partido:', error);
-    res.status(500).json({ error: 'No se pudo eliminar el partido' });
+    console.error('Error al eliminar el partido y las estadísticas más recientes:', error);
+    res.status(500).json({ error: 'No se pudo eliminar el partido y las estadísticas' });
   }
 };
 //---------------------------------------------------------------------------------------

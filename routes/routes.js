@@ -7,6 +7,7 @@ import * as TorneoEquiposController from '../controllers/TorneoEquiposController
 import * as DashboardController from '../controllers/DashboardController.js';
 import * as ProfileController from '../controllers/ProfileController.js';
 import * as NotificationController from '../controllers/NotificationController.js';
+import * as EstadisticasController from '../controllers/EstadisticasController.js';
 
 const router = express.Router();
 
@@ -57,5 +58,9 @@ router.post('/notificacion/:capitanEquipoId/:organizadorTorneoId', NotificationC
 // Rutas de PERFIL 
 router.get('/perfil/:userId', ProfileController.show);
 router.put('/perfil/:userId', ProfileController.update);
+// Rutas de ESTADISTICAS 
+router.get('/estadisticas/:id', EstadisticasController.index); 
+router.get('/estadisticas/torneo/:torneoId', EstadisticasController.show); // Estadisticas de Torneo <-
+router.get('/estadisticas/equipo/:equipoId', EstadisticasController.display); // Estadisticas de Equipo <-
 
 export default router;
