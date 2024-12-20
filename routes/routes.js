@@ -1,4 +1,5 @@
 import express from 'express';
+import { upload, handleMulterError } from '../utils/multer.js';
 import * as UserController from '../controllers/UserController.js';
 import * as TorneosController from '../controllers/TorneosController.js';
 import * as EquiposController from '../controllers/EquiposController.js';
@@ -58,7 +59,7 @@ router.delete('/notificacion/:capitanEquipoId/:torneoId', NotificationController
 router.post('/notificacion/:capitanEquipoId/:organizadorTorneoId', NotificationController.store);
 // Rutas de PERFIL 
 router.get('/perfil/:userId', ProfileController.show);
-router.put('/perfil/:userId', ProfileController.update);
+router.put('/perfil/:userId', upload.single('image'),handleMulterError, ProfileController.update); // Ruta con IMG <-
 // Rutas de ESTADISTICAS 
 router.get('/estadisticas/:id', EstadisticasController.index); 
 router.get('/estadisticas/torneo/:torneoId', EstadisticasController.show); // Estadisticas de Torneo <-

@@ -30,8 +30,18 @@ export const show = async (req, res) => {
 // EDIT / UPDATE PROFILE <-
 
 export const update = async (req, res) => {
-    const userId = parseInt(req.params.userId); // Obtiene el userId desde la URL
-    const { name, email, fsurname, msurname, gender, birthdate, nickname, currentPassword, newPassword, confirmPassword, image } = req.body;
+    const userId = parseInt(req.params.userId);
+    const {
+        name, email, fsurname, msurname, gender, birthdate, nickname, currentPassword, newPassword, confirmPassword
+    } = req.body;
+    // Verifica si hay un archivo cargado
+    let image = undefined;
+    if (req.file) {
+        console.log('Archivo subido:', req.file);
+        image = req.file.filename;
+    } else {
+        console.log('No se subió ninguna imagen.');
+    }    
     console.log("Updating profile:", currentPassword,confirmPassword,newPassword,image);
 
     // 1. Validar que ninguno de los campos obligatorios sea nulo, a excepción de password e image
@@ -103,30 +113,16 @@ export const update = async (req, res) => {
                 field: 'confirmPassword',
                 message: 'La nueva contraseña y la confirmación no coinciden'
             });
+        } // Valida si se mando la nueva contraseña y se confirmo, pero no se confirmo la antigua contraseña <-
+        if(!currentPassword){
+            return res.status(400).json({
+                field: 'currentPassword',
+                message: 'Debes confirmar tú contraseña actual antes de cambiarla.'
+            });
         }
     }
-
-
-    // 6. Verificación de imagen (si existe)
-    /*
-    if (image) {
-        const allowedImageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-        if (!allowedImageTypes.includes(image.mimetype)) {
-            return res.status(400).json({
-                field: 'image',
-                message: 'La imagen debe ser de tipo PNG, JPEG o JPG'
-            });
-        }
-
-        if (image.size > 2 * 1024 * 1024) { // 2MB
-            return res.status(400).json({
-                field: 'image',
-                message: 'La imagen no puede pesar más de 2MB'
-            });
-        }
-    }*/
-
-    try {
+     // Actualiza los datos del usuario en la base de datos
+     try {
         let hashedPassword;
         if (newPassword && newPassword !== '') {
             hashedPassword = await bcrypt.hash(newPassword, 10);
@@ -140,7 +136,7 @@ export const update = async (req, res) => {
             gender,
             birthdate: new Date(birthdate),
             email,
-            image: image ? image.filename : undefined, //Imagen cargada
+            image: image || undefined, //Imagen cargada
             password: hashedPassword || undefined,
         };
 
