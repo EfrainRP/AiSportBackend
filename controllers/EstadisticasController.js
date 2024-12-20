@@ -4,12 +4,12 @@ import { prisma } from '../prisma/db.js';
 export const index = async (req, res) => {
     const userId = parseInt(req.params.id);
     try {
-      // Consulta todos los equipos que tienen estadísticas únicas registradas
+      // Consulta todos los equipos que tienen estadísticas registradas
       const equiposConEstadisticas = await prisma.estadisticas.findMany({
         distinct: ['equipo_id'], // Filtra registros únicos basados en `equipo_id`
         select: {
           equipo_id: true, // Obtiene el ID del equipo
-          equipos: {
+          equipos: { // Relacion con equipos <-
             select: {
               name: true, // Obtiene el nombre del equipo relacionado
             },
@@ -17,7 +17,7 @@ export const index = async (req, res) => {
         },
       });
   
-      // Formatear la respuesta para que sea más clara
+      // Formatear la respuesta para mejor visualizacion <-
       const resultado = equiposConEstadisticas.map((estadistica) => ({
         equipo_id: estadistica.equipo_id,
         name: estadistica.equipos.name,
@@ -81,52 +81,59 @@ export const show = async (req, res) => {
 //---------------------------------------------------------------------------------
 // DISPLAY <- Regresa las estadisticas totales de un equipo en particular en SportHub
 export const display = async (req, res) => {
-    const equipoId = parseInt(req.params.equipoId); // Obtiene el ID del equipo desde los parámetros de la URL
-  
-    try {
-      // Consulta todas las estadísticas relacionadas con el equipo especificado
+  const equipoId = parseInt(req.params.equipoId); // ID del equipo desde los parámetros de la URL
+  const equipoName = req.params.equipoName; // Nombre del equipo desde los parámetros de la URL
+
+  try {
+      // Consulta todas las estadísticas relacionadas con el equipo especificado y verifica el nombre
       const estadisticas = await prisma.estadisticas.findMany({
-        where: { equipo_id: equipoId },
-        select: {
-          PT: true, // Puntos totales
-          CA: true, // Canastas Anotadas
-          DC: true, // DC
-          CC: true, // CC
-          created_at: true, // Fecha de registro de las estadísticas
-        },
+          where: { 
+              equipo_id: equipoId,
+              equipos: {
+                  name: equipoName, // Filtrar por nombre del equipo
+              },
+          },
+          select: {
+              PT: true, // Puntos totales
+              CA: true, // Canastas Anotadas
+              DC: true, // DC
+              CC: true, // CC
+              created_at: true, // Fecha de registro de las estadísticas
+          },
       });
-  
+
       if (estadisticas.length === 0) {
-        return res.status(404).json({
-          message: `No se encontraron estadísticas para el equipo con ID ${equipoId}`,
-        });
+          return res.status(404).json({
+              message: `No se encontraron estadísticas para el equipo con ID ${equipoId} y nombre "${equipoName}"`,
+          });
       }
-  
+
       // Suma las estadísticas totales del equipo
       const totales = estadisticas.reduce(
-        (acumulador, registro) => {
-          acumulador.PT += registro.PT;
-          acumulador.CA += registro.CA;
-          acumulador.DC += registro.DC;
-          acumulador.CC += registro.CC;
-          return acumulador;
-        },
-        { PT: 0, CA: 0, DC: 0, CC: 0 } // Valores iniciales
+          (acumulador, registro) => {
+              acumulador.PT += registro.PT;
+              acumulador.CA += registro.CA;
+              acumulador.DC += registro.DC;
+              acumulador.CC += registro.CC;
+              return acumulador;
+          },
+          { PT: 0, CA: 0, DC: 0, CC: 0 } // Valores iniciales
       );
-  
+
       res.status(200).json({
-        message: `Estadísticas del equipo con ID ${equipoId} obtenidas correctamente`,
-        data: {
-          estadisticas, // Lista de estadísticas individuales
-          totales, // Suma total de las estadísticas
-        },
+          message: `Estadísticas del equipo con ID ${equipoId} y nombre "${equipoName}" obtenidas correctamente`,
+          data: {
+              estadisticas, // Lista de estadísticas individuales
+              totales, // Suma total de las estadísticas
+          },
       });
-    } catch (error) {
+  } catch (error) {
       console.error('Error al calcular estadísticas del equipo:', error);
       res.status(500).json({
-        message: 'Error al calcular estadísticas del equipo',
-        error,
+          message: 'Error al calcular estadísticas del equipo',
+          error,
       });
-    }
-  };
+  }
+};
+
   

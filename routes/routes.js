@@ -8,6 +8,7 @@ import * as DashboardController from '../controllers/DashboardController.js';
 import * as ProfileController from '../controllers/ProfileController.js';
 import * as NotificationController from '../controllers/NotificationController.js';
 import * as EstadisticasController from '../controllers/EstadisticasController.js';
+import * as IAController from '../controllers/IAController.js';
 
 const router = express.Router();
 
@@ -61,6 +62,8 @@ router.put('/perfil/:userId', ProfileController.update);
 // Rutas de ESTADISTICAS 
 router.get('/estadisticas/:id', EstadisticasController.index); 
 router.get('/estadisticas/torneo/:torneoId', EstadisticasController.show); // Estadisticas de Torneo <-
-router.get('/estadisticas/equipo/:equipoId', EstadisticasController.display); // Estadisticas de Equipo <-
+router.get('/estadisticas/equipo/:equipoId/:equipoName', EstadisticasController.display); // Estadisticas de Equipo <-
+// Rutas de IA (SERVER) 
+router.put('/entrenamiento/AI/:equipoId', IAController.update); 
 
 export default router;
