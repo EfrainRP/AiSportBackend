@@ -17,7 +17,7 @@ model users {
   gender                                     String          @default("N/E") @db.VarChar(255)
   password                                   String          @db.VarChar(255)
   birthdate                                  DateTime        @default(dbgenerated("('2023-12-01')")) @db.Date
-  image                                      String          @default("userprofile.webp") @db.VarChar(255)
+  image                                      String          @default("logoPerfil.jpg") @db.VarChar(255)
   remember_token                             String?         @db.VarChar(100)
   created_at                                 DateTime?       @default(now())
   updated_at                                 DateTime?       @updatedAt
@@ -38,6 +38,7 @@ model equipos {
   notifications                                 notifications[]   // Habilitada
   partidos_partidos_equipoLocal_idToequipos     partidos[]        @relation("partidos_equipoLocal_idToequipos")
   partidos_partidos_equipoVisitante_idToequipos partidos[]        @relation("partidos_equipoVisitante_idToequipos")
+  image                                         String            @default("logoEquipo.jpg") @db.VarChar(255) //IMG Team
 
   @@index([user_id], map: "equipos_user_id_foreign")
 }
@@ -102,13 +103,14 @@ model estadisticas {
 }
 
 model miembro_equipos {
+  id           Int       @id @default(autoincrement()) @db.UnsignedInt
   user_miembro String    @db.VarChar(255)
   equipo_id    Int       @db.UnsignedInt
   created_at   DateTime? @default(now())
   updated_at   DateTime? @updatedAt
   equipos      equipos   @relation(fields: [equipo_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "miembro_equipos_equipo_id_foreign")
 
-  @@id([user_miembro, equipo_id])
+  //@@id([equipo_id])
   @@index([equipo_id], map: "miembro_equipos_equipo_id_foreign")
 }
 

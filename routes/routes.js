@@ -43,7 +43,7 @@ router.get('/equipos/torneo/:id', TorneoEquiposController.index); //Todos los eq
 // Rutas de EQUIPOS (CRUD)
 router.get('/equipos/:id', EquiposController.index);
 router.get('/equipo/:equipoName/:equipoId', EquiposController.show); 
-router.put('/equipo/:equipoId', EquiposController.update); 
+router.put('/equipo/:equipoId', upload.single('image'),handleMulterError, EquiposController.update); // Ruta con IMG <-
 router.delete('/equipo/:equipoId', EquiposController.eliminate);  
 router.post('/equipo/create', EquiposController.store); 
 // Rutas de PARTIDOS (CRUD)

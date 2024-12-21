@@ -56,72 +56,104 @@ import { prisma } from '../prisma/db.js';
   export const update = async (req, res) => {
     const equipoId = parseInt(req.params.equipoId); // Obtiene el ID del equipo desde los parámetros de la URL
     const { name, miembros } = req.body; // Obtiene los datos enviados en la solicitud
-  
+    let image = undefined;
+    console.log('Miembros recibidos:', miembros);
+    
+    if (req.file) {
+      console.log('Archivo subido:', req.file);
+      image = req.file.filename;
+    } else {
+      console.log('No se subió ninguna imagen.');
+    }
+
+    // Verificar si `miembros` es un arreglo antes de usar map()
+    if (!Array.isArray(miembros)) {
+      return res.status(400).json({
+        message: 'El campo "miembros" debe ser un arreglo de miembros.',
+      });
+    }
+
     try {
       // Busca el equipo por ID
       const equipo = await prisma.equipos.findFirst({
         where: { id: equipoId },
         include: { miembro_equipos: true }, // Incluir los miembros actuales
       });
-  
+
       if (!equipo) {
         return res.status(404).json({ message: 'Equipo no encontrado.' });
       }
 
       // Validación 1: Nombre obligatorio.
       if (!name) {
-        return res.status(400).json({ message: "El nombre del equipo es obligatorio." });
-       }
-  
+        return res.status(400).json({
+          field: 'name',
+          message: 'El nombre del equipo es obligatorio.'
+        });
+      }
+
       // Verificar si el nombre ha cambiado
       if (name !== equipo.name) {
         // Validar si el nombre ya existe en otro equipo
         const existingEquipo = await prisma.equipos.findFirst({
           where: { name },
         });
-  
+
         if (existingEquipo) {
-          return res.status(400).json({ message: 'El nombre del equipo ya existe.' });
+          return res.status(400).json({
+            field: 'name',
+            message: 'El nombre del equipo ya existe.'
+          });
         }
       }
-  
+
       // Actualiza los datos del equipo
       const updatedEquipo = await prisma.equipos.update({
         where: { id: equipoId },
         data: {
           name,
+          image: image || undefined, // Imagen cargada
           // Maneja la relación de miembros
           miembro_equipos: {
             deleteMany: {}, // Elimina todos los miembros actuales
-            create: miembros.map((miembro) => ({ //Actualiza los nuevos miembros, si es que hay
-              user_miembro: miembro.user_miembro,
+            create: miembros.map((miembro) => ({
+              user_miembro: miembro.user_miembro, // Solo pasa la cadena user_miembro
             })), // Crea los nuevos miembros
           },
         },
       });
-  
+
       // Devuelve el equipo actualizado
       res.status(200).json(updatedEquipo);
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: 'Error al actualizar el equipo.' });
     }
-  };
+};
+
+
   
   // ---------------------------------------------------------------------------------
   // FORM STORE
   export const store = async (req, res) => {
     try {
         const { name, user_id, miembros } = req.body;
-        console.log("Crear equipo",user_id);
+        console.log("Crear equipo", user_id, miembros,name);
 
+        let image = undefined;
+        if (req.file) {
+            console.log('Archivo subido:', req.file);
+            image = req.file.filename;
+        } else {
+            console.log('No se subió ninguna imagen.');
+        }    
 
         // Validación 1: Todos los campos son requeridos
         if (!name || !user_id || !miembros || !Array.isArray(miembros) || miembros.length === 0) {
             return res.status(400).json({ message: "Todos los campos son requeridos." });
         }
-
-        // Validación 2: El nombre del equipo debe ser único
+       
+        // Validación 3: El nombre del equipo debe ser único
         const existingTeam = await prisma.equipos.findFirst({ where: { name } });
         if (existingTeam) {
             return res.status(400).json({ message: "El nombre del equipo ya existe. Por favor, elige otro." });
@@ -131,10 +163,11 @@ import { prisma } from '../prisma/db.js';
         const equipo = await prisma.equipos.create({
             data: {
                 name,
+                image: image || undefined, // Imagen cargada
                 user_id,
                 miembro_equipos: {
-                    create: miembros.map((miembro) => ({ //Mapea sus miembros respectivos en relacion <-
-                        user_miembro: miembro,
+                    create: miembros.map((miembro) => ({ // Mapear sus miembros respectivos en relación
+                        user_miembro: miembro, // Solo pasa la cadena user_miembro
                     })),
                 },
             },
@@ -144,14 +177,15 @@ import { prisma } from '../prisma/db.js';
     } catch (error) {
         console.error("Error al crear el equipo: ", error);
 
-        // Manejo de errores de Prisma ( restricciones únicas)
+        // Manejo de errores de Prisma (restricciones únicas)
         if (error.code === 'P2002') { // Error por restricción de unicidad
-            return res.status(400).json({ message: "El nombre del equipo ya existe. Por favor, elige otro." });
+            return res.status(400).json({ message: "Error de restricción en DB." });
         }
 
         return res.status(500).json({ message: "Error interno del servidor." });
     }
 };
+
 // -------------------------------------------------------------------------------------
 // DELETE 
 export const eliminate = async (req, res) => {

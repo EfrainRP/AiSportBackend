@@ -29,6 +29,7 @@ export const index = async (req, res) => {
                 equipos: { // Relacion de equipo con la notificacion <-
                     select: {
                         name: true, // Obtener el nombre del equipo
+                        image: true, // Obtener el logo del equipo
                     },
                 },
             },
