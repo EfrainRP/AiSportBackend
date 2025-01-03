@@ -56,8 +56,8 @@ model partidos {
   created_at                                   DateTime? @default(now())
   updated_at                                   DateTime? @updatedAt
   //partido_torneos                           partido_torneos[] 
-  equipos_partidos_equipoLocal_idToequipos     equipos   @relation("partidos_equipoLocal_idToequipos", fields: [equipoLocal_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partidos_equipolocal_id_foreign")
-  equipos_partidos_equipoVisitante_idToequipos equipos   @relation("partidos_equipoVisitante_idToequipos", fields: [equipoVisitante_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partidos_equipovisitante_id_foreign")
+  equipoLocal                              equipos   @relation("partidos_equipoLocal_idToequipos", fields: [equipoLocal_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partidos_equipolocal_id_foreign")
+  equipoVisitante                              equipos   @relation("partidos_equipoVisitante_idToequipos", fields: [equipoVisitante_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partidos_equipovisitante_id_foreign")
   torneos                                      torneos   @relation(fields: [torneo_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partidos_torneo_id_foreign")
 
   @@index([equipoLocal_id], map: "partidos_equipolocal_id_foreign")
