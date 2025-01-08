@@ -32,6 +32,13 @@ export const index = async (req, res) => {
           not: parseInt(userId), // Excluir los equipos del usuario especificado.
         },
       },
+      include: {
+        users:{
+          select:{
+            name:true,
+          } 
+        }
+      }
     });
 
     const fechaActual = new Date(); // Fecha actual
@@ -58,7 +65,7 @@ export const index = async (req, res) => {
             name: true,
           },
         },
-        torneoDelPartido: { // Usa exactamente el nombre de la relación
+        torneos: { // Usa exactamente el nombre de la relación
           select: {
             name: true,
             ubicacion: true,
