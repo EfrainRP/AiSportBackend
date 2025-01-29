@@ -67,6 +67,7 @@ export const index = async (req, res) => {
         },
         torneos: { // Usa exactamente el nombre de la relación
           select: {
+            id:true,
             name: true,
             ubicacion: true,
           },
