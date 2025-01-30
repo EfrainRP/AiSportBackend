@@ -1,122 +1,2004 @@
 [
-    {
-        "torneo_id": 1,
-        "equipo_id": 44
-    },
-    {
-        "torneo_id": 2,
-        "equipo_id": 26
-    },
-    {
-        "torneo_id": 3,
-        "equipo_id": 15
-    },
-    {
-        "torneo_id": 4,
-        "equipo_id": 31
-    },
-    {
-        "torneo_id": 5,
-        "equipo_id": 43
-    },
-    {
-        "torneo_id": 6,
-        "equipo_id": 48
-    },
-    {
-        "torneo_id": 7,
-        "equipo_id": 22
-    },
-    {
-        "torneo_id": 8,
-        "equipo_id": 20
-    },
-    {
-        "torneo_id": 9,
-        "equipo_id": 45
-    },
-    {
-        "torneo_id": 10,
-        "equipo_id": 18
-    },
-    {
-        "torneo_id": 11,
-        "equipo_id": 1
-    },
-    {
-        "torneo_id": 12,
-        "equipo_id": 7
-    },
-    {
-        "torneo_id": 13,
-        "equipo_id": 28
-    },
-    {
-        "torneo_id": 14,
-        "equipo_id": 29
-    },
-    {
-        "torneo_id": 15,
-        "equipo_id": 31
-    },
-    {
-        "torneo_id": 16,
-        "equipo_id": 9
-    },
-    {
-        "torneo_id": 17,
-        "equipo_id": 4
-    },
-    {
-        "torneo_id": 18,
-        "equipo_id": 20
-    },
-    {
-        "torneo_id": 19,
-        "equipo_id": 42
-    },
-    {
-        "torneo_id": 20,
-        "equipo_id": 28
-    },
-    {
-        "torneo_id": 21,
-        "equipo_id": 48
-    },
-    {
-        "torneo_id": 22,
-        "equipo_id": 38
-    },
-    {
-        "torneo_id": 23,
-        "equipo_id": 50
-    },
-    {
-        "torneo_id": 24,
-        "equipo_id": 37
-    },
-    {
-        "torneo_id": 25,
-        "equipo_id": 46
-    },
-    {
-        "torneo_id": 26,
-        "equipo_id": 44
-    },
-    {
-        "torneo_id": 27,
-        "equipo_id": 5
-    },
-    {
-        "torneo_id": 28,
-        "equipo_id": 18
-    },
-    {
-        "torneo_id": 29,
-        "equipo_id": 32
-    },
-    {
-        "torneo_id": 30,
-        "equipo_id": 12
-    }
+  {
+    "id": 1,
+    "torneo_id": 1,
+    "equipo_id": 44,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.572Z",
+    "updated_at": "2024-12-15T20:24:22.572Z"
+  },
+  {
+    "id": 2,
+    "torneo_id": 2,
+    "equipo_id": 26,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.577Z",
+    "updated_at": "2024-12-15T20:24:22.577Z"
+  },
+  {
+    "id": 3,
+    "torneo_id": 3,
+    "equipo_id": 15,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.581Z",
+    "updated_at": "2024-12-15T20:24:22.581Z"
+  },
+  {
+    "id": 4,
+    "torneo_id": 4,
+    "equipo_id": 31,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.585Z",
+    "updated_at": "2024-12-15T20:24:22.585Z"
+  },
+  {
+    "id": 5,
+    "torneo_id": 5,
+    "equipo_id": 43,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.588Z",
+    "updated_at": "2024-12-15T20:24:22.588Z"
+  },
+  {
+    "id": 6,
+    "torneo_id": 6,
+    "equipo_id": 48,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.592Z",
+    "updated_at": "2024-12-15T20:24:22.592Z"
+  },
+  {
+    "id": 7,
+    "torneo_id": 7,
+    "equipo_id": 22,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.596Z",
+    "updated_at": "2024-12-15T20:24:22.596Z"
+  },
+  {
+    "id": 8,
+    "torneo_id": 8,
+    "equipo_id": 20,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.599Z",
+    "updated_at": "2024-12-15T20:24:22.599Z"
+  },
+  {
+    "id": 9,
+    "torneo_id": 9,
+    "equipo_id": 45,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.603Z",
+    "updated_at": "2024-12-15T20:24:22.603Z"
+  },
+  {
+    "id": 10,
+    "torneo_id": 10,
+    "equipo_id": 18,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.607Z",
+    "updated_at": "2024-12-15T20:24:22.607Z"
+  },
+  {
+    "id": 11,
+    "torneo_id": 11,
+    "equipo_id": 1,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.613Z",
+    "updated_at": "2025-01-29T21:54:23.827Z"
+  },
+  {
+    "id": 12,
+    "torneo_id": 12,
+    "equipo_id": 7,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.618Z",
+    "updated_at": "2024-12-15T20:24:22.618Z"
+  },
+  {
+    "id": 13,
+    "torneo_id": 13,
+    "equipo_id": 28,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.624Z",
+    "updated_at": "2024-12-15T20:24:22.624Z"
+  },
+  {
+    "id": 14,
+    "torneo_id": 14,
+    "equipo_id": 29,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.628Z",
+    "updated_at": "2024-12-15T20:24:22.628Z"
+  },
+  {
+    "id": 15,
+    "torneo_id": 15,
+    "equipo_id": 31,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.631Z",
+    "updated_at": "2024-12-15T20:24:22.631Z"
+  },
+  {
+    "id": 16,
+    "torneo_id": 16,
+    "equipo_id": 9,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.634Z",
+    "updated_at": "2024-12-15T20:24:22.634Z"
+  },
+  {
+    "id": 17,
+    "torneo_id": 17,
+    "equipo_id": 4,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.638Z",
+    "updated_at": "2024-12-15T20:24:22.638Z"
+  },
+  {
+    "id": 18,
+    "torneo_id": 18,
+    "equipo_id": 20,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.642Z",
+    "updated_at": "2024-12-15T20:24:22.642Z"
+  },
+  {
+    "id": 19,
+    "torneo_id": 19,
+    "equipo_id": 42,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.645Z",
+    "updated_at": "2024-12-15T20:24:22.645Z"
+  },
+  {
+    "id": 20,
+    "torneo_id": 20,
+    "equipo_id": 28,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.649Z",
+    "updated_at": "2024-12-15T20:24:22.649Z"
+  },
+  {
+    "id": 21,
+    "torneo_id": 21,
+    "equipo_id": 48,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.653Z",
+    "updated_at": "2024-12-15T20:24:22.653Z"
+  },
+  {
+    "id": 22,
+    "torneo_id": 22,
+    "equipo_id": 38,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.657Z",
+    "updated_at": "2024-12-15T20:24:22.657Z"
+  },
+  {
+    "id": 23,
+    "torneo_id": 23,
+    "equipo_id": 50,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.660Z",
+    "updated_at": "2024-12-15T20:24:22.660Z"
+  },
+  {
+    "id": 24,
+    "torneo_id": 24,
+    "equipo_id": 37,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.664Z",
+    "updated_at": "2024-12-15T20:24:22.664Z"
+  },
+  {
+    "id": 25,
+    "torneo_id": 25,
+    "equipo_id": 46,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.668Z",
+    "updated_at": "2024-12-15T20:24:22.668Z"
+  },
+  {
+    "id": 26,
+    "torneo_id": 26,
+    "equipo_id": 44,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.672Z",
+    "updated_at": "2024-12-15T20:24:22.672Z"
+  },
+  {
+    "id": 27,
+    "torneo_id": 27,
+    "equipo_id": 5,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.677Z",
+    "updated_at": "2024-12-15T20:24:22.677Z"
+  },
+  {
+    "id": 28,
+    "torneo_id": 28,
+    "equipo_id": 18,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.681Z",
+    "updated_at": "2024-12-15T20:24:22.681Z"
+  },
+  {
+    "id": 29,
+    "torneo_id": 29,
+    "equipo_id": 32,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.685Z",
+    "updated_at": "2024-12-15T20:24:22.685Z"
+  },
+  {
+    "id": 30,
+    "torneo_id": 30,
+    "equipo_id": 12,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:24:22.689Z",
+    "updated_at": "2024-12-15T20:24:22.689Z"
+  },
+  {
+    "id": 31,
+    "torneo_id": 39,
+    "equipo_id": 1,
+    "PT": 4,
+    "CA": 84,
+    "DC": 96,
+    "CC": 45,
+    "created_at": "2024-12-15T20:30:21.255Z",
+    "updated_at": "2024-12-20T02:10:09.024Z"
+  },
+  {
+    "id": 32,
+    "torneo_id": 39,
+    "equipo_id": 2,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:30:21.261Z",
+    "updated_at": "2024-12-15T20:30:21.261Z"
+  },
+  {
+    "id": 33,
+    "torneo_id": 39,
+    "equipo_id": 3,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:30:52.017Z",
+    "updated_at": "2024-12-15T20:30:52.017Z"
+  },
+  {
+    "id": 34,
+    "torneo_id": 39,
+    "equipo_id": 4,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:30:52.021Z",
+    "updated_at": "2024-12-15T20:30:52.021Z"
+  },
+  {
+    "id": 35,
+    "torneo_id": 39,
+    "equipo_id": 5,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:31:10.432Z",
+    "updated_at": "2024-12-15T20:31:10.432Z"
+  },
+  {
+    "id": 36,
+    "torneo_id": 39,
+    "equipo_id": 6,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:31:10.438Z",
+    "updated_at": "2024-12-15T20:31:10.438Z"
+  },
+  {
+    "id": 37,
+    "torneo_id": 39,
+    "equipo_id": 7,
+    "PT": 1,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:32:28.962Z",
+    "updated_at": "2024-12-15T20:32:28.962Z"
+  },
+  {
+    "id": 38,
+    "torneo_id": 39,
+    "equipo_id": 8,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T20:32:28.983Z",
+    "updated_at": "2024-12-15T20:32:28.983Z"
+  },
+  {
+    "id": 39,
+    "torneo_id": 39,
+    "equipo_id": 1,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T21:08:50.770Z",
+    "updated_at": "2025-01-29T22:49:04.286Z"
+  },
+  {
+    "id": 40,
+    "torneo_id": 39,
+    "equipo_id": 3,
+    "PT": 4,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T21:08:50.776Z",
+    "updated_at": "2024-12-15T21:08:50.776Z"
+  },
+  {
+    "id": 41,
+    "torneo_id": 39,
+    "equipo_id": 3,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T21:09:15.794Z",
+    "updated_at": "2024-12-15T21:09:15.794Z"
+  },
+  {
+    "id": 42,
+    "torneo_id": 39,
+    "equipo_id": 1,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T21:09:15.801Z",
+    "updated_at": "2025-01-29T22:49:42.452Z"
+  },
+  {
+    "id": 43,
+    "torneo_id": 39,
+    "equipo_id": 3,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T21:15:15.050Z",
+    "updated_at": "2024-12-15T21:15:15.050Z"
+  },
+  {
+    "id": 44,
+    "torneo_id": 39,
+    "equipo_id": 1,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-15T21:15:15.058Z",
+    "updated_at": "2025-01-29T21:59:32.809Z"
+  },
+  {
+    "id": 45,
+    "torneo_id": 39,
+    "equipo_id": 1,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T18:32:35.555Z",
+    "updated_at": "2025-01-29T19:53:58.328Z"
+  },
+  {
+    "id": 46,
+    "torneo_id": 39,
+    "equipo_id": 3,
+    "PT": 3,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T18:32:35.568Z",
+    "updated_at": "2024-12-16T18:32:35.568Z"
+  },
+  {
+    "id": 47,
+    "torneo_id": 39,
+    "equipo_id": 5,
+    "PT": 6,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T18:42:22.307Z",
+    "updated_at": "2024-12-16T18:42:22.307Z"
+  },
+  {
+    "id": 48,
+    "torneo_id": 39,
+    "equipo_id": 7,
+    "PT": 3,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T18:42:22.313Z",
+    "updated_at": "2024-12-16T18:42:22.313Z"
+  },
+  {
+    "id": 49,
+    "torneo_id": 39,
+    "equipo_id": 3,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T19:09:42.906Z",
+    "updated_at": "2024-12-16T19:09:42.906Z"
+  },
+  {
+    "id": 50,
+    "torneo_id": 39,
+    "equipo_id": 5,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T19:09:42.913Z",
+    "updated_at": "2024-12-16T19:09:42.913Z"
+  },
+  {
+    "id": 51,
+    "torneo_id": 39,
+    "equipo_id": 5,
+    "PT": 7,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T19:14:22.325Z",
+    "updated_at": "2024-12-16T19:14:22.325Z"
+  },
+  {
+    "id": 52,
+    "torneo_id": 39,
+    "equipo_id": 7,
+    "PT": 8,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T19:14:22.331Z",
+    "updated_at": "2024-12-16T19:14:22.331Z"
+  },
+  {
+    "id": 53,
+    "torneo_id": 41,
+    "equipo_id": 5,
+    "PT": 5,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T19:16:29.586Z",
+    "updated_at": "2024-12-16T19:16:29.586Z"
+  },
+  {
+    "id": 54,
+    "torneo_id": 41,
+    "equipo_id": 2,
+    "PT": 6,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T19:16:29.590Z",
+    "updated_at": "2024-12-16T19:16:29.590Z"
+  },
+  {
+    "id": 55,
+    "torneo_id": 41,
+    "equipo_id": 7,
+    "PT": 4,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T19:20:35.409Z",
+    "updated_at": "2024-12-16T19:20:35.409Z"
+  },
+  {
+    "id": 56,
+    "torneo_id": 41,
+    "equipo_id": 4,
+    "PT": 5,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T19:20:35.416Z",
+    "updated_at": "2024-12-16T19:20:35.416Z"
+  },
+  {
+    "id": 57,
+    "torneo_id": 41,
+    "equipo_id": 10,
+    "PT": 8,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T19:21:04.703Z",
+    "updated_at": "2024-12-16T19:21:04.703Z"
+  },
+  {
+    "id": 58,
+    "torneo_id": 41,
+    "equipo_id": 3,
+    "PT": 9,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T19:21:04.707Z",
+    "updated_at": "2024-12-16T19:21:04.707Z"
+  },
+  {
+    "id": 59,
+    "torneo_id": 41,
+    "equipo_id": 9,
+    "PT": 6,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T19:21:26.078Z",
+    "updated_at": "2024-12-16T19:21:26.078Z"
+  },
+  {
+    "id": 60,
+    "torneo_id": 41,
+    "equipo_id": 12,
+    "PT": 4,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T19:21:26.085Z",
+    "updated_at": "2024-12-16T19:21:26.085Z"
+  },
+  {
+    "id": 61,
+    "torneo_id": 41,
+    "equipo_id": 14,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T19:22:04.883Z",
+    "updated_at": "2024-12-16T19:22:04.883Z"
+  },
+  {
+    "id": 62,
+    "torneo_id": 41,
+    "equipo_id": 6,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T19:22:04.888Z",
+    "updated_at": "2024-12-16T19:22:04.888Z"
+  },
+  {
+    "id": 63,
+    "torneo_id": 41,
+    "equipo_id": 11,
+    "PT": 6,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T19:22:26.479Z",
+    "updated_at": "2024-12-16T19:22:26.479Z"
+  },
+  {
+    "id": 64,
+    "torneo_id": 41,
+    "equipo_id": 8,
+    "PT": 4,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T19:22:26.484Z",
+    "updated_at": "2024-12-16T19:22:26.484Z"
+  },
+  {
+    "id": 65,
+    "torneo_id": 41,
+    "equipo_id": 19,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T19:22:43.499Z",
+    "updated_at": "2024-12-16T19:22:43.499Z"
+  },
+  {
+    "id": 66,
+    "torneo_id": 41,
+    "equipo_id": 15,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T19:22:43.503Z",
+    "updated_at": "2024-12-16T19:22:43.503Z"
+  },
+  {
+    "id": 67,
+    "torneo_id": 41,
+    "equipo_id": 17,
+    "PT": 3,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T19:23:06.528Z",
+    "updated_at": "2024-12-16T19:23:06.528Z"
+  },
+  {
+    "id": 68,
+    "torneo_id": 41,
+    "equipo_id": 22,
+    "PT": 6,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T19:23:06.534Z",
+    "updated_at": "2024-12-16T19:23:06.534Z"
+  },
+  {
+    "id": 69,
+    "torneo_id": 41,
+    "equipo_id": 2,
+    "PT": 3,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T21:15:37.556Z",
+    "updated_at": "2024-12-16T21:15:37.556Z"
+  },
+  {
+    "id": 70,
+    "torneo_id": 41,
+    "equipo_id": 4,
+    "PT": 4,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T21:15:37.571Z",
+    "updated_at": "2024-12-16T21:15:37.571Z"
+  },
+  {
+    "id": 71,
+    "torneo_id": 41,
+    "equipo_id": 3,
+    "PT": 4,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T21:16:10.163Z",
+    "updated_at": "2024-12-16T21:16:10.163Z"
+  },
+  {
+    "id": 72,
+    "torneo_id": 41,
+    "equipo_id": 14,
+    "PT": 5,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T21:16:10.168Z",
+    "updated_at": "2024-12-16T21:16:10.168Z"
+  },
+  {
+    "id": 73,
+    "torneo_id": 41,
+    "equipo_id": 3,
+    "PT": 4,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:00:03.848Z",
+    "updated_at": "2024-12-16T23:00:03.848Z"
+  },
+  {
+    "id": 74,
+    "torneo_id": 41,
+    "equipo_id": 19,
+    "PT": 5,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:00:03.854Z",
+    "updated_at": "2024-12-16T23:00:03.854Z"
+  },
+  {
+    "id": 75,
+    "torneo_id": 41,
+    "equipo_id": 11,
+    "PT": 3,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:21:34.679Z",
+    "updated_at": "2024-12-16T23:21:34.679Z"
+  },
+  {
+    "id": 76,
+    "torneo_id": 41,
+    "equipo_id": 22,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:21:34.688Z",
+    "updated_at": "2024-12-16T23:21:34.688Z"
+  },
+  {
+    "id": 77,
+    "torneo_id": 41,
+    "equipo_id": 9,
+    "PT": 3,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:22:13.214Z",
+    "updated_at": "2024-12-16T23:22:13.214Z"
+  },
+  {
+    "id": 78,
+    "torneo_id": 41,
+    "equipo_id": 14,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:22:13.232Z",
+    "updated_at": "2024-12-16T23:22:13.232Z"
+  },
+  {
+    "id": 79,
+    "torneo_id": 41,
+    "equipo_id": 4,
+    "PT": 3,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:23:56.930Z",
+    "updated_at": "2024-12-16T23:23:56.930Z"
+  },
+  {
+    "id": 80,
+    "torneo_id": 41,
+    "equipo_id": 11,
+    "PT": 5,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:23:56.935Z",
+    "updated_at": "2024-12-16T23:23:56.935Z"
+  },
+  {
+    "id": 81,
+    "torneo_id": 41,
+    "equipo_id": 19,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:32:04.490Z",
+    "updated_at": "2024-12-16T23:32:04.490Z"
+  },
+  {
+    "id": 82,
+    "torneo_id": 41,
+    "equipo_id": 9,
+    "PT": 1,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:32:04.501Z",
+    "updated_at": "2024-12-16T23:32:04.501Z"
+  },
+  {
+    "id": 83,
+    "torneo_id": 41,
+    "equipo_id": 19,
+    "PT": 11,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:32:47.558Z",
+    "updated_at": "2024-12-16T23:32:47.558Z"
+  },
+  {
+    "id": 84,
+    "torneo_id": 41,
+    "equipo_id": 11,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:32:47.563Z",
+    "updated_at": "2024-12-16T23:32:47.563Z"
+  },
+  {
+    "id": 85,
+    "torneo_id": 40,
+    "equipo_id": 1,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:34:06.824Z",
+    "updated_at": "2025-01-29T22:25:28.196Z"
+  },
+  {
+    "id": 86,
+    "torneo_id": 40,
+    "equipo_id": 2,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:34:06.829Z",
+    "updated_at": "2024-12-16T23:34:06.829Z"
+  },
+  {
+    "id": 87,
+    "torneo_id": 40,
+    "equipo_id": 4,
+    "PT": 1,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:34:29.423Z",
+    "updated_at": "2024-12-16T23:34:29.423Z"
+  },
+  {
+    "id": 88,
+    "torneo_id": 40,
+    "equipo_id": 3,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:34:29.428Z",
+    "updated_at": "2024-12-16T23:34:29.428Z"
+  },
+  {
+    "id": 89,
+    "torneo_id": 40,
+    "equipo_id": 5,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:34:47.437Z",
+    "updated_at": "2024-12-16T23:34:47.437Z"
+  },
+  {
+    "id": 90,
+    "torneo_id": 40,
+    "equipo_id": 6,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:34:47.441Z",
+    "updated_at": "2024-12-16T23:34:47.441Z"
+  },
+  {
+    "id": 91,
+    "torneo_id": 40,
+    "equipo_id": 7,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:35:06.511Z",
+    "updated_at": "2024-12-16T23:35:06.511Z"
+  },
+  {
+    "id": 92,
+    "torneo_id": 40,
+    "equipo_id": 8,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:35:06.515Z",
+    "updated_at": "2024-12-16T23:35:06.515Z"
+  },
+  {
+    "id": 93,
+    "torneo_id": 40,
+    "equipo_id": 9,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:35:22.228Z",
+    "updated_at": "2024-12-16T23:35:22.228Z"
+  },
+  {
+    "id": 94,
+    "torneo_id": 40,
+    "equipo_id": 10,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:35:22.233Z",
+    "updated_at": "2024-12-16T23:35:22.233Z"
+  },
+  {
+    "id": 95,
+    "torneo_id": 40,
+    "equipo_id": 11,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:35:36.425Z",
+    "updated_at": "2024-12-16T23:35:36.425Z"
+  },
+  {
+    "id": 96,
+    "torneo_id": 40,
+    "equipo_id": 12,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:35:36.430Z",
+    "updated_at": "2024-12-16T23:35:36.430Z"
+  },
+  {
+    "id": 97,
+    "torneo_id": 40,
+    "equipo_id": 13,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:35:53.087Z",
+    "updated_at": "2024-12-16T23:35:53.087Z"
+  },
+  {
+    "id": 98,
+    "torneo_id": 40,
+    "equipo_id": 14,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:35:53.091Z",
+    "updated_at": "2024-12-16T23:35:53.091Z"
+  },
+  {
+    "id": 99,
+    "torneo_id": 40,
+    "equipo_id": 15,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:36:07.048Z",
+    "updated_at": "2024-12-16T23:36:07.048Z"
+  },
+  {
+    "id": 100,
+    "torneo_id": 40,
+    "equipo_id": 16,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:36:07.052Z",
+    "updated_at": "2024-12-16T23:36:07.052Z"
+  },
+  {
+    "id": 101,
+    "torneo_id": 40,
+    "equipo_id": 17,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:36:25.986Z",
+    "updated_at": "2024-12-16T23:36:25.986Z"
+  },
+  {
+    "id": 102,
+    "torneo_id": 40,
+    "equipo_id": 18,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:36:25.990Z",
+    "updated_at": "2024-12-16T23:36:25.990Z"
+  },
+  {
+    "id": 103,
+    "torneo_id": 40,
+    "equipo_id": 19,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:36:43.891Z",
+    "updated_at": "2024-12-16T23:36:43.891Z"
+  },
+  {
+    "id": 104,
+    "torneo_id": 40,
+    "equipo_id": 20,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:36:43.895Z",
+    "updated_at": "2024-12-16T23:36:43.895Z"
+  },
+  {
+    "id": 105,
+    "torneo_id": 40,
+    "equipo_id": 21,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:36:59.332Z",
+    "updated_at": "2024-12-16T23:36:59.332Z"
+  },
+  {
+    "id": 106,
+    "torneo_id": 40,
+    "equipo_id": 22,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:36:59.337Z",
+    "updated_at": "2024-12-16T23:36:59.337Z"
+  },
+  {
+    "id": 107,
+    "torneo_id": 40,
+    "equipo_id": 23,
+    "PT": 4,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:37:15.607Z",
+    "updated_at": "2024-12-16T23:37:15.607Z"
+  },
+  {
+    "id": 108,
+    "torneo_id": 40,
+    "equipo_id": 24,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:37:15.612Z",
+    "updated_at": "2024-12-16T23:37:15.612Z"
+  },
+  {
+    "id": 109,
+    "torneo_id": 40,
+    "equipo_id": 25,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:37:29.830Z",
+    "updated_at": "2024-12-16T23:37:29.830Z"
+  },
+  {
+    "id": 110,
+    "torneo_id": 40,
+    "equipo_id": 26,
+    "PT": 4,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:37:29.836Z",
+    "updated_at": "2024-12-16T23:37:29.836Z"
+  },
+  {
+    "id": 111,
+    "torneo_id": 40,
+    "equipo_id": 27,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:37:41.904Z",
+    "updated_at": "2024-12-16T23:37:41.904Z"
+  },
+  {
+    "id": 112,
+    "torneo_id": 40,
+    "equipo_id": 28,
+    "PT": 4,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:37:41.908Z",
+    "updated_at": "2024-12-16T23:37:41.908Z"
+  },
+  {
+    "id": 113,
+    "torneo_id": 40,
+    "equipo_id": 29,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:38:13.327Z",
+    "updated_at": "2024-12-16T23:38:13.327Z"
+  },
+  {
+    "id": 114,
+    "torneo_id": 40,
+    "equipo_id": 30,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:38:13.331Z",
+    "updated_at": "2024-12-16T23:38:13.331Z"
+  },
+  {
+    "id": 115,
+    "torneo_id": 40,
+    "equipo_id": 31,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:38:27.579Z",
+    "updated_at": "2024-12-16T23:38:27.579Z"
+  },
+  {
+    "id": 116,
+    "torneo_id": 40,
+    "equipo_id": 32,
+    "PT": 4,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:38:27.583Z",
+    "updated_at": "2024-12-16T23:38:27.583Z"
+  },
+  {
+    "id": 117,
+    "torneo_id": 40,
+    "equipo_id": 1,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:39:54.927Z",
+    "updated_at": "2025-01-29T22:32:56.371Z"
+  },
+  {
+    "id": 118,
+    "torneo_id": 40,
+    "equipo_id": 32,
+    "PT": 5,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:39:54.931Z",
+    "updated_at": "2024-12-16T23:39:54.931Z"
+  },
+  {
+    "id": 119,
+    "torneo_id": 40,
+    "equipo_id": 5,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:40:46.011Z",
+    "updated_at": "2024-12-16T23:40:46.011Z"
+  },
+  {
+    "id": 120,
+    "torneo_id": 40,
+    "equipo_id": 15,
+    "PT": 6,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:40:46.016Z",
+    "updated_at": "2024-12-16T23:40:46.016Z"
+  },
+  {
+    "id": 121,
+    "torneo_id": 40,
+    "equipo_id": 3,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:41:15.675Z",
+    "updated_at": "2024-12-16T23:41:15.675Z"
+  },
+  {
+    "id": 122,
+    "torneo_id": 40,
+    "equipo_id": 14,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:41:15.680Z",
+    "updated_at": "2024-12-16T23:41:15.680Z"
+  },
+  {
+    "id": 123,
+    "torneo_id": 40,
+    "equipo_id": 10,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:41:47.085Z",
+    "updated_at": "2024-12-16T23:41:47.085Z"
+  },
+  {
+    "id": 124,
+    "torneo_id": 40,
+    "equipo_id": 21,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:41:47.090Z",
+    "updated_at": "2024-12-16T23:41:47.090Z"
+  },
+  {
+    "id": 125,
+    "torneo_id": 40,
+    "equipo_id": 26,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:42:20.318Z",
+    "updated_at": "2024-12-16T23:42:20.318Z"
+  },
+  {
+    "id": 126,
+    "torneo_id": 40,
+    "equipo_id": 28,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:42:20.322Z",
+    "updated_at": "2024-12-16T23:42:20.322Z"
+  },
+  {
+    "id": 127,
+    "torneo_id": 40,
+    "equipo_id": 29,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:42:39.106Z",
+    "updated_at": "2024-12-16T23:42:39.106Z"
+  },
+  {
+    "id": 128,
+    "torneo_id": 40,
+    "equipo_id": 8,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:42:39.112Z",
+    "updated_at": "2024-12-16T23:42:39.112Z"
+  },
+  {
+    "id": 129,
+    "torneo_id": 40,
+    "equipo_id": 23,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:42:55.638Z",
+    "updated_at": "2024-12-16T23:42:55.638Z"
+  },
+  {
+    "id": 130,
+    "torneo_id": 40,
+    "equipo_id": 19,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:42:55.642Z",
+    "updated_at": "2024-12-16T23:42:55.642Z"
+  },
+  {
+    "id": 131,
+    "torneo_id": 40,
+    "equipo_id": 17,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:43:08.840Z",
+    "updated_at": "2024-12-16T23:43:08.840Z"
+  },
+  {
+    "id": 132,
+    "torneo_id": 40,
+    "equipo_id": 11,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:43:08.846Z",
+    "updated_at": "2024-12-16T23:43:08.846Z"
+  },
+  {
+    "id": 133,
+    "torneo_id": 40,
+    "equipo_id": 15,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:43:37.000Z",
+    "updated_at": "2024-12-16T23:43:37.000Z"
+  },
+  {
+    "id": 134,
+    "torneo_id": 40,
+    "equipo_id": 10,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:43:37.004Z",
+    "updated_at": "2024-12-16T23:43:37.004Z"
+  },
+  {
+    "id": 135,
+    "torneo_id": 40,
+    "equipo_id": 23,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:44:00.089Z",
+    "updated_at": "2024-12-16T23:44:00.089Z"
+  },
+  {
+    "id": 136,
+    "torneo_id": 40,
+    "equipo_id": 14,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:44:00.095Z",
+    "updated_at": "2024-12-16T23:44:00.095Z"
+  },
+  {
+    "id": 137,
+    "torneo_id": 40,
+    "equipo_id": 29,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:44:19.848Z",
+    "updated_at": "2024-12-16T23:44:19.848Z"
+  },
+  {
+    "id": 138,
+    "torneo_id": 40,
+    "equipo_id": 28,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:44:19.852Z",
+    "updated_at": "2024-12-16T23:44:19.852Z"
+  },
+  {
+    "id": 139,
+    "torneo_id": 40,
+    "equipo_id": 32,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:44:39.632Z",
+    "updated_at": "2024-12-16T23:44:39.632Z"
+  },
+  {
+    "id": 140,
+    "torneo_id": 40,
+    "equipo_id": 11,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:44:39.636Z",
+    "updated_at": "2024-12-16T23:44:39.636Z"
+  },
+  {
+    "id": 141,
+    "torneo_id": 40,
+    "equipo_id": 10,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:45:02.292Z",
+    "updated_at": "2024-12-16T23:45:02.292Z"
+  },
+  {
+    "id": 142,
+    "torneo_id": 40,
+    "equipo_id": 23,
+    "PT": 3,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:45:02.298Z",
+    "updated_at": "2024-12-16T23:45:02.298Z"
+  },
+  {
+    "id": 143,
+    "torneo_id": 40,
+    "equipo_id": 29,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:45:15.878Z",
+    "updated_at": "2024-12-16T23:45:15.878Z"
+  },
+  {
+    "id": 144,
+    "torneo_id": 40,
+    "equipo_id": 11,
+    "PT": 3,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:45:15.882Z",
+    "updated_at": "2024-12-16T23:45:15.882Z"
+  },
+  {
+    "id": 145,
+    "torneo_id": 39,
+    "equipo_id": 9,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:46:13.011Z",
+    "updated_at": "2024-12-16T23:46:13.011Z"
+  },
+  {
+    "id": 146,
+    "torneo_id": 39,
+    "equipo_id": 10,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:46:13.015Z",
+    "updated_at": "2024-12-16T23:46:13.015Z"
+  },
+  {
+    "id": 147,
+    "torneo_id": 39,
+    "equipo_id": 12,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:46:26.396Z",
+    "updated_at": "2024-12-16T23:46:26.396Z"
+  },
+  {
+    "id": 148,
+    "torneo_id": 39,
+    "equipo_id": 11,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:46:26.400Z",
+    "updated_at": "2024-12-16T23:46:26.400Z"
+  },
+  {
+    "id": 149,
+    "torneo_id": 39,
+    "equipo_id": 14,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:46:39.905Z",
+    "updated_at": "2024-12-16T23:46:39.905Z"
+  },
+  {
+    "id": 150,
+    "torneo_id": 39,
+    "equipo_id": 19,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:46:39.909Z",
+    "updated_at": "2024-12-16T23:46:39.909Z"
+  },
+  {
+    "id": 151,
+    "torneo_id": 39,
+    "equipo_id": 28,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:46:54.589Z",
+    "updated_at": "2024-12-16T23:46:54.589Z"
+  },
+  {
+    "id": 152,
+    "torneo_id": 39,
+    "equipo_id": 20,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:46:54.593Z",
+    "updated_at": "2024-12-16T23:46:54.593Z"
+  },
+  {
+    "id": 153,
+    "torneo_id": 39,
+    "equipo_id": 10,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:47:14.275Z",
+    "updated_at": "2024-12-16T23:47:14.275Z"
+  },
+  {
+    "id": 154,
+    "torneo_id": 39,
+    "equipo_id": 19,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:47:14.280Z",
+    "updated_at": "2024-12-16T23:47:14.280Z"
+  },
+  {
+    "id": 155,
+    "torneo_id": 39,
+    "equipo_id": 28,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-16T23:47:28.742Z",
+    "updated_at": "2024-12-16T23:47:28.742Z"
+  },
+  {
+    "id": 157,
+    "torneo_id": 39,
+    "equipo_id": 10,
+    "PT": 1,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-18T00:47:31.834Z",
+    "updated_at": "2024-12-18T00:47:31.834Z"
+  },
+  {
+    "id": 158,
+    "torneo_id": 39,
+    "equipo_id": 19,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-18T00:47:31.844Z",
+    "updated_at": "2024-12-18T00:47:31.844Z"
+  },
+  {
+    "id": 159,
+    "torneo_id": 39,
+    "equipo_id": 10,
+    "PT": 1,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-18T01:04:06.647Z",
+    "updated_at": "2024-12-18T01:04:06.647Z"
+  },
+  {
+    "id": 160,
+    "torneo_id": 39,
+    "equipo_id": 19,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-18T01:04:06.654Z",
+    "updated_at": "2024-12-18T01:04:06.654Z"
+  },
+  {
+    "id": 162,
+    "torneo_id": 39,
+    "equipo_id": 28,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-18T01:44:09.355Z",
+    "updated_at": "2024-12-18T01:44:09.355Z"
+  },
+  {
+    "id": 163,
+    "torneo_id": 39,
+    "equipo_id": 40,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-18T01:56:30.533Z",
+    "updated_at": "2024-12-18T01:56:30.533Z"
+  },
+  {
+    "id": 164,
+    "torneo_id": 39,
+    "equipo_id": 15,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-18T01:56:30.538Z",
+    "updated_at": "2024-12-18T01:56:30.538Z"
+  },
+  {
+    "id": 165,
+    "torneo_id": 40,
+    "equipo_id": 11,
+    "PT": 1,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-18T20:29:45.059Z",
+    "updated_at": "2024-12-18T20:29:45.059Z"
+  },
+  {
+    "id": 166,
+    "torneo_id": 40,
+    "equipo_id": 23,
+    "PT": 4,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-18T20:29:45.114Z",
+    "updated_at": "2024-12-18T20:29:45.114Z"
+  },
+  {
+    "id": 167,
+    "torneo_id": 42,
+    "equipo_id": 2,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-19T00:36:40.135Z",
+    "updated_at": "2024-12-19T00:36:40.135Z"
+  },
+  {
+    "id": 168,
+    "torneo_id": 42,
+    "equipo_id": 1,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-19T00:36:40.141Z",
+    "updated_at": "2025-01-30T00:36:17.856Z"
+  },
+  {
+    "id": 171,
+    "torneo_id": 39,
+    "equipo_id": 23,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-19T18:10:33.859Z",
+    "updated_at": "2024-12-19T18:10:33.859Z"
+  },
+  {
+    "id": 172,
+    "torneo_id": 39,
+    "equipo_id": 13,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-19T18:10:33.864Z",
+    "updated_at": "2024-12-19T18:10:33.864Z"
+  },
+  {
+    "id": 173,
+    "torneo_id": 39,
+    "equipo_id": 23,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-19T18:10:55.617Z",
+    "updated_at": "2024-12-19T18:10:55.617Z"
+  },
+  {
+    "id": 174,
+    "torneo_id": 39,
+    "equipo_id": 10,
+    "PT": 3,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-19T18:10:55.621Z",
+    "updated_at": "2024-12-19T18:10:55.621Z"
+  },
+  {
+    "id": 177,
+    "torneo_id": 42,
+    "equipo_id": 3,
+    "PT": 4,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-19T18:32:55.307Z",
+    "updated_at": "2024-12-19T18:32:55.307Z"
+  },
+  {
+    "id": 178,
+    "torneo_id": 42,
+    "equipo_id": 4,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-19T18:32:55.312Z",
+    "updated_at": "2024-12-19T18:32:55.312Z"
+  },
+  {
+    "id": 179,
+    "torneo_id": 42,
+    "equipo_id": 5,
+    "PT": 0,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-19T18:33:18.493Z",
+    "updated_at": "2024-12-19T18:33:18.493Z"
+  },
+  {
+    "id": 180,
+    "torneo_id": 42,
+    "equipo_id": 6,
+    "PT": 3,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-19T18:33:18.497Z",
+    "updated_at": "2024-12-19T18:33:18.497Z"
+  },
+  {
+    "id": 181,
+    "torneo_id": 42,
+    "equipo_id": 9,
+    "PT": 5,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-19T18:33:45.920Z",
+    "updated_at": "2024-12-19T18:43:22.736Z"
+  },
+  {
+    "id": 182,
+    "torneo_id": 42,
+    "equipo_id": 7,
+    "PT": 2,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-19T18:33:45.924Z",
+    "updated_at": "2024-12-19T18:43:22.736Z"
+  },
+  {
+    "id": 185,
+    "torneo_id": 42,
+    "equipo_id": 9,
+    "PT": 7,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-19T18:43:57.118Z",
+    "updated_at": "2024-12-19T18:44:11.588Z"
+  },
+  {
+    "id": 186,
+    "torneo_id": 42,
+    "equipo_id": 2,
+    "PT": 3,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-19T18:43:57.124Z",
+    "updated_at": "2024-12-19T18:44:11.588Z"
+  },
+  {
+    "id": 187,
+    "torneo_id": 42,
+    "equipo_id": 3,
+    "PT": 6,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-19T21:24:37.294Z",
+    "updated_at": "2024-12-19T21:24:37.294Z"
+  },
+  {
+    "id": 188,
+    "torneo_id": 42,
+    "equipo_id": 6,
+    "PT": 3,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-19T21:24:37.299Z",
+    "updated_at": "2024-12-19T21:24:37.299Z"
+  },
+  {
+    "id": 189,
+    "torneo_id": 42,
+    "equipo_id": 3,
+    "PT": 5,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-19T21:52:49.515Z",
+    "updated_at": "2024-12-19T21:52:49.515Z"
+  },
+  {
+    "id": 190,
+    "torneo_id": 42,
+    "equipo_id": 9,
+    "PT": 3,
+    "CA": 0,
+    "DC": 0,
+    "CC": 0,
+    "created_at": "2024-12-19T21:52:49.524Z",
+    "updated_at": "2024-12-19T21:52:49.524Z"
+  }
 ]

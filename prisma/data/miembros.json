@@ -1,162 +1,72 @@
 [
-    {
-        "user_miembro": 40,
-        "equipo_id": 10
-    },
-    {
-        "user_miembro": 14,
-        "equipo_id": 38
-    },
-    {
-        "user_miembro": 1,
-        "equipo_id": 26
-    },
-    {
-        "user_miembro": 11,
-        "equipo_id": 4
-    },
-    {
-        "user_miembro": 11,
-        "equipo_id": 41
-    },
-    {
-        "user_miembro": 32,
-        "equipo_id": 49
-    },
-    {
-        "user_miembro": 35,
-        "equipo_id": 47
-    },
-    {
-        "user_miembro": 44,
-        "equipo_id": 14
-    },
-    {
-        "user_miembro": 26,
-        "equipo_id": 20
-    },
-    {
-        "user_miembro": 8,
-        "equipo_id": 36
-    },
-    {
-        "user_miembro": 29,
-        "equipo_id": 17
-    },
-    {
-        "user_miembro": 44,
-        "equipo_id": 33
-    },
-    {
-        "user_miembro": 25,
-        "equipo_id": 45
-    },
-    {
-        "user_miembro": 11,
-        "equipo_id": 25
-    },
-    {
-        "user_miembro": 25,
-        "equipo_id": 44
-    },
-    {
-        "user_miembro": 43,
-        "equipo_id": 20
-    },
-    {
-        "user_miembro": 22,
-        "equipo_id": 13
-    },
-    {
-        "user_miembro": 28,
-        "equipo_id": 45
-    },
-    {
-        "user_miembro": 27,
-        "equipo_id": 22
-    },
-    {
-        "user_miembro": 29,
-        "equipo_id": 27
-    },
-    {
-        "user_miembro": 24,
-        "equipo_id": 17
-    },
-    {
-        "user_miembro": 24,
-        "equipo_id": 10
-    },
-    {
-        "user_miembro": 29,
-        "equipo_id": 35
-    },
-    {
-        "user_miembro": 37,
-        "equipo_id": 9
-    },
-    {
-        "user_miembro": 3,
-        "equipo_id": 27
-    },
-    {
-        "user_miembro": 2,
-        "equipo_id": 7
-    },
-    {
-        "user_miembro": 47,
-        "equipo_id": 21
-    },
-    {
-        "user_miembro": 5,
-        "equipo_id": 33
-    },
-    {
-        "user_miembro": 49,
-        "equipo_id": 33
-    },
-    {
-        "user_miembro": 7,
-        "equipo_id": 3
-    },
-    {
-        "user_miembro": 27,
-        "equipo_id": 7
-    },
-    {
-        "user_miembro": 3,
-        "equipo_id": 7
-    },
-    {
-        "user_miembro": 9,
-        "equipo_id": 16
-    },
-    {
-        "user_miembro": 5,
-        "equipo_id": 5
-    },
-    {
-        "user_miembro": 16,
-        "equipo_id": 7
-    },
-    {
-        "user_miembro": 35,
-        "equipo_id": 40
-    },
-    {
-        "user_miembro": 51,
-        "equipo_id": 46
-    },
-    {
-        "user_miembro": 50,
-        "equipo_id": 46
-    },
-    {
-        "user_miembro": 49,
-        "equipo_id": 46
-    },
-    {
-        "user_miembro": 48,
-        "equipo_id": 46
-    }
+  {
+    "id": 6,
+    "user_miembro": "Member",
+    "equipo_id": 63,
+    "created_at": "2024-12-21T01:16:56.142Z",
+    "updated_at": "2024-12-21T01:16:56.142Z"
+  },
+  {
+    "id": 7,
+    "user_miembro": "member2",
+    "equipo_id": 63,
+    "created_at": "2024-12-21T01:16:56.142Z",
+    "updated_at": "2024-12-21T01:16:56.142Z"
+  },
+  {
+    "id": 8,
+    "user_miembro": "member3",
+    "equipo_id": 63,
+    "created_at": "2024-12-21T01:16:56.142Z",
+    "updated_at": "2024-12-21T01:16:56.142Z"
+  },
+  {
+    "id": 22,
+    "user_miembro": "member1",
+    "equipo_id": 1,
+    "created_at": "2024-12-21T01:45:17.355Z",
+    "updated_at": "2024-12-21T01:45:17.355Z"
+  },
+  {
+    "id": 23,
+    "user_miembro": "member2",
+    "equipo_id": 64,
+    "created_at": "2024-12-21T01:45:17.355Z",
+    "updated_at": "2024-12-21T01:45:17.355Z"
+  },
+  {
+    "id": 24,
+    "user_miembro": "dsad",
+    "equipo_id": 64,
+    "created_at": "2024-12-21T01:45:17.355Z",
+    "updated_at": "2024-12-21T01:45:17.355Z"
+  },
+  {
+    "id": 29,
+    "user_miembro": "das",
+    "equipo_id": 67,
+    "created_at": "2024-12-21T01:59:13.935Z",
+    "updated_at": "2024-12-21T01:59:13.935Z"
+  },
+  {
+    "id": 30,
+    "user_miembro": "a",
+    "equipo_id": 67,
+    "created_at": "2024-12-21T01:59:13.935Z",
+    "updated_at": "2024-12-21T01:59:13.935Z"
+  },
+  {
+    "id": 35,
+    "user_miembro": "dass",
+    "equipo_id": 68,
+    "created_at": "2024-12-21T02:13:19.332Z",
+    "updated_at": "2024-12-21T02:13:19.332Z"
+  },
+  {
+    "id": 36,
+    "user_miembro": "dsaaa",
+    "equipo_id": 68,
+    "created_at": "2024-12-21T02:13:19.332Z",
+    "updated_at": "2024-12-21T02:13:19.332Z"
+  }
 ]
