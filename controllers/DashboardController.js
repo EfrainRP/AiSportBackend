@@ -15,7 +15,6 @@ export const dashIndex = async (req,res) =>{
 // Index <- Regresa todos los torneos y equipos a exepcion de los que pertenecen al usuario Auth 
 export const index = async (req, res) => {
   const { userId } = req.params; // Extraer userId de los parámetros de la solicitud.
-  console.log("Volviendo al Dash <-");
   try {
     // Consultar todos los torneos excepto los del usuario.
     const torneos = await prisma.torneos.findMany({
@@ -33,12 +32,55 @@ export const index = async (req, res) => {
           not: parseInt(userId), // Excluir los equipos del usuario especificado.
         },
       },
+      include: {
+        users:{
+          select:{
+            name:true,
+          } 
+        }
+      }
     });
+
+    const fechaActual = new Date(); // Fecha actual
+
+    const proximosPartidos = await prisma.partidos.findMany({
+      where: {
+        fechaPartido: {
+          gt: new Date(8/8/24), // Fecha (actual), gt es mayor que
+        },
+      },
+      orderBy: {
+        fechaPartido: 'asc', // Ordenar por fecha
+      },
+      select: {
+        fechaPartido: true,
+        horaPartido: true,
+        equipoLocal: {
+          select: {
+            name: true,
+          },
+        },
+        equipoVisitante: {
+          select: {
+            name: true,
+          },
+        },
+        torneos: { // Usa exactamente el nombre de la relación
+          select: {
+            name: true,
+            ubicacion: true,
+          },
+        },
+      },
+      
+    });
+
 
     // Enviar ambos resultados en una sola respuesta.
     res.status(200).json({
       torneos,
       equipos,
+      proximosPartidos
     });
   } catch (error) {
     console.error('Error al obtener torneos y equipos:', error);
