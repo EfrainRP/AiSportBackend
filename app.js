@@ -16,8 +16,6 @@ app.use(express.json());
 // Servir archivos estáticos desde la carpeta 'uploads' "imagenes" <-
 app.use('/sporthub/api/utils/uploads', express.static(path.join(__dirname, 'utils/uploads')));
 
-app.use(cors()); // Permitir todas las solicitudes CORS
-app.use(express.json());
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.use('/sporthub/api', userRoutes); //Carga de rutas

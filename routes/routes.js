@@ -65,6 +65,8 @@ router.get('/estadisticas/:id', EstadisticasController.index);
 router.get('/estadisticas/torneo/:torneoId', EstadisticasController.show); // Estadisticas de Torneo <-
 router.get('/estadisticas/equipo/:equipoId/:equipoName', EstadisticasController.display); // Estadisticas de Equipo <-
 // Rutas de IA (SERVER) 
-router.put('/entrenamiento/AI/:equipoId', IAController.update); 
+router.put('/entrenamiento/equipo/AI/:equipoId', IAController.update); 
+router.put('/entrenamiento/user/AI/:userId', IAController.edit); 
+router.get('/estadisticas/AI/:userId', IAController.index); 
 
 export default router;
