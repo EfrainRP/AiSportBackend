@@ -24,6 +24,7 @@ model users {
   equipos                                    equipos[]
   notifications_notifications_user_idTousers notifications[] @relation("notifications_user_idTousers") // Habilitada
   torneos                                    torneos[]
+  ai                                         AI[] // Relación inversa con AI 
 }
 
 model equipos {
@@ -33,9 +34,9 @@ model equipos {
   created_at                                    DateTime?         @default(now())
   updated_at                                    DateTime?         @updatedAt
   users                                         users             @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "equipos_user_id_foreign")
-  estadisticas                                  estadisticas[]    // Relacion habilitada
+  estadisticas                                  estadisticas[] // Relacion habilitada
   miembro_equipos                               miembro_equipos[] // Relación habilitada
-  notifications                                 notifications[]   // Habilitada
+  notifications                                 notifications[] // Habilitada
   partidos_partidos_equipoLocal_idToequipos     partidos[]        @relation("partidos_equipoLocal_idToequipos")
   partidos_partidos_equipoVisitante_idToequipos partidos[]        @relation("partidos_equipoVisitante_idToequipos")
   image                                         String            @default("logoEquipo.jpg") @db.VarChar(255) //IMG Team
@@ -75,13 +76,43 @@ model torneos {
   user_id       Int             @db.UnsignedInt
   created_at    DateTime?       @default(now())
   updated_at    DateTime?       @updatedAt
-  estadisticas  estadisticas[]  // Habilitada
+  estadisticas  estadisticas[] // Habilitada
   notifications notifications[] // Habilitada
   //partido_torneos      partido_torneos[]     @ignore
-  partidos      partidos[]      // Habilitada
+  partidos      partidos[] // Habilitada
   users         users           @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "torneos_user_id_foreign")
 
   @@index([user_id], map: "torneos_user_id_foreign")
+}
+
+// ENUM AI <-
+enum Performance {
+  NA // N/A (por defecto)
+  DEFICIENTE
+  MEJORABLE
+  BUENO
+  MUY_BUENO
+  EXCEPCIONAL
+}
+
+model AI {
+  id         Int         @id @default(autoincrement()) @db.UnsignedInt
+  user_id    Int         @db.UnsignedInt
+  SS         Int         @default(0) @db.UnsignedInt
+  SA         Int         @default(0) @db.UnsignedInt
+  TM         Int         @default(0) @db.UnsignedInt
+  BC         Int         @default(0) @db.UnsignedInt
+  DR         Int         @default(0) @db.UnsignedInt
+  TO         Int         @default(0) @db.UnsignedInt
+  ST         Int         @default(0) @db.UnsignedInt
+  DD         Int         @default(0) @db.UnsignedInt
+  TR         Int         @default(0) @db.UnsignedInt
+  PF         Performance @default(NA) // Usa el Enum con un valor por defecto
+  created_at DateTime?   @default(now())
+  updated_at DateTime?   @updatedAt
+  users      users       @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "AI_user_id_foreign")
+
+  @@index([user_id], map: "AI_user_id_foreign")
 }
 
 model estadisticas {
@@ -177,4 +208,3 @@ enum notifications_status {
 //   @@id([torneo_id, partido_id])
 // }
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-

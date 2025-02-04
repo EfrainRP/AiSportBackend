@@ -1,0 +1,542 @@
+[
+  {
+    "id": 4,
+    "equipo_id": 20,
+    "torneo_id": 29,
+    "user_id": 51,
+    "user_id2": 50,
+    "status": "rejected",
+    "created_at": "2024-12-18T15:04:46.086Z",
+    "updated_at": "2024-12-18T21:47:24.235Z"
+  },
+  {
+    "id": 8,
+    "equipo_id": 3,
+    "torneo_id": 22,
+    "user_id": 51,
+    "user_id2": 30,
+    "status": "accepted",
+    "created_at": "2024-12-18T18:13:14.015Z",
+    "updated_at": null
+  },
+  {
+    "id": 9,
+    "equipo_id": 5,
+    "torneo_id": 39,
+    "user_id": 50,
+    "user_id2": 51,
+    "status": "pending",
+    "created_at": "2024-12-18T18:14:00.908Z",
+    "updated_at": null
+  },
+  {
+    "id": 11,
+    "equipo_id": 47,
+    "torneo_id": 2,
+    "user_id": 51,
+    "user_id2": 31,
+    "status": "pending",
+    "created_at": "2024-12-21T18:56:28.716Z",
+    "updated_at": "2024-12-21T18:56:28.716Z"
+  },
+  {
+    "id": 12,
+    "equipo_id": 41,
+    "torneo_id": 32,
+    "user_id": 23,
+    "user_id2": 37,
+    "status": "accepted",
+    "created_at": "2024-12-26T07:30:00Z",
+    "updated_at": "2024-12-23T19:27:00Z"
+  },
+  {
+    "id": 13,
+    "equipo_id": 31,
+    "torneo_id": 19,
+    "user_id": 42,
+    "user_id2": 25,
+    "status": "rejected",
+    "created_at": "2024-12-25T23:33:00Z",
+    "updated_at": null
+  },
+  {
+    "id": 14,
+    "equipo_id": 42,
+    "torneo_id": 3,
+    "user_id": 42,
+    "user_id2": 42,
+    "status": "rejected",
+    "created_at": "2024-12-28T08:41:00Z",
+    "updated_at": "2024-12-27T01:21:00Z"
+  },
+  {
+    "id": 15,
+    "equipo_id": 12,
+    "torneo_id": 16,
+    "user_id": 39,
+    "user_id2": 47,
+    "status": "rejected",
+    "created_at": "2024-12-27T06:27:00Z",
+    "updated_at": null
+  },
+  {
+    "id": 16,
+    "equipo_id": 24,
+    "torneo_id": 29,
+    "user_id": 16,
+    "user_id2": 7,
+    "status": "accepted",
+    "created_at": "2024-12-24T06:34:00Z",
+    "updated_at": null
+  },
+  {
+    "id": 17,
+    "equipo_id": 43,
+    "torneo_id": 12,
+    "user_id": 25,
+    "user_id2": 24,
+    "status": "accepted",
+    "created_at": "2024-12-25T09:33:00Z",
+    "updated_at": "2024-12-27T13:13:00Z"
+  },
+  {
+    "id": 18,
+    "equipo_id": 30,
+    "torneo_id": 34,
+    "user_id": 33,
+    "user_id2": 3,
+    "status": "pending",
+    "created_at": "2024-12-22T10:30:00Z",
+    "updated_at": "2024-12-24T04:20:00Z"
+  },
+  {
+    "id": 19,
+    "equipo_id": 25,
+    "torneo_id": 26,
+    "user_id": 21,
+    "user_id2": 33,
+    "status": "rejected",
+    "created_at": "2024-12-20T07:42:00Z",
+    "updated_at": "2024-12-25T20:00:00Z"
+  },
+  {
+    "id": 20,
+    "equipo_id": 2,
+    "torneo_id": 32,
+    "user_id": 31,
+    "user_id2": 37,
+    "status": "rejected",
+    "created_at": "2024-12-28T19:26:00Z",
+    "updated_at": "2024-12-28T14:58:00Z"
+  },
+  {
+    "id": 21,
+    "equipo_id": 35,
+    "torneo_id": 17,
+    "user_id": 29,
+    "user_id2": 20,
+    "status": "pending",
+    "created_at": "2024-12-18T08:48:00Z",
+    "updated_at": "2024-12-23T07:06:00Z"
+  },
+  {
+    "id": 22,
+    "equipo_id": 36,
+    "torneo_id": 14,
+    "user_id": 2,
+    "user_id2": 3,
+    "status": "rejected",
+    "created_at": "2024-12-19T14:57:00Z",
+    "updated_at": "2024-12-24T16:42:00Z"
+  },
+  {
+    "id": 23,
+    "equipo_id": 13,
+    "torneo_id": 12,
+    "user_id": 47,
+    "user_id2": 14,
+    "status": "rejected",
+    "created_at": "2024-12-23T02:02:00Z",
+    "updated_at": "2024-12-20T19:19:00Z"
+  },
+  {
+    "id": 24,
+    "equipo_id": 27,
+    "torneo_id": 3,
+    "user_id": 3,
+    "user_id2": 30,
+    "status": "accepted",
+    "created_at": "2024-12-28T02:32:00Z",
+    "updated_at": "2024-12-22T12:50:00Z"
+  },
+  {
+    "id": 25,
+    "equipo_id": 36,
+    "torneo_id": 3,
+    "user_id": 8,
+    "user_id2": 36,
+    "status": "rejected",
+    "created_at": "2024-12-26T11:22:00Z",
+    "updated_at": "2024-12-26T07:37:00Z"
+  },
+  {
+    "id": 26,
+    "equipo_id": 14,
+    "torneo_id": 34,
+    "user_id": 11,
+    "user_id2": 30,
+    "status": "rejected",
+    "created_at": "2024-12-25T11:16:00Z",
+    "updated_at": "2024-12-25T16:35:00Z"
+  },
+  {
+    "id": 27,
+    "equipo_id": 28,
+    "torneo_id": 10,
+    "user_id": 26,
+    "user_id2": 46,
+    "status": "rejected",
+    "created_at": "2024-12-18T09:02:00Z",
+    "updated_at": null
+  },
+  {
+    "id": 28,
+    "equipo_id": 45,
+    "torneo_id": 11,
+    "user_id": 3,
+    "user_id2": 20,
+    "status": "pending",
+    "created_at": "2024-12-21T06:02:00Z",
+    "updated_at": null
+  },
+  {
+    "id": 29,
+    "equipo_id": 50,
+    "torneo_id": 38,
+    "user_id": 17,
+    "user_id2": 46,
+    "status": "accepted",
+    "created_at": "2024-12-19T16:37:00Z",
+    "updated_at": "2024-12-24T04:31:00Z"
+  },
+  {
+    "id": 30,
+    "equipo_id": 48,
+    "torneo_id": 5,
+    "user_id": 40,
+    "user_id2": 31,
+    "status": "accepted",
+    "created_at": "2024-12-22T06:12:00Z",
+    "updated_at": null
+  },
+  {
+    "id": 31,
+    "equipo_id": 12,
+    "torneo_id": 7,
+    "user_id": 35,
+    "user_id2": 31,
+    "status": "rejected",
+    "created_at": "2024-12-19T16:53:00Z",
+    "updated_at": "2024-12-23T18:16:00Z"
+  },
+  {
+    "id": 32,
+    "equipo_id": 22,
+    "torneo_id": 22,
+    "user_id": 4,
+    "user_id2": 26,
+    "status": "accepted",
+    "created_at": "2024-12-21T05:30:00Z",
+    "updated_at": "2024-12-23T22:49:00Z"
+  },
+  {
+    "id": 33,
+    "equipo_id": 9,
+    "torneo_id": 30,
+    "user_id": 5,
+    "user_id2": 34,
+    "status": "accepted",
+    "created_at": "2024-12-18T20:25:00Z",
+    "updated_at": "2024-12-22T20:06:00Z"
+  },
+  {
+    "id": 34,
+    "equipo_id": 12,
+    "torneo_id": 9,
+    "user_id": 48,
+    "user_id2": 36,
+    "status": "rejected",
+    "created_at": "2024-12-25T06:52:00Z",
+    "updated_at": "2024-12-19T02:19:00Z"
+  },
+  {
+    "id": 35,
+    "equipo_id": 17,
+    "torneo_id": 36,
+    "user_id": 47,
+    "user_id2": 26,
+    "status": "pending",
+    "created_at": "2024-12-22T13:14:00Z",
+    "updated_at": "2024-12-28T05:15:00Z"
+  },
+  {
+    "id": 36,
+    "equipo_id": 2,
+    "torneo_id": 1,
+    "user_id": 40,
+    "user_id2": 33,
+    "status": "pending",
+    "created_at": "2024-12-27T23:53:00Z",
+    "updated_at": null
+  },
+  {
+    "id": 37,
+    "equipo_id": 22,
+    "torneo_id": 5,
+    "user_id": 13,
+    "user_id2": 28,
+    "status": "pending",
+    "created_at": "2024-12-20T23:57:00Z",
+    "updated_at": "2024-12-24T09:30:00Z"
+  },
+  {
+    "id": 38,
+    "equipo_id": 14,
+    "torneo_id": 17,
+    "user_id": 9,
+    "user_id2": 34,
+    "status": "rejected",
+    "created_at": "2024-12-25T15:11:00Z",
+    "updated_at": "2024-12-25T07:15:00Z"
+  },
+  {
+    "id": 39,
+    "equipo_id": 49,
+    "torneo_id": 10,
+    "user_id": 49,
+    "user_id2": 30,
+    "status": "rejected",
+    "created_at": "2024-12-28T18:14:00Z",
+    "updated_at": "2024-12-24T05:24:00Z"
+  },
+  {
+    "id": 40,
+    "equipo_id": 28,
+    "torneo_id": 39,
+    "user_id": 9,
+    "user_id2": 45,
+    "status": "pending",
+    "created_at": "2024-12-28T03:43:00Z",
+    "updated_at": "2024-12-20T00:14:00Z"
+  },
+  {
+    "id": 41,
+    "equipo_id": 13,
+    "torneo_id": 11,
+    "user_id": 5,
+    "user_id2": 30,
+    "status": "accepted",
+    "created_at": "2024-12-19T04:01:00Z",
+    "updated_at": "2024-12-24T23:44:00Z"
+  },
+  {
+    "id": 42,
+    "equipo_id": 43,
+    "torneo_id": 8,
+    "user_id": 44,
+    "user_id2": 19,
+    "status": "rejected",
+    "created_at": "2024-12-27T00:11:00Z",
+    "updated_at": "2024-12-20T17:53:00Z"
+  },
+  {
+    "id": 43,
+    "equipo_id": 11,
+    "torneo_id": 33,
+    "user_id": 21,
+    "user_id2": 19,
+    "status": "rejected",
+    "created_at": "2024-12-18T01:05:00Z",
+    "updated_at": null
+  },
+  {
+    "id": 44,
+    "equipo_id": 29,
+    "torneo_id": 10,
+    "user_id": 23,
+    "user_id2": 12,
+    "status": "accepted",
+    "created_at": "2024-12-27T00:16:00Z",
+    "updated_at": "2024-12-18T21:56:00Z"
+  },
+  {
+    "id": 45,
+    "equipo_id": 50,
+    "torneo_id": 22,
+    "user_id": 25,
+    "user_id2": 30,
+    "status": "accepted",
+    "created_at": "2024-12-23T11:49:00Z",
+    "updated_at": null
+  },
+  {
+    "id": 46,
+    "equipo_id": 21,
+    "torneo_id": 31,
+    "user_id": 48,
+    "user_id2": 22,
+    "status": "pending",
+    "created_at": "2024-12-24T03:51:00Z",
+    "updated_at": "2024-12-25T12:33:00Z"
+  },
+  {
+    "id": 47,
+    "equipo_id": 1,
+    "torneo_id": 27,
+    "user_id": 10,
+    "user_id2": 36,
+    "status": "accepted",
+    "created_at": "2024-12-26T14:46:00Z",
+    "updated_at": "2024-12-19T04:47:00Z"
+  },
+  {
+    "id": 48,
+    "equipo_id": 43,
+    "torneo_id": 33,
+    "user_id": 51,
+    "user_id2": 42,
+    "status": "accepted",
+    "created_at": "2024-12-25T23:43:00Z",
+    "updated_at": "2024-12-24T10:14:00Z"
+  },
+  {
+    "id": 49,
+    "equipo_id": 1,
+    "torneo_id": 25,
+    "user_id": 24,
+    "user_id2": 7,
+    "status": "accepted",
+    "created_at": "2024-12-19T13:44:00Z",
+    "updated_at": "2024-12-22T03:38:00Z"
+  },
+  {
+    "id": 50,
+    "equipo_id": 21,
+    "torneo_id": 23,
+    "user_id": 28,
+    "user_id2": 30,
+    "status": "rejected",
+    "created_at": "2024-12-27T21:47:00Z",
+    "updated_at": "2024-12-21T23:51:00Z"
+  },
+  {
+    "id": 51,
+    "equipo_id": 48,
+    "torneo_id": 19,
+    "user_id": 47,
+    "user_id2": 26,
+    "status": "pending",
+    "created_at": "2024-12-24T10:11:00Z",
+    "updated_at": "2024-12-22T00:08:00Z"
+  },
+  {
+    "id": 52,
+    "equipo_id": 3,
+    "torneo_id": 30,
+    "user_id": 29,
+    "user_id2": 30,
+    "status": "accepted",
+    "created_at": "2024-12-23T16:23:00Z",
+    "updated_at": "2024-12-24T03:23:00Z"
+  },
+  {
+    "id": 53,
+    "equipo_id": 30,
+    "torneo_id": 40,
+    "user_id": 22,
+    "user_id2": 18,
+    "status": "accepted",
+    "created_at": "2024-12-19T06:32:00Z",
+    "updated_at": "2024-12-24T07:43:00Z"
+  },
+  {
+    "id": 54,
+    "equipo_id": 11,
+    "torneo_id": 28,
+    "user_id": 29,
+    "user_id2": 45,
+    "status": "accepted",
+    "created_at": "2024-12-28T11:34:00Z",
+    "updated_at": "2024-12-28T10:56:00Z"
+  },
+  {
+    "id": 55,
+    "equipo_id": 32,
+    "torneo_id": 1,
+    "user_id": 22,
+    "user_id2": 33,
+    "status": "rejected",
+    "created_at": "2024-12-24T10:57:00Z",
+    "updated_at": "2024-12-26T18:38:00Z"
+  },
+  {
+    "id": 56,
+    "equipo_id": 14,
+    "torneo_id": 8,
+    "user_id": 18,
+    "user_id2": 42,
+    "status": "rejected",
+    "created_at": "2024-12-22T10:22:00Z",
+    "updated_at": null
+  },
+  {
+    "id": 57,
+    "equipo_id": 44,
+    "torneo_id": 39,
+    "user_id": 24,
+    "user_id2": 51,
+    "status": "rejected",
+    "created_at": "2024-12-25T03:29:00Z",
+    "updated_at": "2024-12-24T17:22:00Z"
+  },
+  {
+    "id": 58,
+    "equipo_id": 28,
+    "torneo_id": 3,
+    "user_id": 29,
+    "user_id2": 9,
+    "status": "pending",
+    "created_at": "2024-12-23T09:23:00Z",
+    "updated_at": "2024-12-27T12:14:00Z"
+  },
+  {
+    "id": 59,
+    "equipo_id": 50,
+    "torneo_id": 6,
+    "user_id": 49,
+    "user_id2": 22,
+    "status": "pending",
+    "created_at": "2024-12-20T17:00:00Z",
+    "updated_at": "2024-12-18T21:59:00Z"
+  },
+  {
+    "id": 60,
+    "equipo_id": 44,
+    "torneo_id": 16,
+    "user_id": 15,
+    "user_id2": 50,
+    "status": "rejected",
+    "created_at": "2024-12-21T23:48:00Z",
+    "updated_at": "2024-12-23T19:30:00Z"
+  },
+  {
+    "id": 61,
+    "equipo_id": 9,
+    "torneo_id": 16,
+    "user_id": 44,
+    "user_id2": 5,
+    "status": "accepted",
+    "created_at": "2024-12-23T17:29:00Z",
+    "updated_at": null
+  }
+]
