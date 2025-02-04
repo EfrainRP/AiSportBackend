@@ -7,7 +7,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2023-10-05",
         "fechaFin": "2023-10-06",
-        "cantEquipo": 8,
+        "cantEquipo": 8,        
         "user_id": 23
     },
     {
@@ -18,7 +18,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-08-27",
         "fechaFin": "2024-07-06",
-        "cantEquipo": 2,
+        "cantEquipo": 8,        
         "user_id": 31
     },
     {
@@ -29,7 +29,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2023-12-02",
         "fechaFin": "2024-02-10",
-        "cantEquipo": 15,
+        "cantEquipo": 8,
         "user_id": 4
     },
     {
@@ -40,7 +40,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-02-06",
         "fechaFin": "2024-02-04",
-        "cantEquipo": 13,
+        "cantEquipo": 8,
         "user_id": 28
     },
     {
@@ -51,7 +51,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2023-09-18",
         "fechaFin": "2024-08-15",
-        "cantEquipo": 11,
+        "cantEquipo": 8,
         "user_id": 36
     },
     {
@@ -62,7 +62,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-07-04",
         "fechaFin": "2024-04-05",
-        "cantEquipo": 4,
+        "cantEquipo": 8,        
         "user_id": 33
     },
     {
@@ -73,7 +73,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2023-11-30",
         "fechaFin": "2024-03-27",
-        "cantEquipo": 2,
+        "cantEquipo": 8,        
         "user_id": 39
     },
     {
@@ -84,7 +84,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2023-09-22",
         "fechaFin": "2024-03-01",
-        "cantEquipo": 2,
+        "cantEquipo": 8,        
         "user_id": 47
     },
     {
@@ -95,7 +95,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-03-07",
         "fechaFin": "2024-06-18",
-        "cantEquipo": 7,
+        "cantEquipo": 8,        
         "user_id": 1
     },
     {
@@ -106,7 +106,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2023-11-03",
         "fechaFin": "2023-11-06",
-        "cantEquipo": 14,
+        "cantEquipo": 8,
         "user_id": 5
     },
     {
@@ -117,7 +117,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2023-09-21",
         "fechaFin": "2024-02-07",
-        "cantEquipo": 9,
+        "cantEquipo": 8,        
         "user_id": 5
     },
     {
@@ -128,7 +128,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-04-06",
         "fechaFin": "2024-06-27",
-        "cantEquipo": 2,
+        "cantEquipo": 8,        
         "user_id": 50
     },
     {
@@ -139,7 +139,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-02-03",
         "fechaFin": "2023-12-17",
-        "cantEquipo": 4,
+        "cantEquipo": 8,        
         "user_id": 34
     },
     {
@@ -150,7 +150,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-07-23",
         "fechaFin": "2023-10-30",
-        "cantEquipo": 14,
+        "cantEquipo": 8,
         "user_id": 23
     },
     {
@@ -161,7 +161,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-07-10",
         "fechaFin": "2023-11-14",
-        "cantEquipo": 7,
+        "cantEquipo": 8,      
         "user_id": 28
     },
     {
@@ -172,7 +172,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2023-09-14",
         "fechaFin": "2024-01-10",
-        "cantEquipo": 3,
+        "cantEquipo": 8,        
         "user_id": 30
     },
     {
@@ -183,7 +183,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-05-12",
         "fechaFin": "2024-04-02",
-        "cantEquipo": 7,
+        "cantEquipo": 8,        
         "user_id": 48
     },
     {
@@ -194,7 +194,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-03-11",
         "fechaFin": "2023-12-14",
-        "cantEquipo": 3,
+        "cantEquipo": 8,        
         "user_id": 28
     },
     {
@@ -205,7 +205,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-04-18",
         "fechaFin": "2023-12-13",
-        "cantEquipo": 4,
+        "cantEquipo": 8,        
         "user_id": 35
     },
     {
@@ -216,7 +216,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-01-15",
         "fechaFin": "2024-06-29",
-        "cantEquipo": 12,
+        "cantEquipo": 8,
         "user_id": 40
     },
     {
@@ -227,7 +227,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-01-08",
         "fechaFin": "2023-12-21",
-        "cantEquipo": 6,
+        "cantEquipo": 8,        
         "user_id": 20
     },
     {
@@ -238,7 +238,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-07-28",
         "fechaFin": "2024-04-19",
-        "cantEquipo": 12,
+        "cantEquipo": 8,
         "user_id": 15
     },
     {
@@ -249,7 +249,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2023-10-21",
         "fechaFin": "2024-04-08",
-        "cantEquipo": 11,
+        "cantEquipo": 8,
         "user_id": 13
     },
     {
@@ -260,7 +260,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-07-25",
         "fechaFin": "2023-10-24",
-        "cantEquipo": 12,
+        "cantEquipo": 8,
         "user_id": 43
     },
     {
@@ -271,7 +271,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-02-13",
         "fechaFin": "2024-07-23",
-        "cantEquipo": 5,
+        "cantEquipo": 8,        
         "user_id": 15
     },
     {
@@ -282,7 +282,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2023-10-31",
         "fechaFin": "2024-03-06",
-        "cantEquipo": 13,
+        "cantEquipo": 8,
         "user_id": 11
     },
     {
@@ -293,7 +293,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-05-23",
         "fechaFin": "2024-01-03",
-        "cantEquipo": 14,
+        "cantEquipo": 8,
         "user_id": 48
     },
     {
@@ -304,7 +304,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-06-01",
         "fechaFin": "2024-10-20",
-        "cantEquipo": 15,
+        "cantEquipo": 8,
         "user_id": 9
     },
     {
@@ -315,7 +315,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-01-27",
         "fechaFin": "2024-06-15",
-        "cantEquipo": 1,
+        "cantEquipo": 8,        
         "user_id": 14
     },
     {
@@ -326,7 +326,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2023-11-02",
         "fechaFin": "2023-12-24",
-        "cantEquipo": 6,
+        "cantEquipo": 8,        
         "user_id": 43
     },
     {
@@ -337,7 +337,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-07-10",
         "fechaFin": "2024-03-29",
-        "cantEquipo": 8,
+        "cantEquipo": 8,        
         "user_id": 32
     },
     {
@@ -348,7 +348,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2023-10-04",
         "fechaFin": "2024-06-11",
-        "cantEquipo": 4,
+        "cantEquipo": 8,        
         "user_id": 41
     },
     {
@@ -359,7 +359,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-02-15",
         "fechaFin": "2024-07-10",
-        "cantEquipo": 13,
+        "cantEquipo": 8,
         "user_id": 28
     },
     {
@@ -370,7 +370,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2023-12-12",
         "fechaFin": "2023-12-16",
-        "cantEquipo": 7,
+        "cantEquipo": 8,        
         "user_id": 35
     },
     {
@@ -381,7 +381,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-08-10",
         "fechaFin": "2024-09-21",
-        "cantEquipo": 10,
+        "cantEquipo": 8,
         "user_id": 21
     },
     {
@@ -392,7 +392,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2023-10-10",
         "fechaFin": "2024-09-22",
-        "cantEquipo": 8,
+        "cantEquipo": 8,        
         "user_id": 35
     },
     {
@@ -403,7 +403,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2023-11-14",
         "fechaFin": "2024-09-14",
-        "cantEquipo": 9,
+        "cantEquipo": 8,        
         "user_id": 43
     },
     {
@@ -414,7 +414,7 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-01-05",
         "fechaFin": "2024-03-30",
-        "cantEquipo": 13,
+        "cantEquipo": 8,
         "user_id": 6
     },
     {
@@ -425,8 +425,8 @@
         "descripcion": "descripcion",
         "fechaInicio": "2024-06-10",
         "fechaFin": "2024-04-23",
-        "cantEquipo": 7,
-        "user_id": 14
+        "cantEquipo": 8,        
+        "user_id": 51
     },
     {
         "id": 40,
@@ -436,7 +436,18 @@
         "descripcion": "descripcion",
         "fechaInicio": "2023-09-17",
         "fechaFin": "2024-02-29",
-        "cantEquipo": 2,
-        "user_id": 22
+        "cantEquipo": 8,        
+        "user_id": 51
+    },
+    {
+        "id": 41,
+        "name": "Torneito",
+        "ubicacion": "Verralls",
+        "email": "torneito@wordpress.com",
+        "descripcion": "descripcion",
+        "fechaInicio": "2024-09-17",
+        "fechaFin": "2025-02-29",
+        "cantEquipo": 8,        
+        "user_id": 51
     }
 ]

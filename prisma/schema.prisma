@@ -17,12 +17,12 @@ model users {
   gender                                     String          @default("N/E") @db.VarChar(255)
   password                                   String          @db.VarChar(255)
   birthdate                                  DateTime        @default(dbgenerated("('2023-12-01')")) @db.Date
-  image                                      String          @default("userprofile.webp") @db.VarChar(255)
+  image                                      String          @default("logoPerfil.jpg") @db.VarChar(255)
   remember_token                             String?         @db.VarChar(100)
   created_at                                 DateTime?       @default(now())
   updated_at                                 DateTime?       @updatedAt
   equipos                                    equipos[]
-  notifications_notifications_user_idTousers notifications[] @relation("notifications_user_idTousers") @ignore
+  notifications_notifications_user_idTousers notifications[] @relation("notifications_user_idTousers") // Habilitada
   torneos                                    torneos[]
 }
 
@@ -33,11 +33,12 @@ model equipos {
   created_at                                    DateTime?         @default(now())
   updated_at                                    DateTime?         @updatedAt
   users                                         users             @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "equipos_user_id_foreign")
-  estadisticas                                  estadisticas[]    @ignore
-  miembro_equipos                               miembro_equipos[] @ignore
-  notifications                                 notifications[]   @ignore
+  estadisticas                                  estadisticas[]    // Relacion habilitada
+  miembro_equipos                               miembro_equipos[] // Relación habilitada
+  notifications                                 notifications[]   // Habilitada
   partidos_partidos_equipoLocal_idToequipos     partidos[]        @relation("partidos_equipoLocal_idToequipos")
   partidos_partidos_equipoVisitante_idToequipos partidos[]        @relation("partidos_equipoVisitante_idToequipos")
+  image                                         String            @default("logoEquipo.jpg") @db.VarChar(255) //IMG Team
 
   @@index([user_id], map: "equipos_user_id_foreign")
 }
@@ -54,9 +55,9 @@ model partidos {
   torneo_id                                    Int       @db.UnsignedInt
   created_at                                   DateTime? @default(now())
   updated_at                                   DateTime? @updatedAt
-  // partido_torneos                              partido_torneos[] @ignore
-  equipos_partidos_equipoLocal_idToequipos     equipos   @relation("partidos_equipoLocal_idToequipos", fields: [equipoLocal_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partidos_equipolocal_id_foreign")
-  equipos_partidos_equipoVisitante_idToequipos equipos   @relation("partidos_equipoVisitante_idToequipos", fields: [equipoVisitante_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partidos_equipovisitante_id_foreign")
+  //partido_torneos                           partido_torneos[] 
+  equipos_partidos_equipoLocal_idToequipos                              equipos   @relation("partidos_equipoLocal_idToequipos", fields: [equipoLocal_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partidos_equipolocal_id_foreign")
+  equipos_partidos_equipoVisitante_idToequipos                              equipos   @relation("partidos_equipoVisitante_idToequipos", fields: [equipoVisitante_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partidos_equipovisitante_id_foreign")
   torneos                                      torneos   @relation(fields: [torneo_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "partidos_torneo_id_foreign")
 
   @@index([equipoLocal_id], map: "partidos_equipolocal_id_foreign")
@@ -74,16 +75,17 @@ model torneos {
   user_id       Int             @db.UnsignedInt
   created_at    DateTime?       @default(now())
   updated_at    DateTime?       @updatedAt
-  estadisticas  estadisticas[]  @ignore
-  notifications notifications[] @ignore
-  // partido_torneos      partido_torneos[]      @ignore
-  partidos      partidos[]      @ignore
+  estadisticas  estadisticas[]  // Habilitada
+  notifications notifications[] // Habilitada
+  //partido_torneos      partido_torneos[]     @ignore
+  partidos      partidos[]      // Habilitada
   users         users           @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "torneos_user_id_foreign")
 
   @@index([user_id], map: "torneos_user_id_foreign")
 }
 
 model estadisticas {
+  id         Int       @id @default(autoincrement()) @db.UnsignedInt
   torneo_id  Int       @db.UnsignedInt
   equipo_id  Int       @db.UnsignedInt
   PT         Int       @default(0) @db.UnsignedInt
@@ -95,23 +97,25 @@ model estadisticas {
   equipos    equipos   @relation(fields: [equipo_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "estadisticas_equipo_id_foreign")
   torneos    torneos   @relation(fields: [torneo_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "estadisticas_torneo_id_foreign")
 
-  @@id([torneo_id, equipo_id])
+  //@@id([torneo_id, equipo_id])
   @@index([equipo_id], map: "estadisticas_equipo_id_foreign")
   @@index([torneo_id], map: "estadisticas_torneo_id_foreign")
 }
 
 model miembro_equipos {
+  id           Int       @id @default(autoincrement()) @db.UnsignedInt
   user_miembro String    @db.VarChar(255)
   equipo_id    Int       @db.UnsignedInt
   created_at   DateTime? @default(now())
   updated_at   DateTime? @updatedAt
   equipos      equipos   @relation(fields: [equipo_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "miembro_equipos_equipo_id_foreign")
 
-  @@id([user_miembro, equipo_id])
+  //@@id([equipo_id])
   @@index([equipo_id], map: "miembro_equipos_equipo_id_foreign")
 }
 
 model notifications {
+  id                                 Int                  @id @default(autoincrement()) @db.UnsignedInt
   equipo_id                          Int?                 @db.UnsignedInt
   torneo_id                          Int?                 @db.UnsignedInt
   user_id                            Int                  @db.UnsignedInt
@@ -127,7 +131,6 @@ model notifications {
   @@index([torneo_id], map: "notifications_torneo_id_foreign")
   @@index([user_id2], map: "notifications_user_id2_foreign")
   @@index([user_id], map: "notifications_user_id_foreign")
-  @@ignore
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.

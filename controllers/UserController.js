@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
-import { prisma } from '../prisma/db.js';
 import jwt from 'jsonwebtoken'; // Libreria para generar Token <-
 import crypto from 'crypto';
+import { prisma } from '../prisma/db.js';
 
 // Mostrar todos los usuarios
 export const getAllUsers = async (req, res) => {
@@ -148,7 +148,6 @@ export const loginUser = async (req, res) => {
       message: error.message });
   }
 };
-
 
 // Registro de usuario
 export const registerUser = async (req, res) => {

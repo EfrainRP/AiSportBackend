@@ -1,5 +1,10 @@
 import { prisma } from "../prisma/db.js";
 
+//Mostrar todos los usuarios
+export const getTorneo = async () => {
+    console.log("Entro")
+}
+
 function validateUserInput(data) {
     // Validar tipos y formatos
     const errors = [];
