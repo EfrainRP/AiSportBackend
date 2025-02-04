@@ -1,4 +1,4 @@
-# sporthubNodejs
+# AiSportNodejs
 
 npm install
 npm run db-seed
