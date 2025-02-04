@@ -1,5 +1,4 @@
 import { prisma } from '../prisma/db.js';
-import * as query from "../utils/queries.js";
 
 // Index <- 
 export const index = async (req, res) => {
