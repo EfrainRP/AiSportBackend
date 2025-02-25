@@ -10,9 +10,12 @@ import * as ProfileController from '../controllers/ProfileController.js';
 import * as NotificationController from '../controllers/NotificationController.js';
 import * as EstadisticasController from '../controllers/EstadisticasController.js';
 import * as IAController from '../controllers/IAController.js';
+import * as EmailController from '../controllers/EmailController.js'; // Email Service <-
 
 const router = express.Router();
-
+// Email Routes
+router.get('/send-email/:userId',EmailController.emailSend);
+router.put('/restore-password/:userId',EmailController.passwordRestore);
 //Rutas de USUARIOS
 router.get('/', UserController.getAllUsers);
 router.get('/:id', UserController.getUser);

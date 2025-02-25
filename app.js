@@ -24,7 +24,12 @@ connect(); // Conecta a la base de datos
 
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => {
+// Cambiar 'localhost' por '0.0.0.0'
+app.listen(port, '0.0.0.0', () => {
   console.log(`Servidor corriendo en el puerto ${port}`);
 });
+//
+//app.listen(port, () => {
+//  console.log(`Servidor corriendo en el puerto ${port}`);
+//});
 
