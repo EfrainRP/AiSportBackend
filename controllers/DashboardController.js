@@ -55,12 +55,12 @@ export const index = async (req, res) => {
       select: {
         fechaPartido: true,
         horaPartido: true,
-        equipoLocal: {
+        equipos_partidos_equipoLocal_idToequipos: {
           select: {
             name: true,
           },
         },
-        equipoVisitante: {
+        equipos_partidos_equipoVisitante_idToequipos: {
           select: {
             name: true,
           },
