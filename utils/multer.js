@@ -13,6 +13,7 @@ const storage = multer.diskStorage({
         
         // Normaliza la ruta para evitar que esta se duplique <-
         uploadPath = uploadPath.replace(/^C:\\C:\\/, 'C:\\'); // Reemplaza "C:\C:\" por "C:\"
+        uploadPath = uploadPath.replace(/%20/g, ' '); // Reemplaza %20 por un espacio
 
         console.log("DESTINATION DONE", uploadPath); // Verifica que la ruta sea correcta
 

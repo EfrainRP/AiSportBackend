@@ -15,3 +15,7 @@ DB_PORT=3306
 PORT = 3000
 
 DATABASE_URL=`${DB_DIALECT}://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`
+
+------------------------------------------------------
+Se necesita reemplazar la raiz, ya sea de C:\\ a E:\\
+uploadPath = uploadPath.replace(/^C:\\C:\\/, 'C:\\'); // Reemplaza "C:\C:\" por "C:\"
