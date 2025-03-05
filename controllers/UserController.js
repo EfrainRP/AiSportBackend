@@ -130,12 +130,14 @@ export const loginUser = async (req, res) => {
         { expiresIn: '1h' } // Da tiempo de expiracion de 1 hora al token
       );
 
-      // Devolver el token junto con el mensaje y el nombre de usuario
+      // Establecer el token como cookie en vez de almacenarse local <-
+      res.cookie('token', token, { httpOnly: true, maxAge: 3600000 }); // 1 hora de expiración
+
+      // Enviar el usuario y login success
       res.json({
         status: "success",
         message: 'Login successful',
-        params: {userId: user.id, userName: user.name},
-        token: token, // Enviar el token al frontend
+        params: { userId: user.id, userName: user.name },
       });
     } else {
       res.status(401).json({ 
