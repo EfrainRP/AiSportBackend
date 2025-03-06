@@ -24,7 +24,7 @@ app.use(
       scriptSrc: ["'self'", "https://apis.google.com"], // Permitir Google API y scripts inline
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"], // Permitir estilos en línea y Google Fonts
       fontSrc: ["'self'", "https://fonts.gstatic.com"], // Permitir fuentes de Google
-      imgSrc: ["'self'", "data:"], // Permitir imágenes locales y en base64
+      imgSrc: ["'self'", "data:", "https://img.icons8.com"], // Permitir imágenes locales, base64 y desde img.icons8.com
       connectSrc: ["'self'", "https://aisport.com"], // Permitir conexiones a API externa
       frameAncestors: ["'self'"], // Evita que el sitio sea embebido en iframes externos
       upgradeInsecureRequests: [], // Fuerza HTTPS

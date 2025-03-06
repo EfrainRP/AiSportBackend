@@ -55,98 +55,138 @@ export const emailSend = async (req, res) => {
 
     // Preparar el mensaje que se enviará
     const msg = {
-        to: user.email, // Correo del usuario (existente)
+        to: 'miguel.magana0967@alumnos.udg.mx',//user.email, // Correo del usuario (existente)
         from: 'sporthub2711@gmail.com',  // Remitente verificado en SendGrid <- (Gmail sporthub)
         subject: subject, // Asunto del correo
         html: `  <!-- Estilos en línea para correo HTML -->
-          <html>
-            <head>
-              <style>
-                body {
-                  font-family: 'Arial', sans-serif;
-                  color: #333;
-                  line-height: 1.6;
-                  margin: 0;
-                  padding: 0;
-                  background-color: #f7f7f7;
-                }
-                .container {
-                  max-width: 600px;
-                  margin: 0 auto;
-                  background-color: white;
-                  padding: 20px;
-                  border-radius: 8px;
-                  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-                }
-                .header {
-                  text-align: center;
-                  background-color: #4CAF50;
-                  padding: 20px;
-                  border-radius: 8px 8px 0 0;
-                }
-                .header h1 {
-                  margin: 0;
-                  color: white;
-                  font-size: 24px;
-                }
-                .logo {
-                  display: block;
-                  margin: 0 auto 20px;
-                  max-width: 80px;
-                }
-                .content {
-                  padding: 20px;
-                  color: #555;
-                }
-                .important {
-                  color: #ff6347;
-                  font-weight: bold;
-                }
-                .btn {
-                  background-color:rgb(54, 56, 53);
-                  color: white;
-                  padding: 12px 20px;
-                  text-decoration: none;
-                  font-weight: bold;
-                  border-radius: 4px;
-                  display: inline-block;
-                  margin-top: 20px;
-                  text-align: center;
-                }
-                .footer {
-                  text-align: center;
-                  font-size: 12px;
-                  color: #aaa;
-                  margin-top: 30px;
-                }
-              </style>
-            </head>
-            <body>
-              <div class="container">
-                <!-- Header -->
-                <div class="header">
-                  <img class="logo" src="https://img.icons8.com/?size=100&id=bxKRTLFZYynA&format=png&color=000000" alt="Logo AiSport">
-                  <h1>Recuperación de Contraseña AiSport</h1>
-                </div>
-      
-                <!-- Content -->
-                <div class="content">
-                  <p>¡Hola <span class="important">${userName}</span>!</p>
-                  <p>Te mandamos un cordial saludo desde AiSport. Se ha solicitado la recuperación de tu contraseña en nuestra plataforma.</p>
-                  <p><strong>Importante:</strong> Si crees que se trata de un error, puedes ignorar este correo.</p>
-                  <p>Tu contraseña actual en la plataforma será restablecida por tú anterior contraseña mediante este correo. <span class="important"></span></p>
-                  <p>Recuerda, no compartas tu contraseña con nadie más y si tienes algún problema, no dudes en contactarnos.</p>
-      
-                  <!-- Button -->
-                  <a href="https://www.aisport.com/recuperar-password" class="btn">Restablecer contraseña</a>
-                </div>
-      
-                <!-- Footer -->
-                <div class="footer">
-                  <p>¡Gracias por ser parte de AiSport! 📧</p>
-                </div>
-              </div>
-            </body>
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Recuperación de Contraseña AiSport</title>
+            <style>
+              /* Estilos generales */
+              body {
+                background-color: #f0f0f0; /* Fondo gris claro */
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                color: #333;
+              }
+
+              /* Estilos del header */
+              .header {
+                background-color: #333; /* Fondo oscuro */
+                color: white;
+                text-align: center;
+                padding: 20px;
+              }
+
+              .header img {
+                width: 100px; /* Tamaño del logo */
+                height: auto;
+              }
+
+              .header h1 {
+                font-size: 28px;
+                margin-top: 10px;
+                font-weight: bold;
+              }
+
+              /* Estilos para el contenido */
+              .content {
+                background-color: #ffffff; /* Fondo blanco */
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 30px;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+              }
+
+              .content h2 {
+                font-size: 24px;
+                color: #333;
+                margin-bottom: 15px;
+              }
+
+              .content p {
+                font-size: 16px;
+                color: #555;
+                line-height: 1.6;
+              }
+
+              .content p.important {
+                font-weight: bold;
+                color: #d9534f; /* Rojo para resaltar */
+              }
+
+              /* Estilo del botón */
+              .recovery-btn {
+                display: inline-block;
+                background-color: #FFD700; /* Color dorado */
+                color: #333;
+                text-decoration: none;
+                padding: 15px 30px;
+                font-size: 16px;
+                font-weight: bold;
+                text-align: center;
+                border-radius: 5px;
+                transition: background-color 0.3s, transform 0.3s ease-in-out;
+                margin-top: 20px;
+              }
+
+              .recovery-btn:hover {
+                background-color: #ffcc00; /* Dorado más oscuro al pasar el cursor */
+                transform: scale(1.05);
+              }
+
+              .recovery-btn:focus {
+                outline: none;
+              }
+
+              /* Estilo para el pie de página */
+              .footer {
+                text-align: center;
+                margin-top: 30px;
+                font-size: 14px;
+                color: #888;
+              }
+
+              .footer a {
+                color: #333;
+                text-decoration: none;
+              }
+
+              .footer a:hover {
+                text-decoration: underline;
+              }
+            </style>
+          </head>
+          <body>
+
+            <!-- Header -->
+            <div class="header">
+              <img src="https://img.icons8.com/?size=100&id=bxKRTLFZYynA&format=png&color=000000" alt="Logo AiSport">
+              <h1>Recuperación de Contraseña</h1>
+            </div>
+
+            <!-- Contenedor del contenido principal -->
+            <div class="content">
+              <h2>¡Hola, <strong>${userName}</strong>!</h2>
+              <p>Te enviamos este correo porque hemos recibido una solicitud para recuperar tu contraseña en AiSport.</p>
+              <p><strong>Importante:</strong> Si no realizaste esta solicitud, puedes ignorar este mensaje.</p>
+              <p>Para continuar con la recuperación de tu contraseña, por favor haz clic en el siguiente enlace:</p>
+              <a href="http://localhost:3000" class="recovery-btn">Recuperar Contraseña</a>
+              <p class="important">Recuerda, nunca compartas tu contraseña con nadie. Si tienes alguna duda o necesitas ayuda, no dudes en contactarnos.</p>
+              <p>Gracias por ser parte de AiSport. ¡Te deseamos lo mejor en tu entrenamiento!</p>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+              <p>&copy; ${new Date().getFullYear()} AiSport. Todos los derechos reservados.</p>
+              <p>Si no solicitaste la recuperación de tu contraseña, por favor <a href="mailto:support@aisport.com">contáctanos</a>.</p>
+            </div>
+
+          </body>
           </html>
         `,
       };
