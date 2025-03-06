@@ -1,6 +1,8 @@
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Obtener el directorio actual con import.meta.url
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
@@ -9,18 +11,19 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         // Usar path.resolve() para obtener la ruta correcta
-        let uploadPath = path.resolve(__dirname, 'uploads'); // Obtiene la ruta absoluta <-
-        
-        // Normaliza la ruta para evitar que esta se duplique <-
-        uploadPath = uploadPath.replace(/^C:\\C:\\/, 'C:\\'); // Reemplaza "C:\C:\" por "C:\"
-        uploadPath = uploadPath.replace(/%20/g, ' '); // Reemplaza %20 por un espacio
+        const diskLetter = process.env.DISK_LETTER || 'C'; // Usar 'C' por defecto si no se define en .env
+        let uploadPath = path.resolve(`${diskLetter}:`, __dirname, 'uploads'); // Construcción de ruta
 
-        console.log("DESTINATION DONE", uploadPath); // Verifica que la ruta sea correcta
+        // Normaliza la ruta para evitar duplicaciones en Windows
+        uploadPath = uploadPath.replace(/^([A-Z]:)\\\1\\/, '$1\\'); // Evita duplicaciones como "C:\\C:\\"
+        uploadPath = uploadPath.replace(/%20/g, ' '); // Reemplaza %20 por espacios
+        console.log("Letter asigned: ",diskLetter);
+        console.log("DESTINATION DONE", uploadPath);
 
         // Verificar si la carpeta 'uploads' existe, y si no, la crea
         if (!fs.existsSync(uploadPath)) {
             fs.mkdirSync(uploadPath, { recursive: true }); // Crea la carpeta si no existe
-        }
+}
 
         cb(null, uploadPath); // Ruta corregida no duplicada <-
     },
