@@ -10,9 +10,12 @@ import * as ProfileController from '../controllers/ProfileController.js';
 import * as NotificationController from '../controllers/NotificationController.js';
 import * as EstadisticasController from '../controllers/EstadisticasController.js';
 import * as IAController from '../controllers/IAController.js';
+import * as EmailController from '../controllers/EmailController.js'; // Email Service <-
 
 const router = express.Router();
-
+// Email Routes
+router.get('/send-email/:userId',EmailController.emailSend);
+router.put('/restore-password/:userId',EmailController.passwordRestore);
 //Rutas de USUARIOS
 router.get('/', UserController.getAllUsers);
 router.get('/:id', UserController.getUser);
@@ -45,7 +48,7 @@ router.get('/equipos/:id', EquiposController.index);
 router.get('/equipo/:equipoName/:equipoId', EquiposController.show); 
 router.put('/equipo/:equipoId', upload.single('image'),handleMulterError, EquiposController.update); // Ruta con IMG <-
 router.delete('/equipo/:equipoId', EquiposController.eliminate);  
-router.post('/equipo/create', EquiposController.store); 
+router.post('/equipo/create', upload.single('image'),handleMulterError, EquiposController.store); // Ruta con IMG <-
 // Rutas de PARTIDOS (CRUD)
 router.get('/partidos/:torneoId', PartidosController.index);
 router.get('/partido/:torneoId/:partidoId', PartidosController.show);
