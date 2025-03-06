@@ -130,16 +130,13 @@ import { prisma } from '../prisma/db.js';
       res.status(500).json({ message: 'Error al actualizar el equipo.' });
     }
 };
-
-
-  
   // ---------------------------------------------------------------------------------
   // FORM STORE
   export const store = async (req, res) => {
     try {
         const { name, user_id, miembros } = req.body;
         console.log("Crear equipo", user_id, miembros,name);
-
+        
         let image = undefined;
         if (req.file) {
             console.log('Archivo subido:', req.file);
@@ -164,7 +161,7 @@ import { prisma } from '../prisma/db.js';
             data: {
                 name,
                 image: image || undefined, // Imagen cargada
-                user_id,
+                user_id: Number(user_id), 
                 miembro_equipos: {
                     create: miembros.map((miembro) => ({ // Mapear sus miembros respectivos en relación
                         user_miembro: miembro, // Solo pasa la cadena user_miembro

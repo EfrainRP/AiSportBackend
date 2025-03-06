@@ -48,7 +48,7 @@ router.get('/equipos/:id', EquiposController.index);
 router.get('/equipo/:equipoName/:equipoId', EquiposController.show); 
 router.put('/equipo/:equipoId', upload.single('image'),handleMulterError, EquiposController.update); // Ruta con IMG <-
 router.delete('/equipo/:equipoId', EquiposController.eliminate);  
-router.post('/equipo/create', EquiposController.store); 
+router.post('/equipo/create', upload.single('image'),handleMulterError, EquiposController.store); // Ruta con IMG <-
 // Rutas de PARTIDOS (CRUD)
 router.get('/partidos/:torneoId', PartidosController.index);
 router.get('/partido/:torneoId/:partidoId', PartidosController.show);
