@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const port = process.env.PORT || 5000;
 
 const app = express();
 // Configuración del middleware para parsear cookies
@@ -25,7 +26,7 @@ app.use(
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"], // Permitir estilos en línea y Google Fonts
       fontSrc: ["'self'", "https://fonts.gstatic.com"], // Permitir fuentes de Google
       imgSrc: ["'self'", "data:", "https://img.icons8.com"], // Permitir imágenes locales, base64 y desde img.icons8.com
-      connectSrc: ["'self'", "https://aisport.com"], // Permitir conexiones a API externa
+      connectSrc: ["'self'", process.env.DOMAIN], // Permitir conexiones a API externa
       frameAncestors: ["'self'"], // Evita que el sitio sea embebido en iframes externos
       upgradeInsecureRequests: [], // Fuerza HTTPS
       formAction: ["'self'"], // Previene envío de formularios a dominios no autorizados
@@ -36,8 +37,11 @@ app.use(
 app.use( // Solicitudes CORS fuera de Testing <-
   cors({
     origin: process.env.NODE_ENV === "production"
-      ? ["https://aisport.com"] // Producción (Not available yet)
-      : ["http://localhost:3000"], // Dominiio de Desarrollo (React JS en puerto 3000)
+      ? [process.env.DOMAIN] // Producción (Not available yet)
+      : [process.env.FRONTPORT], // Dominiio de Desarrollo (React JS en puerto)
+    methods: "GET,POST,PUT,DELETE,OPTIONS",
+    allowedHeaders: "Content-Type,Authorization",
+    credentials: true, // Permite cookies y autenticación
   })
 );
 
@@ -56,8 +60,6 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.use('/sporthub/api', userRoutes); //Carga de rutas
 
 connect(); // Conecta a la base de datos
-
-const port = process.env.PORT || 5000;
 
 // Middleware para remover CSP en respuestas 404
 app.use((req, res, next) => {
@@ -102,12 +104,5 @@ app.listen(port, '0.0.0.0', () => {
 //  console.log(`Servidor corriendo en el puerto ${port}`);
 //});
 // Permitir todas las solicitudes CORS (comparticion de recursos a dominios externos y Testing)
-app.use(
-  cors({
-    origin: "*", // Cualquier domino accceso
-    methods: "GET,POST,PUT,DELETE",
-    allowedHeaders: "Content-Type,Authorization"
-  })
-);
 */
 
