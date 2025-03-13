@@ -37,7 +37,8 @@ app.use( // Solicitudes CORS fuera de Testing <-
   cors({
     origin: process.env.NODE_ENV === "production"
       ? ["https://aisport.com"] // Producción (Not available yet)
-      : ["http://localhost:3000"], // Dominiio de Desarrollo (React JS en puerto 3000)
+      : ["http://localhost:5173/sporthub/api"], // Dominio de Desarrollo (React JS en puerto 3000)
+      credentials: true, // Permite el uso de credenciales (cookies, cabeceras de autenticación)
   })
 );
 
