@@ -11,15 +11,16 @@ import * as NotificationController from '../controllers/NotificationController.j
 import * as EstadisticasController from '../controllers/EstadisticasController.js';
 import * as IAController from '../controllers/IAController.js';
 import * as EmailController from '../controllers/EmailController.js'; // Email Service <-
+import { loginLimiter } from '../utils/DoSLimit.js'; // DoSLimit Service <-
 
 const router = express.Router();
 // Email Routes
-router.get('/send-email/:userId',EmailController.emailSend);
-router.put('/restore-password/:userId',EmailController.passwordRestore);
+router.post('/send-email',EmailController.emailSend);
+router.put('/restore-password',EmailController.passwordRestore);
 //Rutas de USUARIOS
 router.get('/', UserController.getAllUsers);
 router.get('/:id', UserController.getUser);
-router.post('/login', UserController.loginUser); // Ruta para el inicio de sesión
+router.post('/login', loginLimiter, UserController.loginUser); // Only 5 attemepts every 5 minutes
 
 // Ruta de registro
 router.post('/register', UserController.registerUser);

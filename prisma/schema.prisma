@@ -24,6 +24,8 @@ model users {
   equipos                                    equipos[]
   notifications_notifications_user_idTousers notifications[] @relation("notifications_user_idTousers") // Habilitada
   torneos                                    torneos[]
+  resetPasswordToken                         String?   // Token para recuperar
+  resetPasswordExpires                       DateTime? // Fecha de expiración
   ai                                         AI[] // Relación inversa con AI 
 }
 
