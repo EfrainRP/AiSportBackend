@@ -11,34 +11,50 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+
 // Configuración del middleware para parsear cookies
 app.use(cookieParser());
+
+// Servir archivos estáticos desde la carpeta 'uploads' "imagenes" <-
+app.use('/sporthub/api/utils/uploads', cors({
+  origin: process.env.FRONTPORT,
+    credentials: true,
+  }),
+  (req, res, next) => {
+    res.setHeader("Cross-Origin-Resource-Policy", "cross-origin"); // Permitir acceso desde otros orígenes
+    next();
+  },
+  express.static(path.join(__dirname, 'utils/uploads')));
+
+app.use( // Solicitudes CORS fuera de Testing <-
+  cors({
+    origin:
+      process.env.NODE_ENV === "production"
+      ? [process.env.DOMAIN] // Producción (Not available yet)
+      : [process.env.FRONTPORT], // Dominio de Desarrollo (React JS en puerto 3000)
+      credentials: true, // Permite el uso de credenciales (cookies, cabeceras de autenticación)
+      methods: "GET, POST, PUT, DELETE",
+      allowedHeaders: "Content-Type, Authorization",
+  })
+);
 
 // Seguridad con Helmet (protege contra XSS, Clickjacking, Sniffing)
 app.use(helmet());
 app.use(
   helmet.contentSecurityPolicy({
     reportOnly: false, // No permitir reportes en CE 404
+    crossOriginResourcePolicy: { policy: "cross-origin" },
     directives: {
       defaultSrc: ["'self'"], // Solo permite contenido del mismo dominio
       scriptSrc: ["'self'", "https://apis.google.com"], // Permitir Google API y scripts inline
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"], // Permitir estilos en línea y Google Fonts
       fontSrc: ["'self'", "https://fonts.gstatic.com"], // Permitir fuentes de Google
-      imgSrc: ["'self'", "data:", "https://img.icons8.com"], // Permitir imágenes locales, base64 y desde img.icons8.com
-      connectSrc: ["'self'", "https://aisport.com"], // Permitir conexiones a API externa
+      imgSrc: ["'self'", "data:",`http://localhost:${process.env.PORT}`, process.env.FRONTPORT], // Permitir imágenes locales, base64
+      connectSrc: ["'self'", process.env.DOMAIN], // Permitir conexiones a API externa
       frameAncestors: ["'self'"], // Evita que el sitio sea embebido en iframes externos
       upgradeInsecureRequests: [], // Fuerza HTTPS
       formAction: ["'self'"], // Previene envío de formularios a dominios no autorizados
     }
-  })
-);
-
-app.use( // Solicitudes CORS fuera de Testing <-
-  cors({
-    origin: process.env.NODE_ENV === "production"
-      ? ["https://aisport.com"] // Producción (Not available yet)
-      : ["http://localhost:5173/sporthub/api"], // Dominio de Desarrollo (React JS en puerto 3000)
-      credentials: true, // Permite el uso de credenciales (cookies, cabeceras de autenticación)
   })
 );
 
@@ -48,9 +64,6 @@ app.use(express.json());
 app.use(helmet.noSniff());
 // Deshabilitar X-Powered-By (evita que se revele Express.js externamente)
 app.disable('x-powered-by');
-
-// Servir archivos estáticos desde la carpeta 'uploads' "imagenes" <-
-app.use('/sporthub/api/utils/uploads', express.static(path.join(__dirname, 'utils/uploads')));
 
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
@@ -111,4 +124,3 @@ app.use(
   })
 );
 */
-
