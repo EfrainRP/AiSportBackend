@@ -14,8 +14,8 @@ import * as EmailController from '../controllers/EmailController.js'; // Email S
 
 const router = express.Router();
 // Email Routes
-router.get('/send-email/:userId',EmailController.emailSend);
-router.put('/restore-password/:userId',EmailController.passwordRestore);
+router.post('/send-email',EmailController.emailSend);
+router.put('/restore-password',EmailController.passwordRestore);
 //Rutas de USUARIOS
 router.get('/', UserController.getAllUsers);
 router.get('/:id', UserController.getUser);

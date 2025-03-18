@@ -2,60 +2,118 @@ import { prisma } from '../prisma/db.js';
 import sgMail from '@sendgrid/mail';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 dotenv.config(); // Cargar las variables de entorno
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY); // API Key de SendGrid
 // Función para actualizar la nueva contraseña
 export const passwordRestore = async (req, res) => {
-    try {
-        const userId = parseInt(req.params.userId); // Obtiene el ID del usuario desde los parámetros de la URL
-        const { newPassword } = req.body; // Obtiene la nueva contraseña desde el cuerpo de la solicitud
-        console.log('Contraseña nueva: ',newPassword);
-        if (!newPassword) {
-            return res.status(400).json({ message: "La nueva contraseña es obligatoria." });
-        }
+  try {
+      const { email, token, newPassword, confirmPassword } = req.body; // Recibe el email directamente del body
 
-        // Generar un hash de la nueva contraseña
-        const saltRounds = 10;
-        const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+      console.log("Email y token recibido: ", email,token,newPassword,confirmPassword);
 
-        // Buscar el usuario en la base de datos y actualizar la contraseña
-        const user = await prisma.users.update({
-            where: { id: userId },
-            data: { password: hashedPassword }
-        });
-        
-        return res.status(200).json({ message: "Contraseña actualizada con éxito." });
+      // Validación de presencia
+      if (!email || !newPassword || !confirmPassword) {
+          return res.status(400).json({ message: "Todos los campos son obligatorios." });
+      }
 
-    } catch (error) {
-        console.error("Error al restaurar la contraseña:", error);
-        return res.status(500).json({ message: "Error interno del servidor." });
-    }
+      // Confirmación de contraseñas
+      if (newPassword !== confirmPassword) {
+          return res.status(400).json({ message: "Las contraseñas no coinciden." });
+      }
+
+      // Validación de longitud mínima
+      if (typeof newPassword !== 'string' || newPassword.length < 8) {
+          return res.status(400).json({ message: "La contraseña debe tener al menos 8 caracteres." });
+      }
+
+      // Buscar usuario por email y token válido
+      const user = await prisma.users.findFirst({
+          where: {
+              email: email, // Buscar por email
+              resetPasswordToken: token, // Comparar token recibido
+              resetPasswordExpires: {
+                  gte: new Date(), // Verificar que el token no haya expirado
+              },
+          },
+      });
+
+      // Validar existencia de usuario
+      if (!user) {
+          return res.status(400).json({ message: 'Token inválido, expirado o email incorrecto.' });
+      }
+
+      // Hash de la nueva contraseña
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+      // Actualización de contraseña y limpieza de token
+      await prisma.users.update({
+          where: { id: user.id },
+          data: {
+              password: hashedPassword,
+              resetPasswordToken: null, // Invalidar token
+              resetPasswordExpires: null // Limpiar expiración
+          }
+      });
+
+      console.log(`Contraseña actualizada para el usuario: ${email}`);
+      return res.status(200).json({ message: "Contraseña actualizada con éxito." });
+
+  } catch (error) {
+      console.error("Error al restaurar la contraseña:", error);
+      return res.status(500).json({ message: "Error interno del servidor." });
+  }
 };
 
 // Función para enviar el correo
 export const emailSend = async (req, res) => {
-    const userId = parseInt(req.params.userId); // Obtiene el ID del usuario desde los parámetros de la URL
-    const subject = "Recuperación de contraseña";
-    const text = "Todos los derechos reservados AiSport.";
-    console.log('Email');
+  const { email } = req.body; // Obtiene el email desde el body de la solicitud
+  const subject = "Recuperación de contraseña";
+  const text = "Todos los derechos reservados AiSport.";
+  console.log('📨 Intentando enviar correo a:', email);
+  
   try {
-    // Buscar el usuario en la base de datos usando el userId
-    const user = await prisma.users.findUnique({
-      where: { id: userId },
-    });
+      // Buscar el usuario en la base de datos usando el email
+      const user = await prisma.users.findUnique({
+          where: { email }, // Buscar por email
+      });
 
-    // Si no se encuentra el usuario, retornar un error
-    if (!user) {
-      return res.status(404).json({ error: 'Usuario no encontrado' });
-    }
+      // Si no se encuentra el usuario, retornar un error
+      if (!user) {
+          return res.status(404).json({ error: 'Sin coincidencias de correo' });
+      }
 
-    const userName = user.name;  // Obtener el nombre del usuario
+      // Generar token JWT temporal para seguridad en el email
+      const resetToken = jwt.sign(
+          { userId: user.id }, 
+          process.env.JWT_SECRET, 
+          { expiresIn: '1h' } // 1 hora de expiración
+      );
 
-    // Preparar el mensaje que se enviará
-    const msg = {
-        to: 'miguel.magana0967@alumnos.udg.mx',//user.email, // Correo del usuario (existente)
+      // Guardar token y expiración en la base de datos
+      await prisma.users.update({
+          where: { id: user.id },
+          data: {
+              resetPasswordToken: resetToken,
+              resetPasswordExpires: new Date(Date.now() + 60 * 60 * 1000), // 1 hora después
+          }
+      });
+
+      // Link dependiendo del entorno (producción o desarrollo)
+      const baseUrl = process.env.NODE_ENV === "production"
+          ? "https://aisport.com"
+          : "http://localhost:3000";
+
+      const resetLink = `${baseUrl}/reset-password?token=${resetToken}&email=${encodeURIComponent(user.email)}`;
+
+
+      const userName = user.name;  // Obtener el nombre del usuario
+
+      // Preparar el mensaje que se enviará
+      const msg = {
+        to: user.email, 
         from: 'sporthub2711@gmail.com',  // Remitente verificado en SendGrid <- (Gmail sporthub)
         subject: subject, // Asunto del correo
         html: `  <!-- Estilos en línea para correo HTML -->
@@ -175,8 +233,8 @@ export const emailSend = async (req, res) => {
               <p>Te enviamos este correo porque hemos recibido una solicitud para recuperar tu contraseña en AiSport.</p>
               <p><strong>Importante:</strong> Si no realizaste esta solicitud, puedes ignorar este mensaje.</p>
               <p>Para continuar con la recuperación de tu contraseña, por favor haz clic en el siguiente enlace:</p>
-              <a href="http://localhost:3000" class="recovery-btn">Recuperar Contraseña</a>
-              <p class="important">Recuerda, nunca compartas tu contraseña con nadie. Si tienes alguna duda o necesitas ayuda, no dudes en contactarnos.</p>
+              <a href="${resetLink}" class="recovery-btn">Recuperar Contraseña</a>
+              <p class="important">Recuerda, nunca compartas tu contraseña con nadie. Si tienes alguna duda o necesitas ayuda, no dudes en contactarnos, tu enlace expira en una hora.</p>
               <p>Gracias por ser parte de AiSport. ¡Te deseamos lo mejor en tu entrenamiento!</p>
             </div>
 
@@ -195,10 +253,12 @@ export const emailSend = async (req, res) => {
       await sgMail.send(msg);
       
 
-    console.log('📧 Correo enviado con éxito a:', user.email);
-    res.json({ message: '📧 Correo enviado con éxito' });
+    console.log('📧 Correo enviado con éxito con Token: ', user.email,resetToken);
+    return res.json({ message: '📧 Correo enviado con éxito' });
   } catch (error) {
+    
+    console.error(process.env.SENDGRID_API_KEY);
     console.error('❌ Error al enviar el correo:', error.response?.body || error);
-    res.status(500).json({ error: 'Error al enviar el correo' });
+    return res.status(500).json({ error: 'Error al enviar el correo' });
   }
 };

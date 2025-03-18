@@ -20,7 +20,6 @@ DATABASE_URL=mysql://root:yxuUGeyyfCalXwTLIwkmhiRavFjxnYQw@yamanote.proxy.rlwy.n
 NODE_ENV = local #WEB MODE
 FRONTPORT = http://localhost:5173
 DOMAIN = https://aisport.com
-SENDGRID_API_KEY = SG.SwUWgAyNR-SADcgB4A9S-g.h6fmc8oGWgc9VD3q2q6WTP1LgVgddwnIZc2m9LwFV5o
 
 ------------------------------------------------------
 Se necesita reemplazar la raiz, ya sea de C:\\ a E:\\
