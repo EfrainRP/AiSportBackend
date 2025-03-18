@@ -39,11 +39,35 @@ app.use( // Solicitudes CORS fuera de Testing <-
   })
 );
 
+// Servir archivos estáticos desde la carpeta 'uploads' "imagenes" <-
+app.use('/sporthub/api/utils/uploads', cors({
+  origin: process.env.FRONTPORT,
+    credentials: true,
+  }),
+  (req, res, next) => {
+    res.setHeader("Cross-Origin-Resource-Policy", "cross-origin"); // Permitir acceso desde otros orígenes
+    next();
+  },
+  express.static(path.join(__dirname, 'utils/uploads')));
+
+app.use( // Solicitudes CORS fuera de Testing <-
+  cors({
+    origin:
+      process.env.NODE_ENV === "production"
+      ? [process.env.DOMAIN] // Producción (Not available yet)
+      : [process.env.FRONTPORT], // Dominio de Desarrollo (React JS en puerto 3000)
+      credentials: true, // Permite el uso de credenciales (cookies, cabeceras de autenticación)
+      methods: "GET, POST, PUT, DELETE",
+      allowedHeaders: "Content-Type, Authorization",
+  })
+);
+
 // Seguridad con Helmet (protege contra XSS, Clickjacking, Sniffing)
 app.use(helmet());
 app.use(
   helmet.contentSecurityPolicy({
     reportOnly: false, // No permitir reportes en CE 404
+    crossOriginResourcePolicy: { policy: "cross-origin" },
     crossOriginResourcePolicy: { policy: "cross-origin" },
     directives: {
       defaultSrc: ["'self'"], // Solo permite contenido del mismo dominio
@@ -67,8 +91,8 @@ app.use(
 app.use( // Solicitudes CORS fuera de Testing <-
   cors({
     origin: process.env.NODE_ENV === "production"
-      ? [process.env.DOMAIN] // Producción (Not available yet)
-      : [`http://localhost:${process.env.PORT}`], // Dominiio de Desarrollo (React JS en puerto 3000)
+      ? ["https://aisport.com"] // Producción (Not available yet)
+      : ["http://localhost:3000"], // Dominiio de Desarrollo (React JS en puerto 3000)
   })
 );
 
@@ -128,4 +152,12 @@ app.listen(port, '0.0.0.0', () => {
 //  console.log(`Servidor corriendo en el puerto ${port}`);
 //});
 // Permitir todas las solicitudes CORS (comparticion de recursos a dominios externos y Testing)
+app.use(
+  cors({
+    origin: "*", // Cualquier domino accceso
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type,Authorization"
+  })
+);
 */
+
