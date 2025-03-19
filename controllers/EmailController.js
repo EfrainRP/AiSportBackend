@@ -103,8 +103,8 @@ export const emailSend = async (req, res) => {
 
       // Link dependiendo del entorno (producción o desarrollo)
       const baseUrl = process.env.NODE_ENV === "production"
-          ? "https://aisport.com"
-          : "http://localhost:3000";
+          ? process.env.DOMAIN
+          : `http://localhost:${process.env.PORT}`;
 
       const resetLink = `${baseUrl}/reset-password?token=${resetToken}&email=${encodeURIComponent(user.email)}`;
 
