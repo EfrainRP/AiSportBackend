@@ -104,7 +104,7 @@ export const emailSend = async (req, res) => {
       // Link dependiendo del entorno (producción o desarrollo)
       const baseUrl = process.env.NODE_ENV === "production"
           ? process.env.DOMAIN
-          : `http://localhost:${process.env.PORT}`;
+          : process.env.FRONTPORT;
 
       const resetLink = `${baseUrl}/reset-password?token=${resetToken}&email=${encodeURIComponent(user.email)}`;
 
@@ -254,6 +254,7 @@ export const emailSend = async (req, res) => {
       
 
     console.log('📧 Correo enviado con éxito con Token: ', user.email,resetToken);
+    console.log("🔗 Enlace de recuperación generado:", resetLink);
     return res.json({ message: '📧 Correo enviado con éxito' });
   } catch (error) {
     
