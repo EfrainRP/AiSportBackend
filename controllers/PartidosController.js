@@ -1,23 +1,141 @@
 import { prisma } from '../prisma/db.js';
 
+import bracket4Teams from "../utils/BracketsStructure/bracket_4_teams.json" with { type: "json" };
+import bracket8Teams from "../utils/BracketsStructure/bracket_8_teams.json" with { type: "json" };
+import bracket16Teams from "../utils/BracketsStructure/bracket_16_teams.json" with { type: "json" };
+import bracket32Teams from "../utils/BracketsStructure/bracket_32_teams.json" with { type: "json" };
+
 // Index <- 
 export const index = async (req, res) => {
   const torneoId = parseInt(req.params.torneoId); // Obtiene torneoId desde los parámetros de la URL
 
   try {
     // Consulta para obtener los partidos del torneo
-    const partidos = await prisma.partidos.findMany({
+    let cantEquipoTorneo = await prisma.torneos.findFirst({
+      where:{
+        id: torneoId
+      },
+      select:{
+        cantEquipo: true,
+      }
+    });
+
+    let partidos = await prisma.partidos.findMany({
       where: {
         torneo_id: torneoId, // Filtrar los partidos por el torneoId
+      },
+      orderBy:{
+        ordenPartido: 'asc',
       },
       include: {
         equipos_partidos_equipoLocal_idToequipos: true, // Incluye los campos del equipo local
         equipos_partidos_equipoVisitante_idToequipos: true, // Incluye los campos del equipo visitante
+        // siguiente_partido: true, // Incluye los campos del equipo visitante
       },
     });
 
+    //Selector de brackets
+    let bracket = [];
+
+    switch(cantEquipoTorneo.cantEquipo){
+      case 4:
+        bracket = bracket4Teams;
+        break;
+        
+      case 8:
+        bracket = bracket8Teams;
+        break;
+        
+      case 16:
+        bracket = bracket16Teams;
+        break;
+        
+      case 32:
+        bracket = bracket32Teams;
+      break;
+    }
+
+    const partidosCount = partidos? partidos.length : 0;
+    for(let i = 0; i < partidosCount; i++){
+      let partido = partidos[i];
+      let index = partido.ordenPartido?? i;
+
+      let nameParty = null;
+      if (partido.equipos_partidos_equipoLocal_idToequipos?.name != null || partido.equipos_partidos_equipoVisitante_idToequipos?.name != null){
+        nameParty = `${partido.equipos_partidos_equipoLocal_idToequipos?.name} vs ${partido.equipos_partidos_equipoVisitante_idToequipos?.name}`;
+      }
+
+      bracket[index] = {
+        ...bracket[index],
+        name: nameParty,
+        fechaPartido: new Date(partido.fechaPartido).toLocaleDateString(),
+        horaPartido: new Date(partido.horaPartido).toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true,
+          }),
+        jornada: new Date(partido.jornada).toLocaleDateString(),
+        myIdMatch: partido.id,
+        participants: [
+          {
+            id: partido.equipoVisitante_id,
+            resultText: partido.resVisitante.toString(),
+            isWinner: partido.resVisitante > partido.resLocal,
+            // status: "PLAYED",
+            name: partido.equipos_partidos_equipoVisitante_idToequipos?.name || ''
+          },
+          {
+            id: partido.equipoLocal_id,
+            resultText: partido.resLocal.toString() ,
+            isWinner: partido.resLocal > partido.resVisitante,
+            // status: "PLAYED",
+            name: partido.equipos_partidos_equipoLocal_idToequipos?.name || ''
+          }
+        ]
+      };
+    }
+    //Ciclo original de brackets
+    // for (let i = 0; i <= bracket.length - 1; i++) {
+    //   let partido = partidos[i];
+    //   if (!partido) break; // Sale del ciclo si el partido del indice esta vacio
+
+    //   let nameParty = null;
+    //   if (partido.equipos_partidos_equipoLocal_idToequipos?.name != null || partido.equipos_partidos_equipoVisitante_idToequipos?.name != null){
+    //     nameParty = `${partido.equipos_partidos_equipoLocal_idToequipos?.name} vs ${partido.equipos_partidos_equipoVisitante_idToequipos?.name}`;
+    //   }
+
+    //   bracket[i] = {
+    //     ...bracket[i],
+    //     name: nameParty,
+    //     fechaPartido: new Date(partido.fechaPartido).toLocaleDateString(),
+    //     horaPartido: new Date(partido.horaPartido).toLocaleTimeString([], {
+    //         hour: '2-digit',
+    //         minute: '2-digit',
+    //         hour12: true,
+    //       }),
+    //     jornada: new Date(partido.jornada).toLocaleDateString(),
+    //     myIdMatch: partido.id,
+    //     participants: [
+    //       {
+    //         id: partido.equipoVisitante_id,
+    //         resultText: partido.resVisitante.toString(),
+    //         isWinner: partido.resVisitante > partido.resLocal,
+    //         // status: "PLAYED",
+    //         name: partido.equipos_partidos_equipoVisitante_idToequipos?.name || ''
+    //       },
+    //       {
+    //         id: partido.equipoLocal_id,
+    //         resultText: partido.resLocal.toString() ,
+    //         isWinner: partido.resLocal > partido.resVisitante,
+    //         // status: "PLAYED",
+    //         name: partido.equipos_partidos_equipoLocal_idToequipos?.name || ''
+    //       }
+    //     ]
+    //   };
+    // }
+
     // Responder con la lista de partidos
-    res.status(200).json(partidos);
+    res.status(200).json({brackets:bracket, getPartidosCount: partidosCount});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error al obtener los partidos", error });

@@ -1,0 +1,405 @@
+[
+  {
+    "id": 1,
+    "tournamentRoundText": "1",
+    "nextMatchId": 17,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 2,
+    "tournamentRoundText": "1",
+    "nextMatchId": 17,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 3,
+    "tournamentRoundText": "1",
+    "nextMatchId": 18,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 4,
+    "tournamentRoundText": "1",
+    "nextMatchId": 18,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 5,
+    "tournamentRoundText": "1",
+    "nextMatchId": 19,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 6,
+    "tournamentRoundText": "1",
+    "nextMatchId": 19,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 7,
+    "tournamentRoundText": "1",
+    "nextMatchId": 20,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 8,
+    "tournamentRoundText": "1",
+    "nextMatchId": 20,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 9,
+    "tournamentRoundText": "1",
+    "nextMatchId": 21,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 10,
+    "tournamentRoundText": "1",
+    "nextMatchId": 21,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 11,
+    "tournamentRoundText": "1",
+    "nextMatchId": 22,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 12,
+    "tournamentRoundText": "1",
+    "nextMatchId": 22,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 13,
+    "tournamentRoundText": "1",
+    "nextMatchId": 23,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 14,
+    "tournamentRoundText": "1",
+    "nextMatchId": 23,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 15,
+    "tournamentRoundText": "1",
+    "nextMatchId": 24,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 16,
+    "tournamentRoundText": "1",
+    "nextMatchId": 24,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 17,
+    "tournamentRoundText": "2",
+    "nextMatchId": 25,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 18,
+    "tournamentRoundText": "2",
+    "nextMatchId": 25,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 19,
+    "tournamentRoundText": "2",
+    "nextMatchId": 26,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 20,
+    "tournamentRoundText": "2",
+    "nextMatchId": 26,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 21,
+    "tournamentRoundText": "2",
+    "nextMatchId": 27,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 22,
+    "tournamentRoundText": "2",
+    "nextMatchId": 27,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 23,
+    "tournamentRoundText": "2",
+    "nextMatchId": 28,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 24,
+    "tournamentRoundText": "2",
+    "nextMatchId": 28,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 25,
+    "tournamentRoundText": "3",
+    "nextMatchId": 29,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 26,
+    "tournamentRoundText": "3",
+    "nextMatchId": 29,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 27,
+    "tournamentRoundText": "3",
+    "nextMatchId": 30,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 28,
+    "tournamentRoundText": "3",
+    "nextMatchId": 30,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 29,
+    "tournamentRoundText": "4",
+    "nextMatchId": 31,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 30,
+    "tournamentRoundText": "4",
+    "nextMatchId": 31,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  },
+  {
+    "id": 31,
+    "tournamentRoundText": "5",
+    "nextMatchId": null,
+    "name": "TBD",
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",""
+    ]
+  }
+]
