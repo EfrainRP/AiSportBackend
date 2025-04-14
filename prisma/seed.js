@@ -87,7 +87,8 @@ async function main() {
                     resVisitante: data.resVisitante,
                     equipoLocal_id: data.equipoLocal_id,
                     equipoVisitante_id: data.equipoVisitante_id,
-                    torneo_id: data.torneo_id
+                    torneo_id: data.torneo_id,
+                    ordenPartido: data.ordenPartido?? null
                 }
             })
         }
