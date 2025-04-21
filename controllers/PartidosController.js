@@ -1,9 +1,5 @@
 import { prisma } from '../prisma/db.js';
-
-import bracket4Teams from "../utils/BracketsStructure/bracket_4_teams.json" with { type: "json" };
-import bracket8Teams from "../utils/BracketsStructure/bracket_8_teams.json" with { type: "json" };
-import bracket16Teams from "../utils/BracketsStructure/bracket_16_teams.json" with { type: "json" };
-import bracket32Teams from "../utils/BracketsStructure/bracket_32_teams.json" with { type: "json" };
+import {brackets} from "../utils/formatBracket.js";
 
 // Index <- 
 export const index = async (req, res) => {
@@ -11,20 +7,20 @@ export const index = async (req, res) => {
 
   try {
     // Consulta para obtener los partidos del torneo
-    let cantEquipoTorneo = await prisma.torneos.findFirst({
-      where:{
+    const cantEquipoTorneo = await prisma.torneos.findFirst({
+      where: {
         id: torneoId
       },
-      select:{
+      select: {
         cantEquipo: true,
       }
     });
 
-    let partidos = await prisma.partidos.findMany({
+    const partidos = await prisma.partidos.findMany({
       where: {
         torneo_id: torneoId, // Filtrar los partidos por el torneoId
       },
-      orderBy:{
+      orderBy: {
         ordenPartido: 'asc',
       },
       include: {
@@ -33,109 +29,13 @@ export const index = async (req, res) => {
         // siguiente_partido: true, // Incluye los campos del equipo visitante
       },
     });
+    // console.log(partidos);
+    
+    const bracket = brackets(partidos, cantEquipoTorneo.cantEquipo);
 
-    //Selector de brackets
-    let bracket = [];
-
-    switch(cantEquipoTorneo.cantEquipo){
-      case 4:
-        bracket = bracket4Teams;
-        break;
-        
-      case 8:
-        bracket = bracket8Teams;
-        break;
-        
-      case 16:
-        bracket = bracket16Teams;
-        break;
-        
-      case 32:
-        bracket = bracket32Teams;
-      break;
-    }
-
-    const partidosCount = partidos? partidos.length : 0;
-    for(let i = 0; i < partidosCount; i++){
-      let partido = partidos[i];
-      let index = partido.ordenPartido?? i;
-
-      let nameParty = null;
-      if (partido.equipos_partidos_equipoLocal_idToequipos?.name != null || partido.equipos_partidos_equipoVisitante_idToequipos?.name != null){
-        nameParty = `${partido.equipos_partidos_equipoLocal_idToequipos?.name} vs ${partido.equipos_partidos_equipoVisitante_idToequipos?.name}`;
-      }
-
-      bracket[index] = {
-        ...bracket[index],
-        name: nameParty,
-        fechaPartido: new Date(partido.fechaPartido).toLocaleDateString(),
-        horaPartido: new Date(partido.horaPartido).toLocaleTimeString([], {
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: true,
-          }),
-        jornada: new Date(partido.jornada).toLocaleDateString(),
-        myIdMatch: partido.id,
-        participants: [
-          {
-            id: partido.equipoVisitante_id,
-            resultText: partido.resVisitante.toString(),
-            isWinner: partido.resVisitante > partido.resLocal,
-            // status: "PLAYED",
-            name: partido.equipos_partidos_equipoVisitante_idToequipos?.name || ''
-          },
-          {
-            id: partido.equipoLocal_id,
-            resultText: partido.resLocal.toString() ,
-            isWinner: partido.resLocal > partido.resVisitante,
-            // status: "PLAYED",
-            name: partido.equipos_partidos_equipoLocal_idToequipos?.name || ''
-          }
-        ]
-      };
-    }
-    //Ciclo original de brackets
-    // for (let i = 0; i <= bracket.length - 1; i++) {
-    //   let partido = partidos[i];
-    //   if (!partido) break; // Sale del ciclo si el partido del indice esta vacio
-
-    //   let nameParty = null;
-    //   if (partido.equipos_partidos_equipoLocal_idToequipos?.name != null || partido.equipos_partidos_equipoVisitante_idToequipos?.name != null){
-    //     nameParty = `${partido.equipos_partidos_equipoLocal_idToequipos?.name} vs ${partido.equipos_partidos_equipoVisitante_idToequipos?.name}`;
-    //   }
-
-    //   bracket[i] = {
-    //     ...bracket[i],
-    //     name: nameParty,
-    //     fechaPartido: new Date(partido.fechaPartido).toLocaleDateString(),
-    //     horaPartido: new Date(partido.horaPartido).toLocaleTimeString([], {
-    //         hour: '2-digit',
-    //         minute: '2-digit',
-    //         hour12: true,
-    //       }),
-    //     jornada: new Date(partido.jornada).toLocaleDateString(),
-    //     myIdMatch: partido.id,
-    //     participants: [
-    //       {
-    //         id: partido.equipoVisitante_id,
-    //         resultText: partido.resVisitante.toString(),
-    //         isWinner: partido.resVisitante > partido.resLocal,
-    //         // status: "PLAYED",
-    //         name: partido.equipos_partidos_equipoVisitante_idToequipos?.name || ''
-    //       },
-    //       {
-    //         id: partido.equipoLocal_id,
-    //         resultText: partido.resLocal.toString() ,
-    //         isWinner: partido.resLocal > partido.resVisitante,
-    //         // status: "PLAYED",
-    //         name: partido.equipos_partidos_equipoLocal_idToequipos?.name || ''
-    //       }
-    //     ]
-    //   };
-    // }
-
+    // console.log(bracket);
     // Responder con la lista de partidos
-    res.status(200).json({brackets:bracket, getPartidosCount: partidosCount});
+    res.status(200).json({ brackets: bracket, getPartidosCount: partidos.length, cantEquipoTorneo: cantEquipoTorneo.cantEquipo });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error al obtener los partidos", error });
@@ -145,7 +45,7 @@ export const index = async (req, res) => {
 // Show <- 
 export const show = async (req, res) => {
   const { torneoId, partidoId } = req.params; // Obtener torneoId y partidoId de la URL
-  console.log("Show ",torneoId,partidoId)
+  console.log("Show ", torneoId, partidoId)
   try {
     // Obtiene el partido específico basado en torneoId y partidoId
     const partido = await prisma.partidos.findFirst({
@@ -175,230 +75,11 @@ export const show = async (req, res) => {
 
 //---------------------------------------------------------------------------------------
 // Update <- 
-  export const update = async (req, res) => {
-    const { torneoId,partidoId } = req.params;
-    const { equipoLocalId, equipoVisitanteId, horaPartido, fechaPartido, jornada, resLocal, resVisitante } = req.body;
-    console.log("Datos del partido",resLocal,resVisitante)
+export const update = async (req, res) => {
+  const { torneoId, partidoId } = req.params;
+  const { equipoLocalId, equipoVisitanteId, horaPartido, fechaPartido, jornada, resLocal, resVisitante, ordenPartido } = req.body;
+  console.log("Datos del partido", resLocal, resVisitante, ordenPartido)
 
-    try {
-      // Validación de existencia del torneo
-      const torneo = await prisma.torneos.findUnique({
-        where: { id: Number(torneoId) },
-      });
-  
-      if (!torneo) {
-        return res.status(404).json({ field: 'torneoId', message: 'El torneo especificado no existe.' });
-      }
-       
-       // Validación de si los equipos ya jugaron entre sí
-       const partidoExistente = await prisma.partidos.findFirst({
-        where: {
-          torneo_id: Number(torneoId),
-          OR: [
-            { equipoLocal_id: Number(equipoLocalId), equipoVisitante_id: Number(equipoVisitanteId) },
-            { equipoLocal_id: Number(equipoVisitanteId), equipoVisitante_id: Number(equipoLocalId) },
-          ],
-        },
-      });
-      // Validacion si los equipos a editar son los mismos o distintos
-      const equiposExistentes = await prisma.partidos.findFirst({
-        where: { id: Number(partidoId) },
-      });
-
-      // Validacion si el partido a editar es el ultimo (mas reciente) o no
-      // En caso de no serlo, no se le permite cambiar de equipos al modificar la estructura del torneo de partidos ya posteriores <-
-      const ultimoPartido = await prisma.partidos.findFirst({
-        where: { torneo_id: Number(torneoId) },    // Filtramos por torneo_id
-        orderBy: { id: 'desc' }, // Ordenamos por fecha de manera descendente (más reciente primero)
-      });
-      // Valida si los equipos ya han tenido un partido, o si son del partido más reciente del torneo <-
-      if(equiposExistentes.equipoLocal_id != equipoLocalId || equiposExistentes.equipoVisitante_id != equipoVisitanteId){
-        //console.log("Distintos")
-    
-        // Paso 2: Verificar si el partidoId corresponde al último partido
-        if (ultimoPartido.id !== Number(partidoId)) {
-          console.log("PARTIDO NO ES EL MAS RECIENTE ")
-          return res.status(400).json({ 
-            field: 'partido', 
-            message: 'No es posible cambiar los equipos de un partido que no es el más reciente del torneo.' 
-          });
-        } // Si los dos equipos ya han tenido un partido antes 
-        if (partidoExistente) {
-          return res.status(400).json({ 
-            field: 'equipo', 
-            message: 'Los equipos ya han tenido un partido en este torneo.' 
-          });
-        }
-      }else{
-        console.log("IGUALES")
-      }
-      // Valida si se actualizan los resultados del partido mas reciente o no <-
-      if(equiposExistentes.resLocal != resLocal || equiposExistentes.resVisitante != resVisitante){
-        if (ultimoPartido.id !== Number(partidoId)) {
-          console.log("PARTIDO NO ES EL MAS RECIENTE ")
-          return res.status(400).json({ 
-            field: 'partido', 
-            message: 'No es posible cambiar los resultados de un partido que no es el más reciente del torneo.' 
-          });
-        }
-      }
-      
-      // Validar campos nulos o vacíos
-      if (!equipoLocalId) return res.status(400).json({ field: 'equipo', message: 'Los equipos son obligatorios.' });
-      if (!equipoVisitanteId) return res.status(400).json({ field: 'equipo', message: 'Los equipos son obligatorios.' });
-      if (!horaPartido) return res.status(400).json({ field: 'horaPartido', message: 'La hora del partido es obligatoria.' });
-      if (!fechaPartido) return res.status(400).json({ field: 'fechaPartido', message: 'La fecha de partido es obligatoria.' });
-      if (!jornada) return res.status(400).json({ field: 'jornada', message: 'La jornada es obligatoria.' });
-      if (!resLocal === '' || resLocal < 0) return res.status(400).json({ field: 'resLocal', message: 'El resultado del equipo local debe ser mayor o igual a 0.' });
-      if (!resVisitante === '' || resVisitante < 0) return res.status(400).json({ field: 'resVisitante', message: 'El resultado del equipo visitante debe ser mayor o igual a 0.' });
-
-      // Calcular el número máximo de partidos posibles
-      const partidosPosibles = torneo.cantEquipo-1;
-  
-      // Obtener la cantidad de partidos ya creados para este torneo
-      const partidosCreados = await prisma.partidos.count({
-        where: {
-          torneo_id: torneo.id,
-        },
-      });
-      
-      // Validación de si se han creado todos los partidos posibles
-      if (partidosCreados >= partidosPosibles) {
-        return res.status(400).json({ field: 'cantPartidos', message: 'Ya se han creado todos los partidos posibles para este torneo.' });
-      }
-  
-      // Validación de equipo visitante y local
-      if (equipoLocalId === equipoVisitanteId) {
-        return res.status(400).json({ field: 'equipo', message: 'El equipo local y visitante no pueden ser el mismo.' });
-      }
-  
-      // Validación de fechaPartido a un formato válido
-      const parsedFechaPartido = new Date(fechaPartido);
-      if (isNaN(parsedFechaPartido.getTime())) {
-        return res.status(400).json({ field: 'fechaPartido', message: 'La fecha del partido no es válida.' });
-      }
-  
-      // Validación de fechaPartido dentro de las fechas del torneo
-      if (parsedFechaPartido < torneo.fechaInicio || parsedFechaPartido > torneo.fechaFin) {
-        return res.status(400).json({ 
-          field: 'fechaPartido', 
-          message: `La fecha del partido está fuera del rango del torneo. Las fechas válidas son desde ${torneo.fechaInicio.toISOString().split('T')[0]} hasta ${torneo.fechaFin.toISOString().split('T')[0]}.`
-        });
-      }
-  
-      // Validación de jornada como fecha
-      const parsedJornada = new Date(jornada);
-      if (isNaN(parsedJornada.getTime())) {
-        return res.status(400).json({ field: 'jornada', message: 'La jornada no es una fecha válida.' });
-      }
-  
-      // Validación de jornada dentro del rango del torneo
-      if (parsedJornada < torneo.fechaInicio || parsedJornada > torneo.fechaFin) {
-        return res.status(400).json({ 
-          field: 'jornada', 
-          message: `La jornada está fuera del rango del torneo. Las fechas válidas son desde ${torneo.fechaInicio.toISOString().split('T')[0]} hasta ${torneo.fechaFin.toISOString().split('T')[0]}.`
-        });
-      }
-  
-      // Validación de equipoLocalId y equipoVisitanteId
-      if (!equipoLocalId || !equipoVisitanteId) {
-        return res.status(400).json({ field: 'equipo', message: 'Los IDs de los equipos local y visitante son obligatorios.' });
-      }
-  
-      // Validación de horaPartido como formato
-      if (!horaPartido || !/^\d{2}:\d{2}(:\d{2})?$/.test(horaPartido)) {
-        return res.status(400).json({ field: 'horaPartido', message: 'La hora del partido no es válida. Debe tener formato HH:mm o HH:mm:ss.' });
-      }
-  
-      // Convertir horaPartido en un formato válido (ISO 8601)
-      const formattedHoraPartido = new Date(`${fechaPartido}T${horaPartido}:00`);
-  
-      if (isNaN(formattedHoraPartido.getTime())) {
-        return res.status(400).json({ field: 'horaPartido', message: 'La hora del partido no es válida.' });
-      }
-      // Actualizacion del partido y sus estadisticas mas recientes <-
-      await prisma.$transaction(async (prisma) => {
-        // Actualización del partido
-        const partido = await prisma.partidos.update({
-          where: { id: Number(partidoId) },
-          data: {
-            torneo_id: Number(torneoId),
-            equipoLocal_id: Number(equipoLocalId),
-            equipoVisitante_id: Number(equipoVisitanteId),
-            horaPartido: formattedHoraPartido,
-            fechaPartido: parsedFechaPartido,
-            jornada: parsedJornada,
-            resLocal: Number(resLocal),
-            resVisitante: Number(resVisitante),
-          },
-        });
-  
-        // Encuentra y actualiza la estadística más reciente del Equipo Local
-        const latestLocalStat = await prisma.estadisticas.findFirst({
-          where: {
-            torneo_id: Number(torneoId),
-            equipo_id: Number(equipoLocalId),
-          },
-          orderBy: {
-            id: 'desc', // Ordenar por ID de mayor a menor
-          },
-        });
-  
-        if (latestLocalStat) {
-          await prisma.estadisticas.update({
-            where: {
-              id: latestLocalStat.id, // Actualiza la estadística más reciente
-            },
-            data: {
-              PT: Number(resLocal), // Puntos del equipo local
-              CA: 0,
-              DC: 0,
-              CC: 0,
-            },
-          });
-        }
-  
-        // Encuentra y actualiza la estadística más reciente del Equipo Visitante
-        const latestVisitorStat = await prisma.estadisticas.findFirst({
-          where: {
-            torneo_id: Number(torneoId),
-            equipo_id: Number(equipoVisitanteId),
-          },
-          orderBy: {
-            id: 'desc', // Ordenar por ID de mayor a menor
-          },
-        });
-  
-        if (latestVisitorStat) {
-          await prisma.estadisticas.update({
-            where: {
-              id: latestVisitorStat.id, // Actualiza la estadística más reciente
-            },
-            data: {
-              PT: Number(resVisitante), // Puntos del equipo visitante
-              CA: 0,
-              DC: 0,
-              CC: 0,
-            },
-          });
-        }
-
-        res.status(200).json({
-          message: 'Partido y estadísticas más recientes actualizados correctamente',
-          partido,
-        });
-      });
-    } catch (error) {
-      console.error('Error al actualizar el partido:', error);
-      res.status(500).json({ error: 'Hubo un error al actualizar el partido.' });
-    }
-  }
-//--------------------------------------------------------------------------------------------
-// STORE CREATE <-  
-export const store = async (req, res) => {
-  const { torneoId } = req.params;
-  const { equipoLocalId, equipoVisitanteId, horaPartido, fechaPartido, jornada, resLocal, resVisitante } = req.body;
-  console.log("Datos del partido",torneoId,equipoLocalId,equipoVisitanteId)
   try {
     // Validación de existencia del torneo
     const torneo = await prisma.torneos.findUnique({
@@ -409,35 +90,70 @@ export const store = async (req, res) => {
       return res.status(404).json({ field: 'torneoId', message: 'El torneo especificado no existe.' });
     }
 
-     // Validar campos nulos o vacíos
-     if (!equipoLocalId) return res.status(400).json({ field: 'equipo', message: 'Los equipos son obligatorios.' });
-     if (!equipoVisitanteId) return res.status(400).json({ field: 'equipo', message: 'Los equipos son obligatorios.' });
-     if (!horaPartido) return res.status(400).json({ field: 'horaPartido', message: 'La hora del partido es obligatoria.' });
-     if (!fechaPartido) return res.status(400).json({ field: 'fechaPartido', message: 'La fecha de partido es obligatoria.' });
-     if (!jornada) return res.status(400).json({ field: 'jornada', message: 'La jornada es obligatoria.' });
-     if (!resLocal === '' || resLocal < 0) return res.status(400).json({ field: 'resLocal', message: 'El resultado del equipo local debe ser mayor o igual a 0.' });
-     if (!resVisitante === '' || resVisitante < 0) return res.status(400).json({ field: 'resVisitante', message: 'El resultado del equipo visitante debe ser mayor o igual a 0.' });
-     
-     // Validación de si los equipos ya jugaron entre sí
-     const partidoExistente = await prisma.partidos.findFirst({
-      where: {
-        torneo_id: Number(torneoId),
-        OR: [
-          { equipoLocal_id: Number(equipoLocalId), equipoVisitante_id: Number(equipoVisitanteId) },
-          { equipoLocal_id: Number(equipoVisitanteId), equipoVisitante_id: Number(equipoLocalId) },
-        ],
-      },
+    // Validación de si los equipos ya jugaron entre sí
+    // const partidoExistente = await prisma.partidos.findFirst({
+    //   where: {
+    //     torneo_id: Number(torneoId),
+    //     OR: [
+    //       { equipoLocal_id: Number(equipoLocalId), equipoVisitante_id: Number(equipoVisitanteId) },
+    //       { equipoLocal_id: Number(equipoVisitanteId), equipoVisitante_id: Number(equipoLocalId) },
+    //     ],
+    //   },
+    // });
+    // Validacion si los equipos a editar son los mismos o distintos
+    const equiposExistentes = await prisma.partidos.findFirst({
+      where: { id: Number(partidoId) },
     });
 
-    if (partidoExistente) {
-      return res.status(400).json({ 
-        field: 'equipo', 
-        message: 'Los equipos ya han tenido un partido en este torneo.' 
-      });
+    // Validacion si el partido a editar es el ultimo (mas reciente) o no
+    // En caso de no serlo, no se le permite cambiar de equipos al modificar la estructura del torneo de partidos ya posteriores <-
+    const ultimoPartido = await prisma.partidos.findFirst({
+      where: { torneo_id: Number(torneoId) },    // Filtramos por torneo_id
+      orderBy: { id: 'desc' }, // Ordenamos por fecha de manera descendente (más reciente primero)
+    });
+    // Valida si los equipos ya han tenido un partido, o si son del partido más reciente del torneo <-
+    if (equiposExistentes.equipoLocal_id != equipoLocalId || equiposExistentes.equipoVisitante_id != equipoVisitanteId) {
+      //console.log("Distintos")
+
+      // Paso 2: Verificar si el partidoId corresponde al último partido
+      if (ultimoPartido.id !== Number(partidoId)) {
+        console.log("PARTIDO NO ES EL MAS RECIENTE ")
+        return res.status(400).json({
+          field: 'partido',
+          message: 'No es posible cambiar los equipos de un partido que no es el más reciente del torneo.'
+        });
+      } // Si los dos equipos ya han tenido un partido antes 
+      // if (partidoExistente) {
+      //   return res.status(400).json({
+      //     field: 'equipo',
+      //     message: 'Los equipos ya han tenido un partido en este torneo.'
+      //   });
+      // }
+    } else {
+      console.log("IGUALES")
+    }
+    // Valida si se actualizan los resultados del partido mas reciente o no <-
+    if (equiposExistentes.resLocal != resLocal || equiposExistentes.resVisitante != resVisitante) {
+      if (ultimoPartido.id !== Number(partidoId)) {
+        console.log("PARTIDO NO ES EL MAS RECIENTE ")
+        return res.status(400).json({
+          field: 'partido',
+          message: 'No es posible cambiar los resultados de un partido que no es el más reciente del torneo.'
+        });
+      }
     }
 
+    // Validar campos nulos o vacíos
+    if (!equipoLocalId) return res.status(400).json({ field: 'equipo', message: 'Los equipos son obligatorios.' });
+    if (!equipoVisitanteId) return res.status(400).json({ field: 'equipo', message: 'Los equipos son obligatorios.' });
+    if (!horaPartido) return res.status(400).json({ field: 'horaPartido', message: 'La hora del partido es obligatoria.' });
+    if (!fechaPartido) return res.status(400).json({ field: 'fechaPartido', message: 'La fecha de partido es obligatoria.' });
+    if (!jornada) return res.status(400).json({ field: 'jornada', message: 'La jornada es obligatoria.' });
+    if (!resLocal === '' || resLocal < 0) return res.status(400).json({ field: 'resLocal', message: 'El resultado del equipo local debe ser mayor o igual a 0.' });
+    if (!resVisitante === '' || resVisitante < 0) return res.status(400).json({ field: 'resVisitante', message: 'El resultado del equipo visitante debe ser mayor o igual a 0.' });
+
     // Calcular el número máximo de partidos posibles
-    const partidosPosibles = torneo.cantEquipo-1;
+    const partidosPosibles = torneo.cantEquipo - 1;
 
     // Obtener la cantidad de partidos ya creados para este torneo
     const partidosCreados = await prisma.partidos.count({
@@ -445,7 +161,7 @@ export const store = async (req, res) => {
         torneo_id: torneo.id,
       },
     });
-    
+
     // Validación de si se han creado todos los partidos posibles
     if (partidosCreados >= partidosPosibles) {
       return res.status(400).json({ field: 'cantPartidos', message: 'Ya se han creado todos los partidos posibles para este torneo.' });
@@ -464,8 +180,8 @@ export const store = async (req, res) => {
 
     // Validación de fechaPartido dentro de las fechas del torneo
     if (parsedFechaPartido < torneo.fechaInicio || parsedFechaPartido > torneo.fechaFin) {
-      return res.status(400).json({ 
-        field: 'fechaPartido', 
+      return res.status(400).json({
+        field: 'fechaPartido',
         message: `La fecha del partido está fuera del rango del torneo. Las fechas válidas son desde ${torneo.fechaInicio.toISOString().split('T')[0]} hasta ${torneo.fechaFin.toISOString().split('T')[0]}.`
       });
     }
@@ -478,8 +194,193 @@ export const store = async (req, res) => {
 
     // Validación de jornada dentro del rango del torneo
     if (parsedJornada < torneo.fechaInicio || parsedJornada > torneo.fechaFin) {
-      return res.status(400).json({ 
-        field: 'jornada', 
+      return res.status(400).json({
+        field: 'jornada',
+        message: `La jornada está fuera del rango del torneo. Las fechas válidas son desde ${torneo.fechaInicio.toISOString().split('T')[0]} hasta ${torneo.fechaFin.toISOString().split('T')[0]}.`
+      });
+    }
+
+    // Validación de equipoLocalId y equipoVisitanteId
+    if (!equipoLocalId || !equipoVisitanteId) {
+      return res.status(400).json({ field: 'equipo', message: 'Los IDs de los equipos local y visitante son obligatorios.' });
+    }
+
+    // Validación de horaPartido como formato
+    if (!horaPartido || !/^\d{2}:\d{2}(:\d{2})?$/.test(horaPartido)) {
+      return res.status(400).json({ field: 'horaPartido', message: 'La hora del partido no es válida. Debe tener formato HH:mm o HH:mm:ss.' });
+    }
+
+    // Convertir horaPartido en un formato válido (ISO 8601)
+    const formattedHoraPartido = new Date(`${fechaPartido}T${horaPartido}:00`);
+
+    if (isNaN(formattedHoraPartido.getTime())) {
+      return res.status(400).json({ field: 'horaPartido', message: 'La hora del partido no es válida.' });
+    }
+    // Actualizacion del partido y sus estadisticas mas recientes <-
+    await prisma.$transaction(async (prisma) => {
+      // Actualización del partido
+      const partido = await prisma.partidos.update({
+        where: { id: Number(partidoId) },
+        data: {
+          torneo_id: Number(torneoId),
+          equipoLocal_id: Number(equipoLocalId),
+          equipoVisitante_id: Number(equipoVisitanteId),
+          horaPartido: formattedHoraPartido,
+          fechaPartido: parsedFechaPartido,
+          jornada: parsedJornada,
+          resLocal: Number(resLocal),
+          resVisitante: Number(resVisitante),
+          ordenPartido: Number(ordenPartido),
+        },
+      });
+
+      // Encuentra y actualiza la estadística más reciente del Equipo Local
+      const latestLocalStat = await prisma.estadisticas.findFirst({
+        where: {
+          torneo_id: Number(torneoId),
+          equipo_id: Number(equipoLocalId),
+        },
+        orderBy: {
+          id: 'desc', // Ordenar por ID de mayor a menor
+        },
+      });
+
+      if (latestLocalStat) {
+        await prisma.estadisticas.update({
+          where: {
+            id: latestLocalStat.id, // Actualiza la estadística más reciente
+          },
+          data: {
+            PT: Number(resLocal), // Puntos del equipo local
+            CA: 0,
+            DC: 0,
+            CC: 0,
+          },
+        });
+      }
+
+      // Encuentra y actualiza la estadística más reciente del Equipo Visitante
+      const latestVisitorStat = await prisma.estadisticas.findFirst({
+        where: {
+          torneo_id: Number(torneoId),
+          equipo_id: Number(equipoVisitanteId),
+        },
+        orderBy: {
+          id: 'desc', // Ordenar por ID de mayor a menor
+        },
+      });
+
+      if (latestVisitorStat) {
+        await prisma.estadisticas.update({
+          where: {
+            id: latestVisitorStat.id, // Actualiza la estadística más reciente
+          },
+          data: {
+            PT: Number(resVisitante), // Puntos del equipo visitante
+            CA: 0,
+            DC: 0,
+            CC: 0,
+          },
+        });
+      }
+
+      res.status(200).json({
+        message: 'Partido y estadísticas más recientes actualizados correctamente',
+        partido,
+      });
+    });
+  } catch (error) {
+    console.error('Error al actualizar el partido:', error);
+    res.status(500).json({ error: 'Hubo un error al actualizar el partido.' });
+  }
+}
+//--------------------------------------------------------------------------------------------
+// STORE CREATE <-  
+export const store = async (req, res) => {
+  const { torneoId } = req.params;
+  const { equipoLocalId, equipoVisitanteId, horaPartido, fechaPartido, jornada, resLocal, resVisitante, ordenPartido } = req.body;
+  console.log("Datos del partido", torneoId, equipoLocalId, equipoVisitanteId)
+  try {
+    // Validación de existencia del torneo
+    const torneo = await prisma.torneos.findUnique({
+      where: { id: Number(torneoId) },
+    });
+
+    if (!torneo) {
+      return res.status(404).json({ field: 'torneoId', message: 'El torneo especificado no existe.' });
+    }
+
+    // Validar campos nulos o vacíos
+    if (!equipoLocalId) return res.status(400).json({ field: 'equipo', message: 'Los equipos son obligatorios.' });
+    if (!equipoVisitanteId) return res.status(400).json({ field: 'equipo', message: 'Los equipos son obligatorios.' });
+    if (!horaPartido) return res.status(400).json({ field: 'horaPartido', message: 'La hora del partido es obligatoria.' });
+    if (!fechaPartido) return res.status(400).json({ field: 'fechaPartido', message: 'La fecha de partido es obligatoria.' });
+    if (!jornada) return res.status(400).json({ field: 'jornada', message: 'La jornada es obligatoria.' });
+    if (!resLocal === '' || resLocal < 0) return res.status(400).json({ field: 'resLocal', message: 'El resultado del equipo local debe ser mayor o igual a 0.' });
+    if (!resVisitante === '' || resVisitante < 0) return res.status(400).json({ field: 'resVisitante', message: 'El resultado del equipo visitante debe ser mayor o igual a 0.' });
+
+    // Validación de si los equipos ya jugaron entre sí
+    // const partidoExistente = await prisma.partidos.findFirst({
+    //   where: {
+    //     torneo_id: Number(torneoId),
+    //     OR: [
+    //       { equipoLocal_id: Number(equipoLocalId), equipoVisitante_id: Number(equipoVisitanteId) },
+    //       { equipoLocal_id: Number(equipoVisitanteId), equipoVisitante_id: Number(equipoLocalId) },
+    //     ],
+    //   },
+    // });
+
+    // if (partidoExistente) {
+    //   return res.status(400).json({
+    //     field: 'equipo',
+    //     message: 'Los equipos ya han tenido un partido en este torneo.'
+    //   });
+    // }
+
+    // Calcular el número máximo de partidos posibles
+    const partidosPosibles = torneo.cantEquipo - 1;
+
+    // Obtener la cantidad de partidos ya creados para este torneo
+    const partidosCreados = await prisma.partidos.count({
+      where: {
+        torneo_id: torneo.id,
+      },
+    });
+
+    // Validación de si se han creado todos los partidos posibles
+    if (partidosCreados >= partidosPosibles) {
+      return res.status(400).json({ field: 'cantPartidos', message: 'Ya se han creado todos los partidos posibles para este torneo.' });
+    }
+
+    // Validación de equipo visitante y local
+    if (equipoLocalId === equipoVisitanteId) {
+      return res.status(400).json({ field: 'equipo', message: 'El equipo local y visitante no pueden ser el mismo.' });
+    }
+
+    // Validación de fechaPartido a un formato válido
+    const parsedFechaPartido = new Date(fechaPartido);
+    if (isNaN(parsedFechaPartido.getTime())) {
+      return res.status(400).json({ field: 'fechaPartido', message: 'La fecha del partido no es válida.' });
+    }
+
+    // Validación de fechaPartido dentro de las fechas del torneo
+    if (parsedFechaPartido < torneo.fechaInicio || parsedFechaPartido > torneo.fechaFin) {
+      return res.status(400).json({
+        field: 'fechaPartido',
+        message: `La fecha del partido está fuera del rango del torneo. Las fechas válidas son desde ${torneo.fechaInicio.toISOString().split('T')[0]} hasta ${torneo.fechaFin.toISOString().split('T')[0]}.`
+      });
+    }
+
+    // Validación de jornada como fecha
+    const parsedJornada = new Date(jornada);
+    if (isNaN(parsedJornada.getTime())) {
+      return res.status(400).json({ field: 'jornada', message: 'La jornada no es una fecha válida.' });
+    }
+
+    // Validación de jornada dentro del rango del torneo
+    if (parsedJornada < torneo.fechaInicio || parsedJornada > torneo.fechaFin) {
+      return res.status(400).json({
+        field: 'jornada',
         message: `La jornada está fuera del rango del torneo. Las fechas válidas son desde ${torneo.fechaInicio.toISOString().split('T')[0]} hasta ${torneo.fechaFin.toISOString().split('T')[0]}.`
       });
     }
@@ -517,6 +418,7 @@ export const store = async (req, res) => {
         jornada: parsedJornada,
         resLocal: Number(resLocal),
         resVisitante: Number(resVisitante),
+        ordenPartido: Number(ordenPartido),
       },
     });
     // Creación de estadisticas del Equipo Local en ese Torneo <-
@@ -543,7 +445,7 @@ export const store = async (req, res) => {
       },
     });
 
-    res.status(201).json({ message: 'Partido creado exitosamente', partido, estadistica_local, estadistica_visitante});
+    res.status(201).json({ message: 'Partido creado exitosamente', partido, estadistica_local, estadistica_visitante });
   } catch (error) {
     console.error('Error al crear el partido:', error);
     res.status(500).json({ error: 'Hubo un error al crear el partido.' });
@@ -618,7 +520,6 @@ export const eliminate = async (req, res) => {
           id: parseInt(partidoId),
         },
       });
-
       res
         .status(200)
         .json({ message: 'Partido y estadísticas más recientes eliminados correctamente', partido: deletedPartido });

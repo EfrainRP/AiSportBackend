@@ -1,41 +1,44 @@
 [
   {
-    "id": 1,
-    "tournamentRoundText": "1",
-    "nextMatchId": 3,
-    "name": "TBD",
+    "id": 0,
+    "tournamentRoundText": 1,
+    "nextMatchId": 2,
+    "name": null,
     "fechaPartido": null,
     "horaPartido": null,
     "jornada": null,
     "myIdMatch": null,
     "participants": [
-      "", ""
+      "",
+      ""
+    ]
+  },
+  {
+    "id": 1,
+    "tournamentRoundText": 1,
+    "nextMatchId": 2,
+    "name": null,
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",
+      ""
     ]
   },
   {
     "id": 2,
-    "tournamentRoundText": "1",
-    "nextMatchId": 3,
-    "name": "TBD",
-    "fechaPartido": null,
-    "horaPartido": null,
-    "jornada": null,
-    "myIdMatch": null,
-    "participants": [
-      "", ""
-    ]
-  },
-  {
-    "id": 3,
-    "tournamentRoundText": "2",
+    "tournamentRoundText": 2,
     "nextMatchId": null,
-    "name": "TBD",
+    "name": null,
     "fechaPartido": null,
     "horaPartido": null,
     "jornada": null,
     "myIdMatch": null,
     "participants": [
-      "", ""
+      "",
+      ""
     ]
   }
 ]
