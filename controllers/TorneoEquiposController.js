@@ -36,7 +36,6 @@ import {brackets} from "../utils/formatBracket.js";
         // let equiposRetornados = 0;
 
         const theBracket = brackets(torneo.partidos, torneo.cantEquipo);
- console.log(theBracket);
         //console.log("partidos por RONDA: ",partidosRonda);
         // Si se llega a una nueva ronda, se devuelve la cantidad de partidos de esa ronda <-
 
