@@ -230,8 +230,18 @@ export const update = async (req, res) => {
     const resLocalAntes = partidoAntes.resLocal;
     const resVisitanteAntes = partidoAntes.resVisitante;
 
-    // Validación da cambio de equipo local o visitante
-    if (equipoLocalId !== equipoLocalIdAntes || equipoVisitanteId !== equipoVisitanteIdAntes || resLocal !== resLocalAntes || resVisitante !== resVisitanteAntes) {
+    // Obtencion del equipo ganador del partido antes
+    const localIsWinnerAntes = resLocalAntes > resVisitanteAntes;    
+    const visitanteIsWinnerAntes = resVisitanteAntes > resLocalAntes;   
+
+    // Obtencion del equipo ganador del partido a modificar 
+    const localIsWinner = resLocal > resVisitante;    
+    const visitanteIsWinner = resVisitante > resLocal;    
+
+    // Validación de un cambio de equipo local o visitante o del cambio del equipo ganador 
+    // En caso de que los equipos del partidos del antes y despues no cambian, no se actualizara el Bracket
+    if (equipoLocalId !== equipoLocalIdAntes || equipoVisitanteId !== equipoVisitanteIdAntes || 
+      localIsWinner !== localIsWinnerAntes || visitanteIsWinner !== visitanteIsWinnerAntes) {
       updateBracket(partidoId, torneoId);
       console.log('actualizado BRACKET');
     }
