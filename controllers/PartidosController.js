@@ -499,6 +499,8 @@ export const eliminate = async (req, res) => {
       if (!partido) {
         throw new Error('Partido no encontrado');
       }
+      console.log('eliminacion actualizado');
+      updateBracket(partidoId, torneoId);
 
       const { equipoLocal_id, equipoVisitante_id } = partido;
 
@@ -539,9 +541,7 @@ export const eliminate = async (req, res) => {
           },
         });
       }
-      
-      updateBracket(partidoId, torneoId);
-      
+
       // Elimina el partido
       const deletedPartido = await prisma.partidos.delete({
         where: {
