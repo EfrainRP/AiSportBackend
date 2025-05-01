@@ -24,8 +24,8 @@ helmetMiddleware().forEach(mw => app.use(mw));
 // CORS principal
 app.use(cors({
   origin: process.env.NODE_ENV === "production"
-    ? [process.env.DOMAIN, "https://aisport.com"]
-    : [process.env.FRONTPORT, "http://localhost:5173"],
+    ? [process.env.DOMAIN]
+    : [process.env.FRONTPORT],
   credentials: true,
   methods: "GET, POST, PUT, DELETE",
   allowedHeaders: "Content-Type, Authorization",
