@@ -1,0 +1,44 @@
+[
+  {
+    "id": 0,
+    "tournamentRoundText": 1,
+    "nextMatchId": 2,
+    "name": null,
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",
+      ""
+    ]
+  },
+  {
+    "id": 1,
+    "tournamentRoundText": 1,
+    "nextMatchId": 2,
+    "name": null,
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",
+      ""
+    ]
+  },
+  {
+    "id": 2,
+    "tournamentRoundText": 2,
+    "nextMatchId": null,
+    "name": null,
+    "fechaPartido": null,
+    "horaPartido": null,
+    "jornada": null,
+    "myIdMatch": null,
+    "participants": [
+      "",
+      ""
+    ]
+  }
+]

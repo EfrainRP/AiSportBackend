@@ -103,8 +103,8 @@ export const emailSend = async (req, res) => {
 
       // Link dependiendo del entorno (producción o desarrollo)
       const baseUrl = process.env.NODE_ENV === "production"
-          ? "https://aisport.com"
-          : "http://localhost:3000";
+          ? process.env.DOMAIN
+          : process.env.FRONTPORT;
 
       const resetLink = `${baseUrl}/reset-password?token=${resetToken}&email=${encodeURIComponent(user.email)}`;
 
@@ -254,9 +254,12 @@ export const emailSend = async (req, res) => {
       
 
     console.log('📧 Correo enviado con éxito con Token: ', user.email,resetToken);
-    res.json({ message: '📧 Correo enviado con éxito' });
+    console.log("🔗 Enlace de recuperación generado:", resetLink);
+    return res.json({ message: '📧 Correo enviado con éxito' });
   } catch (error) {
+    
+    console.error(process.env.SENDGRID_API_KEY);
     console.error('❌ Error al enviar el correo:', error.response?.body || error);
-    res.status(500).json({ error: 'Error al enviar el correo' });
+    return res.status(500).json({ error: 'Error al enviar el correo' });
   }
 };

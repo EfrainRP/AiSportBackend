@@ -11,7 +11,7 @@ export const show = async (req, res) => {
             where: { id: userId },
             include: {
                 equipos: true,  // Incluye los equipos relacionados
-                //notifications_notifications_user_idTousers: true,  // Incluye notificaciones
+                notifications_notifications_user_idTousers: true,  // Incluye notificaciones
                 torneos: true,  // Incluye torneos
             }
         });
@@ -20,6 +20,33 @@ export const show = async (req, res) => {
             return res.status(404).json({ message: 'User not found' });  // Si no se encuentra el usuario, responde con un 404
         }
 
+        // Resolver todas las promesas con Promise.all
+        user.notifications_notifications_user_idTousers = await Promise.all(
+            user.notifications_notifications_user_idTousers.map(async (note) => {
+                const equipo = await prisma.equipos.findFirst({
+                    where: { id: note.equipo_id },
+                    select: { name: true, image: true }
+                });
+
+                const torneo = await prisma.torneos.findFirst({
+                    where: { id: note.toreno_id },
+                    select: { name: true}
+                });
+
+                const user2 = await prisma.users.findFirst({
+                    where: { id: note.user_id2 },
+                    select: { name: true, email: true }
+                });
+
+                // Retornar un objeto con los valores obtenidos
+                return {
+                    ...note,
+                    equipo: equipo? {name: equipo.name, image: equipo.image} : null,
+                    torneo_name: torneo?.name || null,
+                    user2: user2 ? { name: user2.name, email: user2.email } : null
+                };
+            })
+        );
         return res.status(200).json(user);  // Si el usuario es encontrado, responde con los datos
     } catch (error) {
         console.error(error);  // Imprime cualquier error en la consola

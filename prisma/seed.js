@@ -66,28 +66,29 @@ async function main() {
     }
     for (const data of JSONpartidos) {
         try {//Juntamos los datos para obtener el valor en tiempo TIMESTAMP para usarlo despues
-            //let date = new Date(`${data.fechaPartido} ${data.horaPartido}`);
+            let date = new Date(`${data.fechaPartido}T${data.horaPartido}`);
             // date = date.toISOString().split('T');
             // let time = date[1].split('Z');
 
-            // Convertir fechaPartido a objeto Date
-            let date = new Date(data.fechaPartido);
+            // // Convertir fechaPartido a objeto Date
+            // let date = new Date(data.fechaPartido);
 
-            // Extraer la hora de horaPartido y ajustarla en fechaPartido
-            let hora = new Date(data.horaPartido);
+            // // Extraer la hora de horaPartido y ajustarla en fechaPartido
+            // let hora = new Date(data.horaPartido);
 
             // Ajustar la fecha con la hora correcta
-            date.setUTCHours(hora.getUTCHours(), hora.getUTCMinutes(), hora.getUTCSeconds());
+            // date.setUTCHours(hora.getUTCHours(), hora.getUTCMinutes(), hora.getUTCSeconds());
             await prisma.partidos.create({
                 data: {
                     horaPartido: date,
                     fechaPartido: date,
                     jornada: new Date(data.jornada),
-                    resLocal: data.resLocal,
-                    resVisitante: data.resVisitante,
-                    equipoLocal_id: data.equipoLocal_id,
-                    equipoVisitante_id: data.equipoVisitante_id,
-                    torneo_id: data.torneo_id
+                    resLocal: Number(data.resLocal),
+                    resVisitante: Number(data.resVisitante),
+                    equipoLocal_id: Number(data.equipoLocal_id),
+                    equipoVisitante_id: Number(data.equipoVisitante_id),
+                    torneo_id: Number(data.torneo_id),
+                    ordenPartido: data.ordenPartido? Number(data.ordenPartido) : null
                 }
             })
         }

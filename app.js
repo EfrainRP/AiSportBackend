@@ -11,12 +11,36 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const port = process.env.PORT || 5000;
 
 const app = express();
 // Aplica limitadores de solicitud por IP
 app.use(globalLimiter);
 // Configuración del middleware para parsear cookies
 app.use(cookieParser());
+
+// Servir archivos estáticos desde la carpeta 'uploads' "imagenes" <-
+app.use('/sporthub/api/utils/uploads', cors({
+  origin: process.env.FRONTPORT,
+    credentials: true,
+  }),
+  (req, res, next) => {
+    res.setHeader("Cross-Origin-Resource-Policy", "cross-origin"); // Permitir acceso desde otros orígenes
+    next();
+  },
+  express.static(path.join(__dirname, 'utils/uploads')));
+
+app.use( // Solicitudes CORS fuera de Testing <-
+  cors({
+    origin:
+      process.env.NODE_ENV === "production"
+      ? [process.env.DOMAIN] // Producción (Not available yet)
+      : [process.env.FRONTPORT], // Dominio de Desarrollo (React JS en puerto 3000)
+      credentials: true, // Permite el uso de credenciales (cookies, cabeceras de autenticación)
+      methods: "GET, POST, PUT, DELETE",
+      allowedHeaders: "Content-Type, Authorization",
+  })
+);
 
 // Seguridad con Helmet (protege contra XSS, Clickjacking, Sniffing)
 helmetMiddleware().forEach(mw => app.use(mw));
@@ -33,16 +57,15 @@ app.use( // Solicitudes CORS fuera de Testing <-
 app.use(express.json());
 // Deshabilitar X-Powered-By (evita que se revele Express.js externamente)
 app.disable('x-powered-by');
+
 // Servir archivos estáticos desde la carpeta 'uploads' "imagenes" <-
-app.use('/sporthub/api/utils/uploads', express.static(path.join(__dirname, 'utils/uploads')));
+//app.use('/sporthub/api/utils/uploads', express.static(path.join(__dirname, 'utils/uploads')));
 
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.use('/sporthub/api', userRoutes); //Carga de rutas
 
 connect(); // Conecta a la base de datos
-
-const port = process.env.PORT || 5000;
 
 // Middleware para remover CSP en respuestas 404
 app.use(removeSecurityHeadersOn404);

@@ -59,8 +59,13 @@ import { prisma } from '../prisma/db.js';
       if (!torneo) {
         return res.status(404).json({ message: "Torneo no encontrado o datos no coinciden" });
       }
-  
-      res.status(200).json(torneo); // Retorna el torneo con las notificaciones y la información adicional
+      const cantidadPartidos = await prisma.partidos.count({
+        where: {
+          torneo_id: torneoId,
+        },
+      });
+
+      res.status(200).json({torneo: torneo, cantidadPartidos: cantidadPartidos?? 0}); // Retorna el torneo con las notificaciones y la información adicional
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Error al obtener el torneo", error });
