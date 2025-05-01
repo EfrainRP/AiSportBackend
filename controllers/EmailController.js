@@ -80,34 +80,10 @@ export const emailSend = async (req, res) => {
           where: { email }, // Buscar por email
       });
 
-      // Si no se encuentra el usuario, retornar un error
-      if (!user) {
-          return res.status(404).json({ error: 'Sin coincidencias de correo' });
-      }
-
-      // Generar token JWT temporal para seguridad en el email
-      const resetToken = jwt.sign(
-          { userId: user.id }, 
-          process.env.JWT_SECRET, 
-          { expiresIn: '1h' } // 1 hora de expiración
-      );
-
-      // Guardar token y expiración en la base de datos
-      await prisma.users.update({
-          where: { id: user.id },
-          data: {
-              resetPasswordToken: resetToken,
-              resetPasswordExpires: new Date(Date.now() + 60 * 60 * 1000), // 1 hora después
-          }
-      });
-
-      // Link dependiendo del entorno (producción o desarrollo)
-      const baseUrl = process.env.NODE_ENV === "production"
-          ? process.env.DOMAIN
-          : process.env.FRONTPORT;
-
-      const resetLink = `${baseUrl}/reset-password?token=${resetToken}&email=${encodeURIComponent(user.email)}`;
-
+    // Si no se encuentra el usuario, retornar un error
+    if (!user) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
 
       const userName = user.name;  // Obtener el nombre del usuario
 
@@ -253,9 +229,8 @@ export const emailSend = async (req, res) => {
       await sgMail.send(msg);
       
 
-    console.log('📧 Correo enviado con éxito con Token: ', user.email,resetToken);
-    console.log("🔗 Enlace de recuperación generado:", resetLink);
-    return res.json({ message: '📧 Correo enviado con éxito' });
+    console.log('📧 Correo enviado con éxito a:', user.email);
+    res.json({ message: '📧 Correo enviado con éxito' });
   } catch (error) {
     
     console.error(process.env.SENDGRID_API_KEY);

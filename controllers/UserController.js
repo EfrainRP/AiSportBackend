@@ -131,7 +131,12 @@ export const loginUser = async (req, res) => {
       );
 
       // Establecer el token como cookie en vez de almacenarse local <-
-      res.cookie('token', token, { httpOnly: true, maxAge: 3600000 }); // 1 hora de expiración
+      res.cookie('token', token, {
+        httpOnly: true,
+        maxAge: 3600000, // 1 hour for expiration 
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict' // Prevent CSRF 
+      });
 
       // Enviar el usuario y login success
       res.json({
