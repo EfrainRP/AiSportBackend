@@ -297,7 +297,10 @@ export const update = async (req, res) => {
 //--------------------------------------------------------------------------------------------
 // STORE CREATE <-  
 export const store = async (req, res) => {
-  const { torneoId } = req.params;
+  const torneoId = parseInt(req.params.torneoId?.replace(/[^\d]/g, ''));
+  if (isNaN(torneoId)) {
+    return res.status(400).json({ error: 'El ID del torneo es inválido.' });
+  }
   const { equipoLocalId, equipoVisitanteId, horaPartido, fechaPartido, jornada, resLocal, resVisitante, ordenPartido } = req.body;
   console.log("Datos del partido", torneoId, equipoLocalId, equipoVisitanteId)
   try {
