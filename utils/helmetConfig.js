@@ -11,7 +11,7 @@ export const helmetMiddleware = () => [
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"], // Permitir estilos en línea y Google Fonts
       fontSrc: ["'self'", "https://fonts.gstatic.com"], // Permitir fuentes de Google
       imgSrc: ["'self'", "data:", "https://img.icons8.com"], // Permitir imágenes locales, base64 y desde img.icons8.com
-      connectSrc: ["'self'", "https://aisport.com"], // Permitir conexiones a API externa
+      connectSrc: ["'self'", "https://aisport.com", "https://42crnpx1-5173.usw3.devtunnels.ms"], // Dominio en produccion 
       frameAncestors: ["'self'"], // Evita que el sitio sea embebido en iframes externos
       upgradeInsecureRequests: [], // Fuerza HTTPS
       formAction: ["'self'"], // Previene envío de formularios a dominios no autorizados
