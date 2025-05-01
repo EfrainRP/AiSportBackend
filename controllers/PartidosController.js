@@ -1,5 +1,5 @@
 import { prisma } from '../prisma/db.js';
-import {brackets} from "../utils/formatBracket.js";
+import {brackets, updateBracket} from "../utils/formatBracket.js";
 
 // Index <- 
 export const index = async (req, res) => {
@@ -90,6 +90,7 @@ export const update = async (req, res) => {
       return res.status(404).json({ field: 'torneoId', message: 'El torneo especificado no existe.' });
     }
 
+    
     // Validación de si los equipos ya jugaron entre sí
     // const partidoExistente = await prisma.partidos.findFirst({
     //   where: {
@@ -101,47 +102,48 @@ export const update = async (req, res) => {
     //   },
     // });
     // Validacion si los equipos a editar son los mismos o distintos
-    const equiposExistentes = await prisma.partidos.findFirst({
-      where: { id: Number(partidoId) },
-    });
+    // const equiposExistentes = await prisma.partidos.findFirst({
+    //   where: { id: Number(partidoId) },
+    // });
 
     // Validacion si el partido a editar es el ultimo (mas reciente) o no
     // En caso de no serlo, no se le permite cambiar de equipos al modificar la estructura del torneo de partidos ya posteriores <-
-    const ultimoPartido = await prisma.partidos.findFirst({
-      where: { torneo_id: Number(torneoId) },    // Filtramos por torneo_id
-      orderBy: { id: 'desc' }, // Ordenamos por fecha de manera descendente (más reciente primero)
-    });
+    // const ultimoPartido = await prisma.partidos.findFirst({
+    //   where: { torneo_id: Number(torneoId) },    // Filtramos por torneo_id
+    //   orderBy: { id: 'desc' }, // Ordenamos por fecha de manera descendente (más reciente primero)
+    // });
     // Valida si los equipos ya han tenido un partido, o si son del partido más reciente del torneo <-
-    if (equiposExistentes.equipoLocal_id != equipoLocalId || equiposExistentes.equipoVisitante_id != equipoVisitanteId) {
+    // if (equiposExistentes.equipoLocal_id != equipoLocalId || equiposExistentes.equipoVisitante_id != equipoVisitanteId) {
       //console.log("Distintos")
 
       // Paso 2: Verificar si el partidoId corresponde al último partido
-      if (ultimoPartido.id !== Number(partidoId)) {
-        console.log("PARTIDO NO ES EL MAS RECIENTE ")
-        return res.status(400).json({
-          field: 'partido',
-          message: 'No es posible cambiar los equipos de un partido que no es el más reciente del torneo.'
-        });
-      } // Si los dos equipos ya han tenido un partido antes 
+      // if (ultimoPartido.id !== Number(partidoId)) {
+      //   console.log("PARTIDO NO ES EL MAS RECIENTE ")
+      //   return res.status(400).json({
+      //     field: 'partido',
+      //     message: 'No es posible cambiar los equipos de un partido que no es el más reciente del torneo.'
+      //   });
+      // } 
+      // Si los dos equipos ya han tenido un partido antes 
       // if (partidoExistente) {
       //   return res.status(400).json({
       //     field: 'equipo',
       //     message: 'Los equipos ya han tenido un partido en este torneo.'
       //   });
       // }
-    } else {
-      console.log("IGUALES")
-    }
+    // } else {
+    //   console.log("IGUALES")
+    // }
     // Valida si se actualizan los resultados del partido mas reciente o no <-
-    if (equiposExistentes.resLocal != resLocal || equiposExistentes.resVisitante != resVisitante) {
-      if (ultimoPartido.id !== Number(partidoId)) {
-        console.log("PARTIDO NO ES EL MAS RECIENTE ")
-        return res.status(400).json({
-          field: 'partido',
-          message: 'No es posible cambiar los resultados de un partido que no es el más reciente del torneo.'
-        });
-      }
-    }
+    // if (equiposExistentes.resLocal != resLocal || equiposExistentes.resVisitante != resVisitante) {
+    //   if (ultimoPartido.id !== Number(partidoId)) {
+    //     console.log("PARTIDO NO ES EL MAS RECIENTE ")
+    //     return res.status(400).json({
+    //       field: 'partido',
+    //       message: 'No es posible cambiar los resultados de un partido que no es el más reciente del torneo.'
+    //     });
+    //   }
+    // }
 
     // Validar campos nulos o vacíos
     if (!equipoLocalId) return res.status(400).json({ field: 'equipo', message: 'Los equipos son obligatorios.' });
@@ -216,6 +218,34 @@ export const update = async (req, res) => {
     if (isNaN(formattedHoraPartido.getTime())) {
       return res.status(400).json({ field: 'horaPartido', message: 'La hora del partido no es válida.' });
     }
+
+    const partidoAntes = await prisma.partidos.findFirst({
+      where: {
+        id: Number(partidoId),
+      },
+    });
+
+    const equipoLocalIdAntes = partidoAntes.equipoLocal_id;
+    const equipoVisitanteIdAntes = partidoAntes.equipoVisitante_id;
+    const resLocalAntes = partidoAntes.resLocal;
+    const resVisitanteAntes = partidoAntes.resVisitante;
+
+    // Obtencion del equipo ganador del partido antes
+    const localIsWinnerAntes = resLocalAntes > resVisitanteAntes;    
+    const visitanteIsWinnerAntes = resVisitanteAntes > resLocalAntes;   
+
+    // Obtencion del equipo ganador del partido a modificar 
+    const localIsWinner = resLocal > resVisitante;    
+    const visitanteIsWinner = resVisitante > resLocal;    
+
+    // Validación de un cambio de equipo local o visitante o del cambio del equipo ganador 
+    // En caso de que los equipos del partidos del antes y despues no cambian, no se actualizara el Bracket
+    if (equipoLocalId !== equipoLocalIdAntes || equipoVisitanteId !== equipoVisitanteIdAntes || 
+      localIsWinner !== localIsWinnerAntes || visitanteIsWinner !== visitanteIsWinnerAntes) {
+      updateBracket(partidoId, torneoId);
+      console.log('actualizado BRACKET');
+    }
+
     // Actualizacion del partido y sus estadisticas mas recientes <-
     await prisma.$transaction(async (prisma) => {
       // Actualización del partido
@@ -467,15 +497,13 @@ export const eliminate = async (req, res) => {
         where: {
           id: parseInt(partidoId),
         },
-        select: {
-          equipoLocal_id: true,
-          equipoVisitante_id: true,
-        },
       });
 
       if (!partido) {
         throw new Error('Partido no encontrado');
       }
+      console.log('eliminacion actualizado');
+      updateBracket(partidoId, torneoId);
 
       const { equipoLocal_id, equipoVisitante_id } = partido;
 
@@ -523,6 +551,7 @@ export const eliminate = async (req, res) => {
           id: parseInt(partidoId),
         },
       });
+
       res
         .status(200)
         .json({ message: 'Partido y estadísticas más recientes eliminados correctamente', partido: deletedPartido });
