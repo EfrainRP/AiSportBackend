@@ -34,7 +34,9 @@ app.use(cors({
 // Static files (imagenes)
 app.use(
   '/sporthub/api/utils/uploads',
-  cors({ origin: process.env.FRONTPORT, credentials: true }),
+  cors({ origin: process.env.NODE_ENV === "production"
+    ? [process.env.DOMAIN]
+    : [process.env.FRONTPORT], credentials: true }),
   (req, res, next) => {
     res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
     next();
