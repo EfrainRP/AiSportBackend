@@ -17,7 +17,8 @@ const app = express();
 
 // Seguridad y prevención de ataques
 app.disable('x-powered-by');
-
+// Confianza en el primer proxy para que express-rate-limit use X‑Forwarded‑For en servicios externos SendGrid <─
+app.set('trust proxy', 1); 
 app.use(cookieParser());
 helmetMiddleware().forEach(mw => app.use(mw));
 
